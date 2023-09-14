@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Bank Balance Check</string>
+    <string name="calculators">Calculators</string>
+    <string name="monthly_invest_amount">Monthly Invest Amount</string>
+    <string name="enter_amount_rs">Enter Amount (Rs.)</string>
+    <string name="exp_annual_amount">Exp Annual Amount</string>
+    <string name="annual_return">Annual Return %</string>
+    <string name="investment_period">Investment Period</string>
+    <string name="investment_period_years">Investment Period Years</string>
+    <string name="expected_amount">Expected Amount</string>
+    <string name="_00_0000">₹ 00,0000</string>
+    <string name="wealth_gain">Wealth Gain</string>
+    <string name="amount_investment">Amount Investment</string>
+    <string name="reset">Reset</string>
+    <string name="calculate">Calculate</string>
+    <string name="sip_calculator">SIP Calculator</string>
+    <string name="emi_calculator">EMI Calculator</string>
+    <string name="loan_calculator">Loan Calculator</string>
+    <string name="gst_calculator">GST Calculator</string>
+    <string name="fd_calculator">FD Calculator</string>
+    <string name="brokerage_calculator">Brokerage Calculator</string>
+    <string name="swp_calculator">SWP Calculator</string>
+    <string name="rd_calculator">RD Calculator</string>
+    <string name="ppf_calculator">PPF Calculator</string>
+    <string name="epf_calculator">EPF Calculator</string>
+    <string name="inflation_calculator">Inflation Calculator</string>
+    <string name="gratuity_calculator">Gratuity Calculator</string>
 </resources>

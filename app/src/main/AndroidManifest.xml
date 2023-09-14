@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
+            android:name=".BUi.BActivities.Calculators.SIPCalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.CalculatorsActivity"
+            android:exported="false" />
+        <activity
             android:name=".BUi.BActivities.MainActivity"
             android:exported="true">
             <intent-filter>
