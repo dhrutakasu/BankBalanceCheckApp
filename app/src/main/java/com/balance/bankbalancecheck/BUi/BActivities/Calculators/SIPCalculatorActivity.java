@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
-import com.karumi.dexter.BuildConfig;
+
+import java.text.DecimalFormat;
 
 public class SIPCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,7 +74,7 @@ public class SIPCalculatorActivity extends AppCompatActivity implements View.OnC
                 GotoReset();
                 break;
             case R.id.TxtCalculate:
-                GotoCalCulate();
+                GotoCalculate();
                 break;
         }
     }
@@ -98,7 +102,64 @@ public class SIPCalculatorActivity extends AppCompatActivity implements View.OnC
         TxtInvestmentAmount.setText(getResources().getString(R.string._00_0000));
     }
 
-    private void GotoCalCulate() {
+    private void GotoCalculate() {
+        String monthlyInvestmentStr = EdtMonthlyInvest.getText().toString();
+        String annualReturnRateStr = EdtMonthlyInvest.getText().toString();
+        String investmentPeriodStr = EdtInvestmentPeriod.getText().toString();
+        if (TextUtils.isEmpty(monthlyInvestmentStr) && TextUtils.isEmpty(annualReturnRateStr) && TextUtils.isEmpty(investmentPeriodStr)) {
+            Toast.makeText(context, "Please Enter Value.", Toast.LENGTH_SHORT).show();
+        } else {
+            DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
+            SipCalculator sipCalculator = new SipCalculator();
+            double amountttt = sipCalculator.getTotalValue();
+            StringBuilder sb = new StringBuilder();
+            sb.append("₹ ");
+            sb.append(decimalFormat.format(amountttt));
+            TxtExpectedAmount.setText(sb.toString());
+
+            amountttt = sipCalculator.getEstimatedReturns();
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            sb.append(decimalFormat.format(amountttt));
+            TxtWealthGain.setText(sb.toString());
+
+            amountttt = sipCalculator.getTotalInvestedAmount();
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            sb.append(decimalFormat.format(amountttt));
+            TxtInvestmentAmount.setText(sb.toString());
+        }
+    }
+
+    public class SipCalculator {
+        private int monthlyInvestmentAmountInt = Integer.parseInt(EdtMonthlyInvest.getText().toString());
+        private int expectedReturnRateInt = Integer.parseInt(EdtAnnualAmount.getText().toString());
+        private int investmentTimePeriodInt = Integer.parseInt(EdtInvestmentPeriod.getText().toString()) * 12;
+
+        public SipCalculator() {
+        }
+
+        // Total investment is  considered here according to monthly investment plans
+        public long getTotalInvestedAmount() {
+            return (long) (monthlyInvestmentAmountInt * investmentTimePeriodInt);
+        }
+
+        // Estimated returns = maturity value - total investment amount
+        public double getEstimatedReturns() {
+            return getTotalValue() - getTotalInvestedAmount();
+        }
+
+        // Calculate the maturity value according to the formula
+        public double getTotalValue() {
+            double futureValue = 0;
+            double annualReturnRate = expectedReturnRateInt / 100.0;
+            double monthlyReturnRate = annualReturnRate / 12;
+            for (int i = 0; i < investmentTimePeriodInt; i++) {
+                futureValue += monthlyInvestmentAmountInt;
+                futureValue += futureValue * monthlyReturnRate;
+            }
+            return futureValue;
+        }
 
     }
 }

@@ -34,7 +34,7 @@ public class CalculatorsAdapter extends RecyclerView.Adapter<CalculatorsAdapter.
     @Override
     public void onBindViewHolder(@NonNull CalculatorsAdapter.MyViewHolder holder, int position) {
         holder.BtnCalculatorsName.setText(strings.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.BtnCalculatorsName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickListener.CalculatorsClickListener(position);

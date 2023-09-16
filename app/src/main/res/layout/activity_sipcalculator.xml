@@ -56,9 +56,9 @@
                     android:id="@+id/EdtMonthlyInvest"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:hint="@string/enter_amount_rs"
                     android:background="@null"
                     android:inputType="number"
-                    android:hint="@string/enter_amount_rs"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray"
@@ -152,10 +152,10 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="0.6"
+                            android:text="@string/expected_amount"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:padding="@dimen/_2sdp"
-                            android:text="@string/expected_amount"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />

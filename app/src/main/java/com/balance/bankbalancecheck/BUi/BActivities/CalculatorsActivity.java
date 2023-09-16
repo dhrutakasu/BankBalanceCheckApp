@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.EMICalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SIPCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.R;
@@ -66,6 +67,7 @@ public class CalculatorsActivity extends AppCompatActivity {
                 startActivity(new Intent(context, SIPCalculatorActivity.class));
                 break;
             case 1:
+                startActivity(new Intent(context, EMICalculatorActivity.class));
                 break;
             case 2:
                 break;

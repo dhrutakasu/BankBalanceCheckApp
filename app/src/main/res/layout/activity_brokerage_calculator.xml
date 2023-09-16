@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BUi.BActivities.Calculators.BrokerageCalculatorActivity">
+
+    <RelativeLayout
+        android:id="@+id/RlHeaderBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/layout_header" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RlHeaderBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TxtBuyAmount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/buy_amount"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardBuyAmount"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40ssp"
+                android:layout_margin="@dimen/_1sdp"
+                android:padding="@dimen/_10sdp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="@+id/TxtBuyAmount"
+                app:layout_constraintStart_toStartOf="@+id/TxtBuyAmount"
+                app:layout_constraintTop_toBottomOf="@+id/TxtBuyAmount">
+
+                <EditText
+                    android:id="@+id/EdtBuyAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/enter_buy_amount"
+                    android:inputType="number"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/_12sdp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TxtSellAmount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/sell_amount"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/CardBuyAmount"
+                app:layout_constraintStart_toStartOf="@+id/CardBuyAmount"
+                app:layout_constraintTop_toBottomOf="@+id/CardBuyAmount" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardSellAmount"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40ssp"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="@+id/TxtSellAmount"
+                app:layout_constraintStart_toStartOf="@+id/TxtSellAmount"
+                app:layout_constraintTop_toBottomOf="@+id/TxtSellAmount">
+
+                <EditText
+                    android:id="@+id/EdtSellAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/enter_sell_amount"
+                    android:inputType="number"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/_12sdp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TxtQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/quantity"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/CardSellAmount"
+                app:layout_constraintStart_toStartOf="@+id/CardSellAmount"
+                app:layout_constraintTop_toBottomOf="@+id/CardSellAmount" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardQuanity"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40ssp"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="@+id/TxtQuantity"
+                app:layout_constraintStart_toStartOf="@+id/TxtQuantity"
+                app:layout_constraintTop_toBottomOf="@+id/TxtQuantity">
+
+                <EditText
+                    android:id="@+id/EdtQuanity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/enter_quantity"
+                    android:inputType="number"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/_12sdp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TxtSelectTrade"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/select_trade_type"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/CardQuanity"
+                app:layout_constraintStart_toStartOf="@+id/CardQuanity"
+                app:layout_constraintTop_toBottomOf="@+id/CardQuanity" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardTrade"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40ssp"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="@+id/TxtSelectTrade"
+                app:layout_constraintStart_toStartOf="@+id/TxtSelectTrade"
+                app:layout_constraintTop_toBottomOf="@+id/TxtSelectTrade">
+
+                <Spinner
+                    android:id="@+id/SpinnerTrade"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/LlButtons"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/CardTrade"
+                app:layout_constraintStart_toStartOf="@+id/CardTrade"
+                app:layout_constraintTop_toBottomOf="@+id/CardTrade">
+
+                <TextView
+                    android:id="@+id/TxtReset"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:padding="@dimen/_2sdp"
+                    android:text="@string/reset"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TxtCalculate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:padding="@dimen/_2sdp"
+                    android:text="@string/calculate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_1sdp"
+                app:cardBackgroundColor="@color/gray_light"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:layout_constraintEnd_toEndOf="@+id/LlButtons"
+                app:layout_constraintStart_toStartOf="@+id/LlButtons"
+                app:layout_constraintTop_toBottomOf="@+id/LlButtons">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsFirst"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/total_buy_order_value"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountFirst"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountFirst" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountFirst"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsFirst"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsSecond"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/total_sell_order_value"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountSecond" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountSecond"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsSecond"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountFirst" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsThird"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/buy_brokerage"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountThird" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountThird"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsThird"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountSecond" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsFourth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/sell_brokerage"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountFirst"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountFirst" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountFourth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsFirst"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsFifth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/stt_buy_0_1"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountSecond" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountFifth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsSecond"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountFirst" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsSixth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/stt_sell_0_1"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountThird" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountSixth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsThird"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountSecond" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsSeventh"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/exchange_buy_txn_charge"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountFirst"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountFirst" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountSeventh"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsFirst"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsEighth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/exchange_sell_txn_charge"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountSecond" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountEighth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsSecond"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountFirst" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsNinth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/gst_buy_18"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountThird" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountNinth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsThird"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountSecond" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsTenth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/gst_sell_18"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountFirst"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountFirst" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountTenth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsFirst"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsEleventh"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/sebi_buy_charges"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountSecond" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountEleventh"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsSecond"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountFirst" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsTwelveth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/sebi_sell_charges"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountThird" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountTwelveth"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsThird"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountSecond" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsThirteen"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/stamp_duty_0_015"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountFirst"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountFirst" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountThirteen"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsFirst"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsFourteen"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/total_tax_and_charges"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountSecond"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountSecond" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountFourteen"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsSecond"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountFirst" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp">
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAnsFifteen"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_weight="0.6"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/net_profit_and_loss"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountThird"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/TxtLoanAmountThird" />
+
+                        <TextView
+                            android:id="@+id/TxtBrokerageAmountFifteen"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="0.4"
+                            android:gravity="end"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/_00_0000"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintStart_toEndOf="@+id/TxtLoanAnsThird"
+                            app:layout_constraintTop_toBottomOf="@+id/TxtLoanAmountSecond" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
