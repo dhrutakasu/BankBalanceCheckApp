@@ -6,13 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
+
+import java.text.DecimalFormat;
 
 public class BrokerageCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
@@ -69,9 +74,13 @@ public class BrokerageCalculatorActivity extends AppCompatActivity implements Vi
     }
 
     private void CalInitActions() {
+        String[] trade = {"Delivery Equity", "Intraday Equity", "Futures", "Options"};
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
-        TxtTitle.setText(getResources().getString(R.string.gst_calculator));
+        TxtTitle.setText(getResources().getString(R.string.brokerage_calculator));
+        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, trade);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SpinnerTrade.setAdapter(arrayAdapter);
     }
 
     @Override
@@ -129,6 +138,125 @@ public class BrokerageCalculatorActivity extends AppCompatActivity implements Vi
     }
 
     private void GotoCalculate() {
+        BankConstantsData.hideKeyboard(BrokerageCalculatorActivity.this);
 
+        if (EdtBuyAmount.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter buy amount.", Toast.LENGTH_SHORT).show();
+        } else if (EdtSellAmount.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter sell amount.", Toast.LENGTH_SHORT).show();
+        } else if (EdtQuanity.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter quantity.", Toast.LENGTH_SHORT).show();
+        } else {
+
+            double buyAmount = Double.parseDouble(EdtBuyAmount.getText().toString());
+            double sellAmount = Double.parseDouble(EdtSellAmount.getText().toString());
+            int quantity = Integer.parseInt(EdtQuanity.getText().toString());
+            int tradeType = SpinnerTrade.getSelectedItemPosition();
+
+            double totalBuyOrderValue = buyAmount * quantity;
+            double totalSellOrderValue = sellAmount * quantity;
+            double buyBrokerage,sellBrokerage;
+            if (tradeType==0){
+                buyBrokerage=(totalBuyOrderValue * 0.001);
+                sellBrokerage=(totalSellOrderValue * 0.001);
+            } else if (tradeType==1) {
+                buyBrokerage=(totalBuyOrderValue * 0.00025);
+                sellBrokerage=(totalSellOrderValue * 0.00025);
+            } else if (tradeType == 2) {
+                buyBrokerage=(totalBuyOrderValue * 0.005);
+                sellBrokerage=(totalSellOrderValue * 0.005);
+            }else {
+                buyBrokerage=(totalBuyOrderValue * 0.01);
+                sellBrokerage=(totalSellOrderValue * 0.01);
+            }
+//            double buyBrokerage = (tradeType==0) ? (totalBuyOrderValue * 0.001) : (totalBuyOrderValue * 0.00025);
+//            double sellBrokerage = (tradeType==0) ? (totalSellOrderValue * 0.001) : (totalSellOrderValue * 0.00025);
+            double sttBuy = totalBuyOrderValue * 0.001;
+            double sttSell = totalSellOrderValue * 0.001;
+            double exchangeBuyTxnCharge = totalBuyOrderValue * 0.0000325;
+            double exchangeSellTxnCharge = totalSellOrderValue * 0.0000325;
+            double gstBuy = (buyBrokerage + exchangeBuyTxnCharge) * 0.18;
+            double gstSell = (sellBrokerage + exchangeSellTxnCharge) * 0.18;
+            double sebiBuyCharges = totalBuyOrderValue * 0.000000015;
+            double sebiSellCharges = totalSellOrderValue * 0.000000015;
+            double stampDuty = totalBuyOrderValue * 0.00015;
+            double totalTaxAndCharges = buyBrokerage + sellBrokerage + sttBuy + sttSell +
+                    exchangeBuyTxnCharge + exchangeSellTxnCharge + gstBuy + gstSell +
+                    sebiBuyCharges + sebiSellCharges + stampDuty;
+            double netProfitOrLoss = totalSellOrderValue - totalBuyOrderValue - totalTaxAndCharges;
+
+
+            DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("₹ ");
+            String totalBuyOrderValueStr = decimalFormat.format(totalBuyOrderValue);
+            sb.append(totalBuyOrderValueStr);
+            TxtBrokerageAmountFirst.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String totalSellOrderValueStr = decimalFormat.format(totalSellOrderValue);
+            sb.append(totalSellOrderValueStr);
+            TxtBrokerageAmountSecond.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String buyBrokerageStr = decimalFormat.format(buyBrokerage);
+            sb.append(buyBrokerageStr);
+            TxtBrokerageAmountThird.setText(sb.toString()); sb = new StringBuilder();
+            sb.append("₹ ");
+            String sellBrokerageStr = decimalFormat.format(sellBrokerage);
+            sb.append(sellBrokerageStr);
+            TxtBrokerageAmountFourth.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String sttBuyStr = decimalFormat.format(sttBuy);
+            sb.append(sttBuyStr);
+            TxtBrokerageAmountFifth.setText(sb.toString()); sb = new StringBuilder();
+            sb.append("₹ ");
+            String sttSellStr = decimalFormat.format(sttSell);
+            sb.append(sttSellStr);
+            TxtBrokerageAmountSixth.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String exchangeBuyTxnChargeStr = decimalFormat.format(exchangeBuyTxnCharge);
+            sb.append(exchangeBuyTxnChargeStr);
+            TxtBrokerageAmountSeventh.setText(sb.toString()); sb = new StringBuilder();
+            sb.append("₹ ");
+            String exchangeSellTxnChargeStr = decimalFormat.format(exchangeSellTxnCharge);
+            sb.append(exchangeSellTxnChargeStr);
+            TxtBrokerageAmountEighth.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String gstBuyStr = decimalFormat.format(gstBuy);
+            sb.append(gstBuyStr);
+            TxtBrokerageAmountNinth.setText(sb.toString()); sb = new StringBuilder();
+            sb.append("₹ ");
+            String gstSellStr = decimalFormat.format(gstSell);
+            sb.append(gstSellStr);
+            TxtBrokerageAmountTenth.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String sebiBuyChargesStr = decimalFormat.format(sebiBuyCharges);
+            sb.append(sebiBuyChargesStr);
+            TxtBrokerageAmountEleventh.setText(sb.toString()); sb = new StringBuilder();
+            sb.append("₹ ");
+            String sebiSellChargesStr = decimalFormat.format(sebiSellCharges);
+            sb.append(sebiSellChargesStr);
+            TxtBrokerageAmountTwelveth.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String stampDutyStr = decimalFormat.format(stampDuty);
+            sb.append(stampDutyStr);
+            TxtBrokerageAmountThirteen.setText(sb.toString()); sb = new StringBuilder();
+            sb.append("₹ ");
+            String totalTaxAndChargesStr = decimalFormat.format(totalTaxAndCharges);
+            sb.append(totalTaxAndChargesStr);
+            TxtBrokerageAmountFourteen.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String netProfitOrLossStr = decimalFormat.format(netProfitOrLoss);
+            sb.append(netProfitOrLossStr);
+            TxtBrokerageAmountFifteen.setText(sb.toString());
+        }
     }
 }

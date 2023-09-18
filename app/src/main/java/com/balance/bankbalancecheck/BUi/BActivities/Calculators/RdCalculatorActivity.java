@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,17 +19,18 @@ import com.balance.bankbalancecheck.R;
 
 import java.text.DecimalFormat;
 
-public class GSTCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
+public class RdCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private ImageView ImgBack, ImgShareApp;
     private TextView TxtTitle, TxtReset, TxtCalculate;
-    private EditText EdtInitialAmount, EdtGstRate;
-    private TextView TxtGstAmountZero, TxtGstAmountFirst, TxtGstAmountSecond, TxtGstAmountThird, TxtGstAmountFourth;
+    private EditText EdtMonthlyInvestement, EdtRateOfInterest, EdtYears;
+    private Spinner SpinnerTimePeriod;
+    private TextView TxtRDAmountFirst, TxtRDAmountSecond, TxtRDAmountThird;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gstcalculator);
+        setContentView(R.layout.activity_rd_calculator);
         CalInitViews();
         CalInitListeners();
         CalInitActions();
@@ -40,13 +43,13 @@ public class GSTCalculatorActivity extends AppCompatActivity implements View.OnC
         TxtTitle = (TextView) findViewById(R.id.TxtTitle);
         TxtReset = (TextView) findViewById(R.id.TxtReset);
         TxtCalculate = (TextView) findViewById(R.id.TxtCalculate);
-        EdtInitialAmount = (EditText) findViewById(R.id.EdtInitialAmount);
-        EdtGstRate = (EditText) findViewById(R.id.EdtGstRate);
-        TxtGstAmountZero = (TextView) findViewById(R.id.TxtGstAmountZero);
-        TxtGstAmountFirst = (TextView) findViewById(R.id.TxtGstAmountFirst);
-        TxtGstAmountSecond = (TextView) findViewById(R.id.TxtGstAmountSecond);
-        TxtGstAmountThird = (TextView) findViewById(R.id.TxtGstAmountThird);
-        TxtGstAmountFourth = (TextView) findViewById(R.id.TxtGstAmountFourth);
+        EdtMonthlyInvestement = (EditText) findViewById(R.id.EdtMonthlyInvestement);
+        EdtRateOfInterest = (EditText) findViewById(R.id.EdtRateOfInterest);
+        EdtYears = (EditText) findViewById(R.id.EdtYears);
+        SpinnerTimePeriod = (Spinner) findViewById(R.id.SpinnerTimePeriod);
+        TxtRDAmountFirst = (TextView) findViewById(R.id.TxtRDAmountFirst);
+        TxtRDAmountSecond = (TextView) findViewById(R.id.TxtRDAmountSecond);
+        TxtRDAmountThird = (TextView) findViewById(R.id.TxtRDAmountThird);
     }
 
     private void CalInitListeners() {
@@ -57,9 +60,14 @@ public class GSTCalculatorActivity extends AppCompatActivity implements View.OnC
     }
 
     private void CalInitActions() {
+        String[] timePeriod = {"Yearly", "Half Yearly", "Quarterly", "Monthly"};
+
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
-        TxtTitle.setText(getResources().getString(R.string.gst_calculator));
+        TxtTitle.setText(getResources().getString(R.string.rd_calculator));
+        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, timePeriod);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SpinnerTimePeriod.setAdapter(arrayAdapter);
     }
 
     @Override
@@ -95,56 +103,48 @@ public class GSTCalculatorActivity extends AppCompatActivity implements View.OnC
     }
 
     private void GotoReset() {
-        EdtInitialAmount.setText("");
-        EdtGstRate.setText("");
-        TxtGstAmountZero.setText(getResources().getString(R.string._00_0000));
-        TxtGstAmountFirst.setText(getResources().getString(R.string._00_0000));
-        TxtGstAmountSecond.setText(getResources().getString(R.string._00_0000));
-        TxtGstAmountThird.setText(getResources().getString(R.string._00_0000));
-        TxtGstAmountFourth.setText(getResources().getString(R.string._00_0000));
+        EdtMonthlyInvestement.setText("");
+        EdtRateOfInterest.setText("");
+        EdtYears.setText("");
+        TxtRDAmountFirst.setText(getResources().getString(R.string._00_0000));
+        TxtRDAmountSecond.setText(getResources().getString(R.string._00_0000));
+        TxtRDAmountThird.setText(getResources().getString(R.string._00_0000));
     }
 
     private void GotoCalculate() {
-        BankConstantsData.hideKeyboard(GSTCalculatorActivity.this);
-        if (EdtInitialAmount.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter initial amount.", Toast.LENGTH_SHORT).show();
-        }  else if (EdtGstRate.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter gst rate.", Toast.LENGTH_SHORT).show();
+        BankConstantsData.hideKeyboard(RdCalculatorActivity.this);
+
+        if (EdtMonthlyInvestement.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter monthly investment.", Toast.LENGTH_SHORT).show();
+        } else if (EdtRateOfInterest.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter rate of interest.", Toast.LENGTH_SHORT).show();
+        } else if (EdtYears.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter years.", Toast.LENGTH_SHORT).show();
         } else {
-            double initialAmount = Double.parseDouble(EdtInitialAmount.getText().toString());
-            double gstRate = Double.parseDouble(EdtGstRate.getText().toString());
+            double fdAmount = Double.parseDouble(EdtMonthlyInvestement.getText().toString());
+            double interestRate = Double.parseDouble(EdtRateOfInterest.getText().toString());
+            int years = Integer.parseInt(EdtYears.getText().toString());
+
+            double interestAmount = (fdAmount * interestRate * years) / 100;
+            double totalPayment = fdAmount + interestAmount;
 
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
-            double gstAmount = (initialAmount * gstRate) / 100;
-            double cgst = gstAmount / 2;
-            double sgst = gstAmount / 2;
-            double totalPayment = initialAmount + gstAmount;
 
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
-            String AmountStr = decimalFormat.format(initialAmount);
-            sb.append(AmountStr);
-            TxtGstAmountZero.setText(sb.toString());
+            String monthStr = decimalFormat.format(fdAmount);
+            sb.append(monthStr);
+            TxtRDAmountFirst.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String GSTStr = decimalFormat.format(gstAmount);
-            sb.append(GSTStr);
-            TxtGstAmountFirst.setText(sb.toString());
-            sb = new StringBuilder();
-            sb.append("₹ ");
-            String CGSTStr = decimalFormat.format(cgst);
-            sb.append(CGSTStr);
-            TxtGstAmountSecond.setText(sb.toString());
-            sb = new StringBuilder();
-            sb.append("₹ ");
-            String SGSTStr = decimalFormat.format(sgst);
-            sb.append(SGSTStr);
-            TxtGstAmountThird.setText(sb.toString());
+            String totalInterestStr = decimalFormat.format(interestAmount);
+            sb.append(totalInterestStr);
+            TxtRDAmountSecond.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
             String totalPaymentStr = decimalFormat.format(totalPayment);
             sb.append(totalPaymentStr);
-            TxtGstAmountFourth.setText(sb.toString());
+            TxtRDAmountThird.setText(sb.toString());
         }
     }
 }

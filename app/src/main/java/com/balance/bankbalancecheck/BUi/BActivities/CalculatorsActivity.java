@@ -8,8 +8,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.BrokerageCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.EMICalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.EPFCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.FDCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.GSTCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.GratuityCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.InflationCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.LoanAmountCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.PPFCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.RdCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SIPCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SwapCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.R;
 
@@ -70,24 +80,34 @@ public class CalculatorsActivity extends AppCompatActivity {
                 startActivity(new Intent(context, EMICalculatorActivity.class));
                 break;
             case 2:
+                startActivity(new Intent(context, LoanAmountCalculatorActivity.class));
                 break;
             case 3:
+                startActivity(new Intent(context, GSTCalculatorActivity.class));
                 break;
             case 4:
+                startActivity(new Intent(context, FDCalculatorActivity.class));
                 break;
             case 5:
+                startActivity(new Intent(context, BrokerageCalculatorActivity.class));
                 break;
             case 6:
+                startActivity(new Intent(context, SwapCalculatorActivity.class));
                 break;
             case 7:
+                startActivity(new Intent(context, RdCalculatorActivity.class));
                 break;
             case 8:
+                startActivity(new Intent(context, PPFCalculatorActivity.class));
                 break;
             case 9:
+                startActivity(new Intent(context, EPFCalculatorActivity.class));
                 break;
             case 10:
+                startActivity(new Intent(context, InflationCalculatorActivity.class));
                 break;
             case 11:
+                startActivity(new Intent(context, GratuityCalculatorActivity.class));
                 break;
         }
     }

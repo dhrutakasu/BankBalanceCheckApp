@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,21 +19,21 @@ import com.balance.bankbalancecheck.R;
 
 import java.text.DecimalFormat;
 
-public class FDCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
+public class EPFCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private ImageView ImgBack, ImgShareApp;
-    private TextView TxtTitle,TxtReset,TxtCalculate;
-    private EditText EdtFixedDepositAmount,EdtRateInterest,EdtHowSave;
-    private TextView TxtFDAmountFirst,TxtFDAmountSecond,TxtFDAmountThird;
-
+    private TextView TxtTitle, TxtReset, TxtCalculate;
+    private EditText EdtCurrentEPF, EdtBasicSalary, EdtEmployerEPF,EdtContribution,EdtIncreaseSalary,EdtAgeRetire,EdtAge,EdtCurrentInterest;
+    private TextView TxtEPFAmountFirst;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fdcalculator);
+        setContentView(R.layout.activity_epf_calculator);
         CalInitViews();
         CalInitListeners();
         CalInitActions();
     }
+
     private void CalInitViews() {
         context = this;
         ImgBack = (ImageView) findViewById(R.id.ImgBack);
@@ -39,12 +41,15 @@ public class FDCalculatorActivity extends AppCompatActivity implements View.OnCl
         TxtTitle = (TextView) findViewById(R.id.TxtTitle);
         TxtReset = (TextView) findViewById(R.id.TxtReset);
         TxtCalculate = (TextView) findViewById(R.id.TxtCalculate);
-        EdtFixedDepositAmount = (EditText) findViewById(R.id.EdtFixedDepositAmount);
-        EdtRateInterest = (EditText) findViewById(R.id.EdtRateInterest);
-        EdtHowSave = (EditText) findViewById(R.id.EdtHowSave);
-        TxtFDAmountFirst = (TextView) findViewById(R.id.TxtFDAmountFirst);
-        TxtFDAmountSecond = (TextView) findViewById(R.id.TxtFDAmountSecond);
-        TxtFDAmountThird = (TextView) findViewById(R.id.TxtFDAmountThird);
+        EdtCurrentEPF = (EditText) findViewById(R.id.EdtCurrentEPF);
+        EdtBasicSalary = (EditText) findViewById(R.id.EdtBasicSalary);
+        EdtEmployerEPF = (EditText) findViewById(R.id.EdtEmployerEPF);
+        EdtContribution = (EditText) findViewById(R.id.EdtContribution);
+        EdtIncreaseSalary = (EditText) findViewById(R.id.EdtIncreaseSalary);
+        EdtAgeRetire = (EditText) findViewById(R.id.EdtAgeRetire);
+        EdtAge = (EditText) findViewById(R.id.EdtAge);
+        EdtCurrentInterest = (EditText) findViewById(R.id.EdtCurrentInterest);
+        TxtEPFAmountFirst = (TextView) findViewById(R.id.TxtEPFAmountFirst);
     }
 
     private void CalInitListeners() {
@@ -57,7 +62,7 @@ public class FDCalculatorActivity extends AppCompatActivity implements View.OnCl
     private void CalInitActions() {
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
-        TxtTitle.setText(getResources().getString(R.string.fd_calculator));
+        TxtTitle.setText(getResources().getString(R.string.epf_calculator));
     }
 
     @Override
@@ -93,48 +98,51 @@ public class FDCalculatorActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void GotoReset() {
-        EdtFixedDepositAmount.setText("");
-        EdtRateInterest.setText("");
-        EdtHowSave.setText("");
-        TxtFDAmountFirst.setText(getResources().getString(R.string._00_0000));
-        TxtFDAmountSecond.setText(getResources().getString(R.string._00_0000));
-        TxtFDAmountThird.setText(getResources().getString(R.string._00_0000));
+        EdtCurrentEPF.setText("");
+        EdtBasicSalary.setText("");
+        EdtEmployerEPF.setText("");
+        EdtAge.setText("");
+        EdtContribution.setText("");
+        EdtAgeRetire.setText("");
+        EdtCurrentInterest.setText("");
+        EdtIncreaseSalary.setText("");
+        TxtEPFAmountFirst.setText(getResources().getString(R.string._00_0000));
     }
 
     private void GotoCalculate() {
-        BankConstantsData.hideKeyboard(FDCalculatorActivity.this);
+        BankConstantsData.hideKeyboard(EPFCalculatorActivity.this);
 
-        if (EdtFixedDepositAmount.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter fixed deposit amount.", Toast.LENGTH_SHORT).show();
-        }  else if (EdtRateInterest.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter rate of interest.", Toast.LENGTH_SHORT).show();
-        } else if (EdtHowSave.getText().toString().isEmpty()) {
+        if (EdtCurrentEPF.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter current pf.", Toast.LENGTH_SHORT).show();
+        } else if (EdtBasicSalary.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter basic pf.", Toast.LENGTH_SHORT).show();
+        } else if (EdtEmployerEPF.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter employee contribution.", Toast.LENGTH_SHORT).show();
+        } else if (EdtCurrentInterest.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter years.", Toast.LENGTH_SHORT).show();
+        } else if (EdtAgeRetire.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter retire age.", Toast.LENGTH_SHORT).show();
+        } else if (EdtAge.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter your age.", Toast.LENGTH_SHORT).show();
+        } else if (EdtContribution.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter your contribution.", Toast.LENGTH_SHORT).show();
+        } else if (EdtIncreaseSalary.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter increase salary.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtFixedDepositAmount.getText().toString());
-            double interestRate = Double.parseDouble(EdtRateInterest.getText().toString());
-            int years =Integer.parseInt(EdtHowSave.getText().toString());
+            double fdAmount = Double.parseDouble(EdtCurrentEPF.getText().toString());
+            double interestRate = Double.parseDouble(EdtBasicSalary.getText().toString());
+            int years = Integer.parseInt(EdtEmployerEPF.getText().toString());
 
             double interestAmount = (fdAmount * interestRate * years) / 100;
             double totalPayment = fdAmount + interestAmount;
-            
+
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
-            
+
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
             String monthStr = decimalFormat.format(fdAmount);
             sb.append(monthStr);
-            TxtFDAmountFirst.setText(sb.toString());
-            sb = new StringBuilder();
-            sb.append("₹ ");
-            String totalInterestStr = decimalFormat.format(interestAmount);
-            sb.append(totalInterestStr);
-            TxtFDAmountSecond.setText(sb.toString());
-            sb = new StringBuilder();
-            sb.append("₹ ");
-            String totalPaymentStr = decimalFormat.format(totalPayment);
-            sb.append(totalPaymentStr);
-            TxtFDAmountThird.setText(sb.toString());
+            TxtEPFAmountFirst.setText(sb.toString());
         }
     }
 }

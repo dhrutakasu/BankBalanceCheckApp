@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
+
+import java.text.DecimalFormat;
 
 public class LoanAmountCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
@@ -19,6 +23,7 @@ public class LoanAmountCalculatorActivity extends AppCompatActivity implements V
     private TextView TxtTitle;
     private TextView TxtMonthlyEMI, TxtLoanAnsFirst, TxtLoanAnsSecond, TxtLoanAnsThird, TxtLoanAmountFirst, TxtLoanAmountSecond, TxtLoanAmountThird, TxtReset, TxtCalculate;
     private EditText EdtMonthlyEMI, EdtLoanYear, EdtLoanMonth, EdtLoanRate;
+    private int YearsInt, MonthsInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,5 +119,53 @@ public class LoanAmountCalculatorActivity extends AppCompatActivity implements V
     }
 
     private void GotoCalculate() {
+        BankConstantsData.hideKeyboard(LoanAmountCalculatorActivity.this);
+        DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
+        if (EdtMonthlyEMI.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter loan amount.", Toast.LENGTH_SHORT).show();
+        } else if (EdtLoanYear.getText().toString().isEmpty() && EdtLoanMonth.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter period.", Toast.LENGTH_SHORT).show();
+        } else if (EdtLoanRate.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter rate.", Toast.LENGTH_SHORT).show();
+        } else {
+            if (EdtLoanYear.getText().toString().isEmpty()) {
+                YearsInt = 0;
+            } else {
+                YearsInt = Integer.parseInt(EdtLoanYear.getText().toString());
+            }
+            if (EdtLoanMonth.getText().toString().isEmpty()) {
+                MonthsInt = 0;
+            } else {
+                MonthsInt = Integer.parseInt(EdtLoanMonth.getText().toString());
+            }
+            double loanAmount = Double.parseDouble(EdtMonthlyEMI.getText().toString());
+            double interestRate = Double.parseDouble(EdtLoanRate.getText().toString());
+
+            double monthlyInterestRate = interestRate / 12 / 100;
+            int totalMonths = YearsInt * 12 + MonthsInt;
+            double monthlyEMI = calculateLoanAmount(loanAmount, monthlyInterestRate, totalMonths);
+            double totalInterest = monthlyEMI * totalMonths - loanAmount;
+            double totalPayment = monthlyEMI * totalMonths;
+            StringBuilder sb = new StringBuilder();
+            sb.append("₹ ");
+            String monthStr = decimalFormat.format(monthlyEMI);
+            sb.append(monthStr);
+            TxtLoanAmountFirst.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String totalInterestStr = decimalFormat.format(totalInterest);
+            sb.append(totalInterestStr);
+            TxtLoanAmountSecond.setText(sb.toString());
+            sb = new StringBuilder();
+            sb.append("₹ ");
+            String totalPaymentStr = decimalFormat.format(totalPayment);
+            sb.append(totalPaymentStr);
+            TxtLoanAmountThird.setText(sb.toString());
+        }
+    }
+
+    public static double calculateLoanAmount(double loanAmount, double monthlyInterestRate, int totalMonths) {
+        double emi = (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalMonths)) / (Math.pow(1 + monthlyInterestRate, totalMonths) - 1);
+        return emi;
     }
 }

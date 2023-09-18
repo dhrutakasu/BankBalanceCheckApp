@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
 
@@ -106,6 +107,7 @@ public class SIPCalculatorActivity extends AppCompatActivity implements View.OnC
         String monthlyInvestmentStr = EdtMonthlyInvest.getText().toString();
         String annualReturnRateStr = EdtMonthlyInvest.getText().toString();
         String investmentPeriodStr = EdtInvestmentPeriod.getText().toString();
+        BankConstantsData.hideKeyboard(SIPCalculatorActivity.this);
         if (TextUtils.isEmpty(monthlyInvestmentStr) && TextUtils.isEmpty(annualReturnRateStr) && TextUtils.isEmpty(investmentPeriodStr)) {
             Toast.makeText(context, "Please Enter Value.", Toast.LENGTH_SHORT).show();
         } else {

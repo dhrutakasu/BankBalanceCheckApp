@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,21 +19,21 @@ import com.balance.bankbalancecheck.R;
 
 import java.text.DecimalFormat;
 
-public class FDCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
+public class InflationCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private ImageView ImgBack, ImgShareApp;
-    private TextView TxtTitle,TxtReset,TxtCalculate;
-    private EditText EdtFixedDepositAmount,EdtRateInterest,EdtHowSave;
-    private TextView TxtFDAmountFirst,TxtFDAmountSecond,TxtFDAmountThird;
-
+    private TextView TxtTitle, TxtReset, TxtCalculate;
+    private EditText EdtAmount, EdtInitialYear, EdtFinalYears;
+    private TextView TxtAnsResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fdcalculator);
+        setContentView(R.layout.activity_inflation_calculator);
         CalInitViews();
         CalInitListeners();
         CalInitActions();
     }
+
     private void CalInitViews() {
         context = this;
         ImgBack = (ImageView) findViewById(R.id.ImgBack);
@@ -39,12 +41,10 @@ public class FDCalculatorActivity extends AppCompatActivity implements View.OnCl
         TxtTitle = (TextView) findViewById(R.id.TxtTitle);
         TxtReset = (TextView) findViewById(R.id.TxtReset);
         TxtCalculate = (TextView) findViewById(R.id.TxtCalculate);
-        EdtFixedDepositAmount = (EditText) findViewById(R.id.EdtFixedDepositAmount);
-        EdtRateInterest = (EditText) findViewById(R.id.EdtRateInterest);
-        EdtHowSave = (EditText) findViewById(R.id.EdtHowSave);
-        TxtFDAmountFirst = (TextView) findViewById(R.id.TxtFDAmountFirst);
-        TxtFDAmountSecond = (TextView) findViewById(R.id.TxtFDAmountSecond);
-        TxtFDAmountThird = (TextView) findViewById(R.id.TxtFDAmountThird);
+        EdtAmount = (EditText) findViewById(R.id.EdtAmount);
+        EdtInitialYear = (EditText) findViewById(R.id.EdtInitialYear);
+        EdtFinalYears = (EditText) findViewById(R.id.EdtFinalYears);
+        TxtAnsResult = (TextView) findViewById(R.id.TxtAnsResult);
     }
 
     private void CalInitListeners() {
@@ -57,7 +57,7 @@ public class FDCalculatorActivity extends AppCompatActivity implements View.OnCl
     private void CalInitActions() {
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
-        TxtTitle.setText(getResources().getString(R.string.fd_calculator));
+        TxtTitle.setText(getResources().getString(R.string.nps_calculator));
     }
 
     @Override
@@ -93,48 +93,36 @@ public class FDCalculatorActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void GotoReset() {
-        EdtFixedDepositAmount.setText("");
-        EdtRateInterest.setText("");
-        EdtHowSave.setText("");
-        TxtFDAmountFirst.setText(getResources().getString(R.string._00_0000));
-        TxtFDAmountSecond.setText(getResources().getString(R.string._00_0000));
-        TxtFDAmountThird.setText(getResources().getString(R.string._00_0000));
+        EdtAmount.setText("");
+        EdtInitialYear.setText("");
+        EdtFinalYears.setText("");
+        TxtAnsResult.setText(getResources().getString(R.string._00_0000));
     }
 
     private void GotoCalculate() {
-        BankConstantsData.hideKeyboard(FDCalculatorActivity.this);
+        BankConstantsData.hideKeyboard(InflationCalculatorActivity.this);
 
-        if (EdtFixedDepositAmount.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter fixed deposit amount.", Toast.LENGTH_SHORT).show();
-        }  else if (EdtRateInterest.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter rate of interest.", Toast.LENGTH_SHORT).show();
-        } else if (EdtHowSave.getText().toString().isEmpty()) {
-            Toast.makeText(context, "Please enter years.", Toast.LENGTH_SHORT).show();
+        if (EdtAmount.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter amount.", Toast.LENGTH_SHORT).show();
+        } else if (EdtInitialYear.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter initial year.", Toast.LENGTH_SHORT).show();
+        } else if (EdtFinalYears.getText().toString().isEmpty()) {
+            Toast.makeText(context, "Please enter final year.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtFixedDepositAmount.getText().toString());
-            double interestRate = Double.parseDouble(EdtRateInterest.getText().toString());
-            int years =Integer.parseInt(EdtHowSave.getText().toString());
+            double fdAmount = Double.parseDouble(EdtAmount.getText().toString());
+            double interestRate = Double.parseDouble(EdtInitialYear.getText().toString());
+            int years = Integer.parseInt(EdtFinalYears.getText().toString());
 
             double interestAmount = (fdAmount * interestRate * years) / 100;
             double totalPayment = fdAmount + interestAmount;
-            
+
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
-            
+
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
             String monthStr = decimalFormat.format(fdAmount);
             sb.append(monthStr);
-            TxtFDAmountFirst.setText(sb.toString());
-            sb = new StringBuilder();
-            sb.append("₹ ");
-            String totalInterestStr = decimalFormat.format(interestAmount);
-            sb.append(totalInterestStr);
-            TxtFDAmountSecond.setText(sb.toString());
-            sb = new StringBuilder();
-            sb.append("₹ ");
-            String totalPaymentStr = decimalFormat.format(totalPayment);
-            sb.append(totalPaymentStr);
-            TxtFDAmountThird.setText(sb.toString());
+            TxtAnsResult.setText(sb.toString());
         }
     }
 }

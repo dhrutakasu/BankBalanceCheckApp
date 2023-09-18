@@ -18,9 +18,10 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
     private Context context;
     private ImageView ImgBack, ImgShareApp;
     private TextView TxtTitle;
-    private TextView TxtLoanAmount, TxtMonthlyEMI, TxtTotalInterest, TxtTotalPayment;
+    private TextView TxtLoanAmountBtn, TxtMonthlyEMIBtn, TxtTotalInterestBtn, TxtTotalPaymentBtn;
     private ViewPager PagerEMI;
     private EMIAdapter emiAdapter;
+    public static int PosLevel = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +37,21 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
         ImgBack = (ImageView) findViewById(R.id.ImgBack);
         ImgShareApp = (ImageView) findViewById(R.id.ImgShareApp);
         TxtTitle = (TextView) findViewById(R.id.TxtTitle);
-        TxtLoanAmount = (TextView) findViewById(R.id.TxtLoanAmount);
-        TxtMonthlyEMI = (TextView) findViewById(R.id.TxtMonthlyEMI);
-        TxtTotalInterest = (TextView) findViewById(R.id.TxtTotalInterest);
-        TxtTotalPayment = (TextView) findViewById(R.id.TxtTotalPayment);
+        TxtLoanAmountBtn = (TextView) findViewById(R.id.TxtLoanAmountBtn);
+        TxtMonthlyEMIBtn = (TextView) findViewById(R.id.TxtMonthlyEMIBtn);
+        TxtTotalInterestBtn = (TextView) findViewById(R.id.TxtTotalInterestBtn);
+        TxtTotalPaymentBtn = (TextView) findViewById(R.id.TxtTotalPaymentBtn);
         PagerEMI = (ViewPager) findViewById(R.id.PagerEMI);
     }
 
     private void CalInitListeners() {
         ImgBack.setOnClickListener(this);
         ImgShareApp.setOnClickListener(this);
-        TxtLoanAmount.setOnClickListener(this);
-        TxtMonthlyEMI.setOnClickListener(this);
-        TxtTotalInterest.setOnClickListener(this);
-        TxtTotalPayment.setOnClickListener(this);
+        TxtLoanAmountBtn.setOnClickListener(this);
+        TxtMonthlyEMIBtn.setOnClickListener(this);
+        TxtTotalInterestBtn.setOnClickListener(this);
+        TxtTotalPaymentBtn.setOnClickListener(this);
+//        PosLevel = PagerEMI.getCurrentItem();
         PagerEMI.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -59,15 +61,15 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    GotoButtonsCheck(TxtLoanAmount);
+                    GotoButtonsCheck(TxtLoanAmountBtn,position);
                 } else if (position == 1) {
-                    GotoButtonsCheck(TxtMonthlyEMI);
+                    GotoButtonsCheck(TxtMonthlyEMIBtn,position);
                 } else if (position == 2) {
-                    GotoButtonsCheck(TxtTotalInterest);
+                    GotoButtonsCheck(TxtTotalInterestBtn,position);
                 } else if (position == 3) {
-                    GotoButtonsCheck(TxtTotalPayment);
+                    GotoButtonsCheck(TxtTotalPaymentBtn,position);
                 }
-                emiAdapter.getItem(position);
+
             }
 
             @Override
@@ -77,26 +79,28 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-    private void GotoButtonsCheck(TextView view) {
-        TxtLoanAmount.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtLoanAmount.setTextColor(getResources().getColor(R.color.black));
-        TxtMonthlyEMI.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtMonthlyEMI.setTextColor(getResources().getColor(R.color.black));
-        TxtTotalInterest.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtTotalInterest.setTextColor(getResources().getColor(R.color.black));
-        TxtTotalPayment.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtTotalPayment.setTextColor(getResources().getColor(R.color.black));
+    private void GotoButtonsCheck(TextView view, int position) {
+        TxtLoanAmountBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
+        TxtLoanAmountBtn.setTextColor(getResources().getColor(R.color.black));
+        TxtMonthlyEMIBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
+        TxtMonthlyEMIBtn.setTextColor(getResources().getColor(R.color.black));
+        TxtTotalInterestBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
+        TxtTotalInterestBtn.setTextColor(getResources().getColor(R.color.black));
+        TxtTotalPaymentBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
+        TxtTotalPaymentBtn.setTextColor(getResources().getColor(R.color.black));
         view.setBackgroundColor(getResources().getColor(R.color.black));
         view.setTextColor(getResources().getColor(R.color.white));
+//        PosLevel = position;
+        emiAdapter.getItem(position);
     }
 
     private void CalInitActions() {
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(getResources().getString(R.string.emi_calculator));
-        emiAdapter = new EMIAdapter(getSupportFragmentManager(),4);
+        emiAdapter = new EMIAdapter(getSupportFragmentManager(), 4);
         PagerEMI.setAdapter(emiAdapter);
-        GotoButtonsCheck(TxtLoanAmount);
+        GotoButtonsCheck(TxtLoanAmountBtn, 0);
     }
 
     @Override
@@ -107,6 +111,30 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.ImgShareApp:
                 GotoShare();
+                break;
+            case R.id.TxtLoanAmountBtn:
+                PagerEMI.setCurrentItem(0);
+//                PosLevel = PagerEMI.getCurrentItem();
+                GotoButtonsCheck(TxtLoanAmountBtn, PagerEMI.getCurrentItem());
+//                emiAdapter.getItem(PosLevel);
+                break;
+            case R.id.TxtMonthlyEMIBtn:
+                PagerEMI.setCurrentItem(1);
+//                PosLevel = PagerEMI.getCurrentItem();
+                GotoButtonsCheck(TxtMonthlyEMIBtn, PagerEMI.getCurrentItem());
+//                emiAdapter.getItem(PosLevel);
+                break;
+            case R.id.TxtTotalInterestBtn:
+                PagerEMI.setCurrentItem(2);
+//                PosLevel = PagerEMI.getCurrentItem();
+                GotoButtonsCheck(TxtTotalInterestBtn, PagerEMI.getCurrentItem());
+//                emiAdapter.getItem(PosLevel);
+                break;
+            case R.id.TxtTotalPaymentBtn:
+                PagerEMI.setCurrentItem(3);
+//                PosLevel = PagerEMI.getCurrentItem();
+                GotoButtonsCheck(TxtTotalPaymentBtn, PagerEMI.getCurrentItem());
+//                emiAdapter.getItem(PosLevel);
                 break;
         }
     }

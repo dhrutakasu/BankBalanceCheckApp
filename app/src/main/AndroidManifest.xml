@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.balance.bankbalancecheck" >
+    package="com.balance.bankbalancecheck">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BankBalanceCheck" >
+        android:theme="@style/Theme.BankBalanceCheck">
+        <activity
+            android:name=".BUi.BActivities.Calculators.GratuityCalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.Calculators.InflationCalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.Calculators.EPFCalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.Calculators.PPFCalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.Calculators.RdCalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.Calculators.SwapCalculatorActivity"
+            android:exported="false" />
         <activity
             android:name=".BUi.BActivities.Calculators.BrokerageCalculatorActivity"
             android:exported="false" />
@@ -32,7 +50,7 @@
             android:exported="false" />
         <activity
             android:name=".BUi.BActivities.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

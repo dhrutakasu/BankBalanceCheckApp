@@ -7,34 +7,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.BUi.BActivities.Calculators.EMICalculatorActivity;
 import com.balance.bankbalancecheck.R;
 
+import java.text.DecimalFormat;
+
 public class EMIFragment extends Fragment implements View.OnClickListener {
-    private static int EMI_POS;
+    private int EMI_POS = EMICalculatorActivity.PosLevel;
     private View EMIView;
     private Context context;
     private TextView TxtMonthlyEMI, TxtLoanAnsFirst, TxtLoanAnsSecond, TxtLoanAnsThird, TxtLoanAmountFirst, TxtLoanAmountSecond, TxtLoanAmountThird, TxtReset, TxtCalculate;
     private EditText EdtMonthlyEMI, EdtLoanYear, EdtLoanMonth, EdtLoanRate;
-
-    public static Fragment newInstance(int position) {
-        EMIFragment myFragment = new EMIFragment();
-        Bundle data = new Bundle();
-        System.out.println("-- - - -  EMI_Pos " + position);
-        data.putInt(BankConstantsData.EMI_Pos, position);
-        myFragment.setArguments(data);
-        return myFragment;
-    }
+    private int YearsInt, MonthsInt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         EMIView = inflater.inflate(R.layout.fragment_emi, container, false);
-        EMI_POS = getArguments().getInt(BankConstantsData.EMI_Pos);
-
-        System.out.println("-- - - -  EMI_POS " + EMI_POS);
         CalInitViews();
         CalInitListeners();
         CalInitActions();
@@ -64,7 +57,6 @@ public class EMIFragment extends Fragment implements View.OnClickListener {
     }
 
     private void CalInitActions() {
-        System.out.println("-- - - -  EMI_POS Reset Reset" + EMI_POS);
         GotoReset();
     }
 
@@ -82,10 +74,6 @@ public class EMIFragment extends Fragment implements View.OnClickListener {
 
     private void GotoReset() {
         System.out.println("-- - - -  EMI_POSReset " + EMI_POS);
-        EdtMonthlyEMI.setText("");
-        EdtLoanYear.setText("");
-        EdtLoanMonth.setText("");
-        EdtLoanRate.setText("");
         if (EMI_POS == 0) {
             TxtMonthlyEMI.setText(context.getString(R.string.monthly_emi_title));
             TxtLoanAnsFirst.setText(context.getString(R.string.loan_amount_title));
@@ -111,8 +99,112 @@ public class EMIFragment extends Fragment implements View.OnClickListener {
             EdtLoanMonth.setHint(context.getString(R.string.months));
             EdtLoanRate.setHint(context.getString(R.string.rate_per));
         }
+        EdtMonthlyEMI.setText("");
+        EdtLoanYear.setText("");
+        EdtLoanMonth.setText("");
+        EdtLoanRate.setText("");
     }
 
     private void GotoCalculate() {
+        System.out.println("-- - - -  EMI_POS " + EMI_POS);
+        BankConstantsData.hideKeyboard(getActivity());
+        DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
+        if (EMI_POS == 0) {
+            if (EdtMonthlyEMI.getText().toString().isEmpty()) {
+                Toast.makeText(context, "Please enter monthly EMI.", Toast.LENGTH_SHORT).show();
+            } else if (EdtLoanYear.getText().toString().isEmpty() && EdtLoanMonth.getText().toString().isEmpty()) {
+                Toast.makeText(context, "Please enter period.", Toast.LENGTH_SHORT).show();
+            } else if (EdtLoanRate.getText().toString().isEmpty()) {
+                Toast.makeText(context, "Please enter rate.", Toast.LENGTH_SHORT).show();
+            } else {
+                if (EdtLoanYear.getText().toString().isEmpty()) {
+                    YearsInt = 0;
+                } else {
+                    YearsInt = Integer.parseInt(EdtLoanYear.getText().toString());
+                }
+                if (EdtLoanMonth.getText().toString().isEmpty()) {
+                    MonthsInt = 0;
+                } else {
+                    MonthsInt = Integer.parseInt(EdtLoanMonth.getText().toString());
+                }
+                double monthlyEMI = Double.parseDouble(EdtMonthlyEMI.getText().toString());
+                double annualInterestRate = Double.parseDouble(EdtLoanRate.getText().toString());
+
+                int totalMonths = YearsInt * 12 + MonthsInt;
+
+                double monthlyInterestRate = (annualInterestRate / 12) / 100;
+                double loanAmount = calculateLoanAmount(monthlyEMI, monthlyInterestRate, totalMonths);
+                double totalInterest = (monthlyEMI * totalMonths) - loanAmount;
+                double totalPayment = monthlyEMI * totalMonths;
+                StringBuilder sb = new StringBuilder();
+                sb.append("₹ ");
+                String monthStr = decimalFormat.format(loanAmount);
+                sb.append(monthStr);
+                TxtLoanAmountFirst.setText(sb.toString());
+                sb = new StringBuilder();
+                sb.append("₹ ");
+                String totalInterestStr = decimalFormat.format(totalInterest);
+                sb.append(totalInterestStr);
+                TxtLoanAmountSecond.setText(sb.toString());
+                sb = new StringBuilder();
+                sb.append("₹ ");
+                String totalPaymentStr = decimalFormat.format(totalPayment);
+                sb.append(totalPaymentStr);
+                TxtLoanAmountThird.setText(sb.toString());
+            }
+        } else if (EMI_POS == 1 || EMI_POS == 2 || EMI_POS == 3) {
+            if (EdtMonthlyEMI.getText().toString().isEmpty()) {
+                Toast.makeText(context, "Please enter loan amount.", Toast.LENGTH_SHORT).show();
+            } else if (EdtLoanYear.getText().toString().isEmpty() && EdtLoanMonth.getText().toString().isEmpty()) {
+                Toast.makeText(context, "Please enter period.", Toast.LENGTH_SHORT).show();
+            } else if (EdtLoanRate.getText().toString().isEmpty()) {
+                Toast.makeText(context, "Please enter rate.", Toast.LENGTH_SHORT).show();
+            } else {
+                if (EdtLoanYear.getText().toString().isEmpty()) {
+                    YearsInt = 0;
+                } else {
+                    YearsInt = Integer.parseInt(EdtLoanYear.getText().toString());
+                }
+                if (EdtLoanMonth.getText().toString().isEmpty()) {
+                    MonthsInt = 0;
+                } else {
+                    MonthsInt = Integer.parseInt(EdtLoanMonth.getText().toString());
+                }
+                double loanAmount = Double.parseDouble(EdtMonthlyEMI.getText().toString());
+                double interestRate = Double.parseDouble(EdtLoanRate.getText().toString());
+
+                double monthlyInterestRate = interestRate / 12 / 100;
+                int totalMonths = YearsInt * 12 + MonthsInt;
+                double monthlyEMI = calculateMonthlyEMI(loanAmount, monthlyInterestRate, totalMonths);
+                double totalInterest = monthlyEMI * totalMonths - loanAmount;
+                double totalPayment = monthlyEMI * totalMonths;
+                StringBuilder sb = new StringBuilder();
+                sb.append("₹ ");
+                String monthStr = decimalFormat.format(monthlyEMI);
+                sb.append(monthStr);
+                TxtLoanAmountFirst.setText(sb.toString());
+                sb = new StringBuilder();
+                sb.append("₹ ");
+                String totalInterestStr = decimalFormat.format(totalInterest);
+                sb.append(totalInterestStr);
+                TxtLoanAmountSecond.setText(sb.toString());
+                sb = new StringBuilder();
+                sb.append("₹ ");
+                String totalPaymentStr = decimalFormat.format(totalPayment);
+                sb.append(totalPaymentStr);
+                TxtLoanAmountThird.setText(sb.toString());
+            }
+        }
+    }
+
+    public static double calculateLoanAmount(double monthlyEMI, double monthlyInterestRate, int totalMonths) {
+        double loanAmount;
+        loanAmount = (monthlyEMI * (Math.pow(1 + monthlyInterestRate, totalMonths) - 1)) / (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalMonths));
+        return loanAmount;
+    }
+
+    public static double calculateMonthlyEMI(double loanAmount, double monthlyInterestRate, int totalMonths) {
+        double emi = (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalMonths)) / (Math.pow(1 + monthlyInterestRate, totalMonths) - 1);
+        return emi;
     }
 }
