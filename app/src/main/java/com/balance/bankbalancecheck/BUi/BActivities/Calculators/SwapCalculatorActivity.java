@@ -20,9 +20,10 @@ import java.text.DecimalFormat;
 public class SwapCalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private ImageView ImgBack, ImgShareApp;
-    private TextView TxtTitle,TxtReset,TxtCalculate;
-    private EditText EdtTotalInvestment,EdtWithdrawalMonth,EdtReturnRate,EdtTimePeriod;
-    private TextView TxtSwapAmountFirst,TxtSwapAmountSecond,TxtSwapAmountThird;
+    private TextView TxtTitle, TxtReset, TxtCalculate;
+    private EditText EdtTotalInvestment, EdtWithdrawalMonth, EdtReturnRate, EdtTimePeriod;
+    private TextView TxtSwapAmountFirst, TxtSwapAmountSecond, TxtSwapAmountThird;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class SwapCalculatorActivity extends AppCompatActivity implements View.On
         CalInitListeners();
         CalInitActions();
     }
+
     private void CalInitViews() {
         context = this;
         ImgBack = (ImageView) findViewById(R.id.ImgBack);
@@ -107,35 +109,44 @@ public class SwapCalculatorActivity extends AppCompatActivity implements View.On
 
         if (EdtTotalInvestment.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter total investment amount.", Toast.LENGTH_SHORT).show();
-        }  else if (EdtWithdrawalMonth.getText().toString().isEmpty()) {
+        } else if (EdtWithdrawalMonth.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter withdrawal per month amount.", Toast.LENGTH_SHORT).show();
         } else if (EdtReturnRate.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter rate.", Toast.LENGTH_SHORT).show();
         } else if (EdtTimePeriod.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter years.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtTotalInvestment.getText().toString());
-            double interestRate = Double.parseDouble(EdtWithdrawalMonth.getText().toString());
-            int years =Integer.parseInt(EdtReturnRate.getText().toString());
+            double totalInvestment = Double.parseDouble(EdtTotalInvestment.getText().toString());
+            double withdrawalAmount = Double.parseDouble(EdtWithdrawalMonth.getText().toString());
+            double annualReturnRatePercentage = Double.parseDouble(EdtReturnRate.getText().toString());
+            double annualReturnRate = annualReturnRatePercentage / 100.0;
+            int years = Integer.parseInt(EdtTimePeriod.getText().toString());
 
-            double interestAmount = (fdAmount * interestRate * years) / 100;
-            double totalPayment = fdAmount + interestAmount;
+            double monthlyReturnRate = annualReturnRate / 12;
+            int months = years * 12;
+            double finalValue = totalInvestment;
+
+            for (int i = 0; i < months; i++) {
+                finalValue = finalValue * (1 + monthlyReturnRate) - withdrawalAmount;
+            }
+
+            double totalWithdrawal = withdrawalAmount * months;
 
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
 
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
-            String monthStr = decimalFormat.format(fdAmount);
+            String monthStr = decimalFormat.format(totalInvestment);
             sb.append(monthStr);
             TxtSwapAmountFirst.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String totalInterestStr = decimalFormat.format(interestAmount);
+            String totalInterestStr = decimalFormat.format(totalWithdrawal);
             sb.append(totalInterestStr);
             TxtSwapAmountSecond.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String totalPaymentStr = decimalFormat.format(totalPayment);
+            String totalPaymentStr = decimalFormat.format(finalValue);
             sb.append(totalPaymentStr);
             TxtSwapAmountThird.setText(sb.toString());
         }

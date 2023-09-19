@@ -113,28 +113,31 @@ public class PPFCalculatorActivity extends AppCompatActivity implements View.OnC
         } else if (EdtYears.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter years.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtYearlyInvestment.getText().toString());
-            double interestRate = Double.parseDouble(EdtRateOfInterest.getText().toString());
+            double yearlyInvestment = Double.parseDouble(EdtYearlyInvestment.getText().toString());
+            double annualInterestRate = Double.parseDouble(EdtRateOfInterest.getText().toString())/100;
             int years = Integer.parseInt(EdtYears.getText().toString());
 
-            double interestAmount = (fdAmount * interestRate * years) / 100;
-            double totalPayment = fdAmount + interestAmount;
+            double totalInvestment = yearlyInvestment * years;
+            double totalInterest = 0;
+            for (int i = 0; i < years; i++) {
+                totalInterest += (totalInvestment + totalInterest) * annualInterestRate;
+            }
+            double maturityValue = totalInvestment + totalInterest;
 
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
-
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
-            String monthStr = decimalFormat.format(fdAmount);
+            String monthStr = decimalFormat.format(totalInvestment);
             sb.append(monthStr);
             TxtPPFAmountFirst.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String totalInterestStr = decimalFormat.format(interestAmount);
+            String totalInterestStr = decimalFormat.format(totalInterest);
             sb.append(totalInterestStr);
             TxtPPFAmountSecond.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String totalPaymentStr = decimalFormat.format(totalPayment);
+            String totalPaymentStr = decimalFormat.format(maturityValue);
             sb.append(totalPaymentStr);
             TxtPPFAmountThird.setText(sb.toString());
         }

@@ -13,7 +13,7 @@ import com.balance.bankbalancecheck.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context context;
-    private Button BtnCal;
+    private Button BtnCal,BtnScheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void BankInitViews() {
         context = this;
         BtnCal = (Button) findViewById(R.id.BtnCal);
+        BtnScheme = (Button) findViewById(R.id.BtnScheme);
     }
 
     private void BankInitListeners() {
         BtnCal.setOnClickListener(this);
+        BtnScheme.setOnClickListener(this);
     }
 
     private void BankInitActions() {
@@ -43,10 +45,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.BtnCal:
                 GotoCalculators();
                 break;
+            case R.id.BtnScheme:
+                GotoSavingScheme();
+                break;
         }
     }
 
     private void GotoCalculators() {
         startActivity(new Intent(context, CalculatorsActivity.class));
+    }
+
+    private void GotoSavingScheme() {
+        startActivity(new Intent(context, SavingSchemeActivity.class));
     }
 }

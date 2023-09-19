@@ -25,6 +25,7 @@ public class GratuityCalculatorActivity extends AppCompatActivity implements Vie
     private TextView TxtTitle, TxtReset, TxtCalculate;
     private EditText EdtMonthlySalary, EdtYearService;
     private TextView TxtGratuityAmountFirst;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,16 +106,18 @@ public class GratuityCalculatorActivity extends AppCompatActivity implements Vie
         } else if (EdtYearService.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter Year Of Service.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtMonthlySalary.getText().toString());
-            double interestRate = Double.parseDouble(EdtYearService.getText().toString());
-
-
-
+            double monthlySalary = Double.parseDouble(EdtMonthlySalary.getText().toString());
+            int yearsOfService = Integer.parseInt(EdtYearService.getText().toString());
+            if (yearsOfService >= 100) {
+                Toast.makeText(context, "Please enter valid years.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            double gratuity = (monthlySalary * yearsOfService * 15) / 26;
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
 
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
-            String monthStr = decimalFormat.format(fdAmount);
+            String monthStr = decimalFormat.format(gratuity);
             sb.append(monthStr);
             TxtGratuityAmountFirst.setText(sb.toString());
         }

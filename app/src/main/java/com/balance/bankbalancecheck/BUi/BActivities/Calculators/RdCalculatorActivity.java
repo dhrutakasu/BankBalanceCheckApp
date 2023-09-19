@@ -106,6 +106,7 @@ public class RdCalculatorActivity extends AppCompatActivity implements View.OnCl
         EdtMonthlyInvestement.setText("");
         EdtRateOfInterest.setText("");
         EdtYears.setText("");
+        SpinnerTimePeriod.setSelection(0);
         TxtRDAmountFirst.setText(getResources().getString(R.string._00_0000));
         TxtRDAmountSecond.setText(getResources().getString(R.string._00_0000));
         TxtRDAmountThird.setText(getResources().getString(R.string._00_0000));
@@ -121,28 +122,54 @@ public class RdCalculatorActivity extends AppCompatActivity implements View.OnCl
         } else if (EdtYears.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter years.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtMonthlyInvestement.getText().toString());
-            double interestRate = Double.parseDouble(EdtRateOfInterest.getText().toString());
+            double monthlyInvestment = Double.parseDouble(EdtMonthlyInvestement.getText().toString());
+            double annualInterestRate = Double.parseDouble(EdtRateOfInterest.getText().toString()) / 100;
             int years = Integer.parseInt(EdtYears.getText().toString());
+            int timePeriodType = SpinnerTimePeriod.getSelectedItemPosition();
 
-            double interestAmount = (fdAmount * interestRate * years) / 100;
-            double totalPayment = fdAmount + interestAmount;
+            int compoundingFrequency;
+            switch (timePeriodType) {
+                case 0:
+                    compoundingFrequency = 1;
+                    break;
+                case 1:
+                    compoundingFrequency = 2;
+                    break;
+                case 2:
+                    compoundingFrequency = 4;
+                    break;
+                case 3:
+                    compoundingFrequency = 12;
+                    break;
+                default:
+                    System.out.println("Invalid time period type.");
+                    return;
+            }
 
+            int totalPeriods = years * compoundingFrequency;
+            double totalInterest = 0;
+            double depositedAmount = 0;
+            for (int i = 0; i < totalPeriods; i++) {
+                depositedAmount += monthlyInvestment;
+                totalInterest += (depositedAmount + totalInterest) * (annualInterestRate / compoundingFrequency);
+            }
+
+            double maturityAmount = depositedAmount + totalInterest;
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
 
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
-            String monthStr = decimalFormat.format(fdAmount);
+            String monthStr = decimalFormat.format(totalInterest);
             sb.append(monthStr);
             TxtRDAmountFirst.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String totalInterestStr = decimalFormat.format(interestAmount);
+            String totalInterestStr = decimalFormat.format(depositedAmount);
             sb.append(totalInterestStr);
             TxtRDAmountSecond.setText(sb.toString());
             sb = new StringBuilder();
             sb.append("₹ ");
-            String totalPaymentStr = decimalFormat.format(totalPayment);
+            String totalPaymentStr = decimalFormat.format(maturityAmount);
             sb.append(totalPaymentStr);
             TxtRDAmountThird.setText(sb.toString());
         }

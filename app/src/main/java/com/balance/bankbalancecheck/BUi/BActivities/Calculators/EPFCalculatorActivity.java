@@ -129,20 +129,36 @@ public class EPFCalculatorActivity extends AppCompatActivity implements View.OnC
         } else if (EdtIncreaseSalary.getText().toString().isEmpty()) {
             Toast.makeText(context, "Please enter increase salary.", Toast.LENGTH_SHORT).show();
         } else {
-            double fdAmount = Double.parseDouble(EdtCurrentEPF.getText().toString());
-            double interestRate = Double.parseDouble(EdtBasicSalary.getText().toString());
-            int years = Integer.parseInt(EdtEmployerEPF.getText().toString());
-
-            double interestAmount = (fdAmount * interestRate * years) / 100;
-            double totalPayment = fdAmount + interestAmount;
+            double currentEPFBalance = Double.parseDouble(EdtCurrentEPF.getText().toString()); // Rs
+            double basicSalaryMonthly = Double.parseDouble(EdtBasicSalary.getText().toString()); // Rs
+            double employerContributionEPF = Double.parseDouble(EdtEmployerEPF.getText().toString()); // %
+            double yourContributionEPF = Double.parseDouble(EdtContribution.getText().toString()); // %
+            double annualIncreaseInSalary = Double.parseDouble(EdtIncreaseSalary.getText().toString()); // %
+            int ageWhenYouIntendToRetire = Integer.parseInt(EdtAgeRetire.getText().toString()); // years
+            int yourAge = Integer.parseInt(EdtAge.getText().toString()); // years
+            double currentEPFInterestRate = Double.parseDouble(EdtCurrentInterest.getText().toString()); // %
+            double totalPFBalances=calculateTotalPFContribution(currentEPFBalance,basicSalaryMonthly,employerContributionEPF,yourContributionEPF,annualIncreaseInSalary,ageWhenYouIntendToRetire,yourAge,currentEPFInterestRate);
 
             DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
 
             StringBuilder sb = new StringBuilder();
             sb.append("₹ ");
-            String monthStr = decimalFormat.format(fdAmount);
+            String monthStr = decimalFormat.format(totalPFBalances);
             sb.append(monthStr);
             TxtEPFAmountFirst.setText(sb.toString());
         }
+    }
+    public static double calculateTotalPFContribution(double currentEPFBalance, double basicSalaryMonthly, double employerContributionPercentage, double employeeContributionPercentage, double annualIncreaseInSalary, int retireAge, int currentAge, double currentEPFInterestRate) {
+        double totalPFContribution = 0;
+        int yearsUntilRetirement = retireAge - currentAge;
+        for (int i = 0; i < yearsUntilRetirement; i++) {
+            double annualContribution = (basicSalaryMonthly * employeeContributionPercentage / 100) + (basicSalaryMonthly * employerContributionPercentage / 100);
+            currentEPFBalance += annualContribution;
+            double interestEarned = currentEPFBalance * (currentEPFInterestRate / 100);
+            currentEPFBalance += interestEarned;
+            basicSalaryMonthly += (basicSalaryMonthly * annualIncreaseInSalary / 100);
+        }
+        totalPFContribution = currentEPFBalance;
+        return totalPFContribution;
     }
 }

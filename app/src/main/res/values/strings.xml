@@ -110,4 +110,13 @@
     <string name="monthly_salary_basic_da">Monthly Salary (Basic + DA)</string>
     <string name="monthly_salary_amount">Monthly Salary Amount</string>
     <string name="year_of_service">Year Of Service</string>
+    <string name="saving_scheme">Saving scheme</string>
+    <string name="public_pf">Public PF</string>
+    <string name="employee_pf">Employee PF</string>
+    <string name="natinal_ps">Natinal PS</string>
+    <string name="sensor_cs">Sensor CS</string>
+    <string name="national_sc">National SC</string>
+    <string name="post_office_ss">Post Office SS</string>
+    <string name="pm_vaya">PM Vaya</string>
+    <string name="pm_jan_dhan">PM Jan Dhan</string>
 </resources>

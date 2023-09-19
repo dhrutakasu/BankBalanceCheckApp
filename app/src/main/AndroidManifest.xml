@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
+            android:name=".BUi.BActivities.ViewSchemesDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.SavingSchemeActivity"
+            android:exported="false" />
+        <activity
             android:name=".BUi.BActivities.Calculators.GratuityCalculatorActivity"
             android:exported="false" />
         <activity
