@@ -119,4 +119,21 @@
     <string name="post_office_ss">Post Office SS</string>
     <string name="pm_vaya">PM Vaya</string>
     <string name="pm_jan_dhan">PM Jan Dhan</string>
+    <string name="credit_loan_type">Credit Loan Type</string>
+    <string name="car_loan">Car Loan</string>
+    <string name="home_loan">Home Loan</string>
+    <string name="personal_loan">Personal Loan</string>
+    <string name="business_loan">Business Loan</string>
+    <string name="micro_loan">Micro Loan</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="mutual_fund">Mutual Fund</string>
+    <string name="explore_fund">Explore Fund</string>
+    <string name="popular_fund">Popular Fund</string>
+    <string name="banking">Banking</string>
+    <string name="near_by_atm">Near By ATM</string>
+    <string name="net_banking">Net Banking</string>
+    <string name="ussd_banking">USSD Banking</string>
+    <string name="bank_holiday">Bank Holiday</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="bank_balance">Bank Balance</string>
 </resources>

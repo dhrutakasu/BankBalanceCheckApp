@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
+            android:name=".BUi.BActivities.BankingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.MutualFundActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.CreditLoanActivity"
+            android:exported="false" />
+        <activity
             android:name=".BUi.BActivities.ViewSchemesDetailsActivity"
             android:exported="false" />
         <activity

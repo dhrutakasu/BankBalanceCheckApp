@@ -7,14 +7,22 @@
     tools:context=".BUi.BActivities.MainActivity">
 
     <Button
-        android:id="@+id/BtnCal"
+        android:id="@+id/BtnBankDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calculators"
+        android:text="@string/banking"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/BtnCal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calculators"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/BtnBankDetail" />
     <Button
         android:id="@+id/BtnScheme"
         android:layout_width="wrap_content"
@@ -23,5 +31,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/BtnCal" />
+    <Button
+        android:id="@+id/BtnCreditLoan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/credit_loan_type"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/BtnScheme" />
+    <Button
+        android:id="@+id/BtnMutualFund"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mutual_fund"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/BtnCreditLoan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
