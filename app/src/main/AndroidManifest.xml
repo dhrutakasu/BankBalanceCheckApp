@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
+            android:name=".BUi.BActivities.AllBankUSSDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.USSDBankingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.IFSCDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.LoanDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.IFSCActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.NearByActivity"
+            android:exported="false" />
+        <activity
             android:name=".BUi.BActivities.BankingActivity"
             android:exported="false" />
         <activity

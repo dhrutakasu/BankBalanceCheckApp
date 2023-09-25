@@ -124,7 +124,7 @@
     <string name="home_loan">Home Loan</string>
     <string name="personal_loan">Personal Loan</string>
     <string name="business_loan">Business Loan</string>
-    <string name="micro_loan">Micro Loan</string>
+    <string name="education_loan">Education Loan</string>
     <string name="credit_card">Credit Card</string>
     <string name="mutual_fund">Mutual Fund</string>
     <string name="explore_fund">Explore Fund</string>
@@ -136,4 +136,8 @@
     <string name="bank_holiday">Bank Holiday</string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="bank_balance">Bank Balance</string>
+    <string name="nearby">NearBy</string>
+    <string name="ifsc">IFSC</string>
+    <string name="near_by">Near By</string>
+    <string name="ussd_banking">USSD Banking</string>
 </resources>

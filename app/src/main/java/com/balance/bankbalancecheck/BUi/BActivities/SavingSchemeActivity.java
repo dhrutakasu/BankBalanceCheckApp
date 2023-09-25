@@ -49,7 +49,7 @@ public class SavingSchemeActivity extends AppCompatActivity {
         strings.add(getString(R.string.post_office_ss));
         strings.add(getString(R.string.pm_vaya));
         strings.add(getString(R.string.pm_jan_dhan));
-        RvSavingSchemes.setLayoutManager(new GridLayoutManager(context, 2));
+        RvSavingSchemes.setLayoutManager(new GridLayoutManager(context, 1));
         RvSavingSchemes.setAdapter(new CalculatorsAdapter(context, strings, new CalculatorsAdapter.setClickListener() {
             @Override
             public void CalculatorsClickListener(int position) {
