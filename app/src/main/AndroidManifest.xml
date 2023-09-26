@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
+            android:name=".BUi.BActivities.NetBankinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.BankBalanceActivity"
+            android:exported="false" />
+        <activity
             android:name=".BUi.BActivities.AllBankUSSDActivity"
             android:exported="false" />
         <activity
@@ -91,5 +97,6 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

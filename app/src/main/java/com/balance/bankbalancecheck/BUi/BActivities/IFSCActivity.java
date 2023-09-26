@@ -8,16 +8,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BUi.BAdapters.BankAdapter;
+import com.balance.bankbalancecheck.BUi.BAdapters.BranchAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.DistrictAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.StateAdapter;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
@@ -30,9 +34,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class IFSCActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class IFSCActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, TextWatcher {
     private Context context;
-    private ImageView ImgBack,ImgShareApp ;
+    private ImageView ImgBack, ImgShareApp;
     private TextView TxtTitle;
     private RecyclerView RvIFSCBank, RvIFSCState, RvIFSCDistrict, RvIFSCBranch;
     private String IFSCType;
@@ -41,8 +45,11 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<String> DistrictList = new ArrayList<>();
     private ArrayList<String> BranchList = new ArrayList<>();
     private String BankStr, StateStr, DistrictStr, BranchStr;
-    private AutoCompleteTextView AutoIFSCSearch;
-    private ImageView IvIFSCSearch;
+    private EditText EdtIFSCSearch;
+    private BankAdapter bankAdapter;
+    private DistrictAdapter districtAdapter;
+    private StateAdapter stateAdapter;
+    private BranchAdapter branchAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,33 +69,42 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
         RvIFSCState = (RecyclerView) findViewById(R.id.RvIFSCState);
         RvIFSCBranch = (RecyclerView) findViewById(R.id.RvIFSCBranch);
         RvIFSCDistrict = (RecyclerView) findViewById(R.id.RvIFSCDistrict);
-        AutoIFSCSearch = (AutoCompleteTextView) findViewById(R.id.AutoIFSCSearch);
-        IvIFSCSearch = (ImageView) findViewById(R.id.IvIFSCSearch);
+        EdtIFSCSearch = (EditText) findViewById(R.id.EdtIFSCSearch);
         if (new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, "").isEmpty()) {
             IFSCType = "BANK";
-        } else {
+            RvIFSCBank.setVisibility(View.VISIBLE);
+            RvIFSCState.setVisibility(View.GONE);
+            RvIFSCDistrict.setVisibility(View.GONE);
+            RvIFSCBranch.setVisibility(View.GONE);
+        } else if (new BankPreferences(context).getPrefString(BankPreferences.BRANCH_NAME, "").isEmpty()) {
             IFSCType = "STATE";
+            BankStr = new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, "");
+            RvIFSCBank.setVisibility(View.GONE);
+            RvIFSCState.setVisibility(View.VISIBLE);
+            RvIFSCBranch.setVisibility(View.GONE);
+            RvIFSCDistrict.setVisibility(View.GONE);
         }
-        RvIFSCBank.setVisibility(View.VISIBLE);
-        RvIFSCState.setVisibility(View.GONE);
-        RvIFSCDistrict.setVisibility(View.GONE);
-        RvIFSCBranch.setVisibility(View.GONE);
+
+        ImgBack.setVisibility(View.VISIBLE);
+        ImgShareApp.setVisibility(View.VISIBLE);
+        TxtTitle.setText(R.string.ifsc_code);
     }
 
     private void BankInitListeners() {
         ImgBack.setOnClickListener(this);
         ImgShareApp.setOnClickListener(this);
-        AutoIFSCSearch.setOnItemClickListener(this);
+        EdtIFSCSearch.addTextChangedListener(this);
     }
 
     private void BankInitActions() {
-        ImgBack.setVisibility(View.VISIBLE);
-        TxtTitle.setText(R.string.ifsc_code);
         RvIFSCBank.setLayoutManager(new LinearLayoutManager(context));
         RvIFSCState.setLayoutManager(new LinearLayoutManager(context));
         RvIFSCDistrict.setLayoutManager(new LinearLayoutManager(context));
         RvIFSCBranch.setLayoutManager(new LinearLayoutManager(context));
-
+        BankList = new ArrayList<>();
+        StateList = new ArrayList<>();
+        DistrictList = new ArrayList<>();
+        BranchList = new ArrayList<>();
         int i = 0;
         if (IFSCType.equalsIgnoreCase("BANK")) {
             BankList.clear();
@@ -113,10 +129,11 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            BankAdapter bankAdapter = new BankAdapter(context, BankList, new BankAdapter.BankListener() {
+            bankAdapter = new BankAdapter(context, BankList, new BankAdapter.BankListener() {
                 @Override
                 public void BankClick(int pos, ArrayList<String> strings) {
                     BankStr = strings.get(pos).toString();
+                    new BankPreferences(context).putPrefString(BankPreferences.BANK_NAME, BankStr);
                     IFSCType = "STATE";
                     BankInitActions();
                     RvIFSCBank.setVisibility(View.GONE);
@@ -126,11 +143,8 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
             RvIFSCBank.setAdapter(bankAdapter);
-            AutoIFSCSearch.setText("");
-            AutoIFSCSearch.setHint("Select Bank");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, BankList);
-            AutoIFSCSearch.setThreshold(1);
-            AutoIFSCSearch.setAdapter(adapter);
+            EdtIFSCSearch.setText("");
+            EdtIFSCSearch.setHint("Select Bank");
         } else if (IFSCType.equalsIgnoreCase("STATE")) {
             TxtTitle.setText("Select State");
             try {
@@ -144,7 +158,7 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            StateAdapter stateAdapter = new StateAdapter(context, StateList, new StateAdapter.BankListener() {
+            stateAdapter = new StateAdapter(context, StateList, new StateAdapter.BankListener() {
                 @Override
                 public void BankClick(int pos, ArrayList<String> strings) {
                     StateStr = strings.get(pos).toString();
@@ -157,16 +171,13 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
             RvIFSCState.setAdapter(stateAdapter);
-            AutoIFSCSearch.setText("");
-            AutoIFSCSearch.setHint("Select State");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, StateList);
-            AutoIFSCSearch.setThreshold(1);
-            AutoIFSCSearch.setAdapter(adapter);
+            EdtIFSCSearch.setText("");
+            EdtIFSCSearch.setHint("Select State");
         } else if (IFSCType.equalsIgnoreCase("DISTRICT")) {
             TxtTitle.setText("Select District");
             try {
                 AssetManager assetManager = getAssets();
-                InputStreamReader streamReader = new InputStreamReader(assetManager.open("IFSC_Code/" + StateStr + ".txt"), "UTF-8");
+                InputStreamReader streamReader = new InputStreamReader(assetManager.open("IFSC Code/" + BankStr + ".txt"), "UTF-8");
                 BufferedReader reader = new BufferedReader(streamReader);
                 reader.readLine();
                 String[] strings = reader.readLine().split("\\*\\*");
@@ -185,26 +196,23 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     reader.close();
                     streamReader.close();
-                    return;
+                    districtAdapter = new DistrictAdapter(context, DistrictList, new DistrictAdapter.BankListener() {
+                        @Override
+                        public void BankClick(int pos, ArrayList<String> strings) {
+                            DistrictStr = strings.get(pos).toString();
+                            IFSCType = "BRANCH";
+                            BankInitActions();
+                            RvIFSCBank.setVisibility(View.GONE);
+                            RvIFSCState.setVisibility(View.GONE);
+                            RvIFSCDistrict.setVisibility(View.GONE);
+                            RvIFSCBranch.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    RvIFSCDistrict.setAdapter(districtAdapter);
+                    EdtIFSCSearch.setText("");
+                    EdtIFSCSearch.setHint("Select District");
                 }
-                DistrictAdapter districtAdapter = new DistrictAdapter(context, DistrictList, new DistrictAdapter.BankListener() {
-                    @Override
-                    public void BankClick(int pos, ArrayList<String> strings) {
-                        DistrictStr = strings.get(pos).toString();
-                        IFSCType = "BRANCH";
-                        BankInitActions();
-                        RvIFSCBank.setVisibility(View.GONE);
-                        RvIFSCState.setVisibility(View.GONE);
-                        RvIFSCDistrict.setVisibility(View.GONE);
-                        RvIFSCBranch.setVisibility(View.VISIBLE);
-                    }
-                });
-                RvIFSCState.setAdapter(districtAdapter);
-                AutoIFSCSearch.setText("");
-                AutoIFSCSearch.setHint("Select District");
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, DistrictList);
-                AutoIFSCSearch.setThreshold(1);
-                AutoIFSCSearch.setAdapter(adapter);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -212,7 +220,7 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
             TxtTitle.setText("Select Branch");
             try {
                 AssetManager assetManager = getAssets();
-                InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open("IFSC_Code/" + DistrictStr + ".txt"), "UTF-8");
+                InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open("IFSC Code/" + BankStr + ".txt"), "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 bufferedReader.readLine();
                 bufferedReader.readLine();
@@ -224,7 +232,7 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                             break;
                         }
                         String split3 = split[i];
-                        if (split3.contains(StateStr + "->" + DistrictList)) {
+                        if (split3.contains(StateStr + "->" + DistrictStr)) {
                             BranchList.addAll(Arrays.asList(split3.split("->")[2].split("\\*")));
                             break;
                         }
@@ -232,85 +240,38 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     bufferedReader.close();
                     inputStreamReader.close();
-                    return;
+                    branchAdapter = new BranchAdapter(context, BranchList, new BranchAdapter.BankListener() {
+                        @Override
+                        public void BankClick(int pos, ArrayList<String> strings) {
+                            BranchStr = strings.get(pos).toString();
+
+                            new BankPreferences(context).putPrefString(BankPreferences.STATE_NAME, StateStr);
+                            new BankPreferences(context).putPrefString(BankPreferences.DISTRICT_NAME, DistrictStr);
+                            new BankPreferences(context).putPrefString(BankPreferences.BRANCH_NAME, BranchStr);
+                            startActivity(new Intent(context, IFSCDetailsActivity.class)
+                                    .putExtra(BankConstantsData.IFSC_BANK, BankStr)
+                                    .putExtra(BankConstantsData.IFSC_STATE, StateStr)
+                                    .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
+                                    .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
+                            finish();
+                        }
+                    });
+                    RvIFSCBranch.setAdapter(branchAdapter);
+                    EdtIFSCSearch.setText("");
+                    EdtIFSCSearch.setHint("Select Branch");
                 }
-                AutoIFSCSearch.setText("");
-                AutoIFSCSearch.setHint("Select Branch");
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, BranchList);
-                AutoIFSCSearch.setThreshold(1);
-                AutoIFSCSearch.setAdapter(adapter);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-      /*  if (s0.equalsIgnoreCase("STATE")) {
-            AssetManager assets = getAssets();
-            InputStreamReader inputStreamReader = new InputStreamReader(assets.open("IFSC_Code/" + n0 + ".txt"), "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            q0.addAll(Arrays.asList(bufferedReader.readLine().split("\\*")));
-            Log.d("tytyt", "" + q0.size());
-            bufferedReader.close();
-            inputStreamReader.close();
-        } else if (s0.equalsIgnoreCase("DISTRICT")) {
-            AssetManager assets2 = getAssets();
-            InputStreamReader inputStreamReader2 = new InputStreamReader(assets2.open("IFSC_Code/" + n0 + ".txt"), "UTF-8");
-            BufferedReader bufferedReader2 = new BufferedReader(inputStreamReader2);
-            bufferedReader2.readLine();
-            String[] split = bufferedReader2.readLine().split("\\*\\*");
-            if (split.length > 0) {
-                int length2 = split.length;
-                while (true) {
-                    if (i >= length2) {
-                        break;
-                    }
-                    String str2 = split[i];
-                    if (str2.contains(t0)) {
-                        q0.addAll(Arrays.asList(str2.split("->")[1].split("\\*")));
-                        break;
-                    }
-                    i++;
-                }
-                bufferedReader2.close();
-                inputStreamReader2.close();
-                return;
-            }
-            l0.setVisibility(0);
-            r0.setVisibility(8);
-        } else if (s0.equalsIgnoreCase("BRANCH")) {
-            AssetManager assets3 = getAssets();
-            InputStreamReader inputStreamReader3 = new InputStreamReader(assets3.open("IFSC_Code/" + n0 + ".txt"), "UTF-8");
-            BufferedReader bufferedReader3 = new BufferedReader(inputStreamReader3);
-            bufferedReader3.readLine();
-            bufferedReader3.readLine();
-            String[] split2 = bufferedReader3.readLine().split("\\*\\*");
-            if (split2.length > 0) {
-                int length3 = split2.length;
-                while (true) {
-                    if (i >= length3) {
-                        break;
-                    }
-                    String str3 = split2[i];
-                    if (str3.contains(t0 + "->" + o0)) {
-                        q0.addAll(Arrays.asList(str3.split("->")[2].split("\\*")));
-                        break;
-                    }
-                    i++;
-                }
-                bufferedReader3.close();
-                inputStreamReader3.close();
-                return;
-            }
-            l0.setVisibility(0);
-            r0.setVisibility(8);
-        }*/
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ImgBack:
-                finish();
+                onBackPressed();
                 break;
             case R.id.ImgShareApp:
                 GotoShareApp();
@@ -352,16 +313,6 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
             RvIFSCState.setVisibility(View.VISIBLE);
             RvIFSCBank.setVisibility(View.GONE);
         } else if (RvIFSCState.getVisibility() == View.VISIBLE) {
-            BranchStr = "";
-            DistrictStr = "";
-            StateStr = "";
-            IFSCType = "BANK";
-            BankInitActions();
-            RvIFSCBranch.setVisibility(View.GONE);
-            RvIFSCDistrict.setVisibility(View.GONE);
-            RvIFSCState.setVisibility(View.GONE);
-            RvIFSCBank.setVisibility(View.VISIBLE);
-        } else {
             super.onBackPressed();
         }
     }
@@ -388,5 +339,28 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                     .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
                     .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (IFSCType.equalsIgnoreCase("BANK")) {
+            bankAdapter.getFilter().filter(s.toString());
+        } else if (IFSCType.equalsIgnoreCase("STATE")) {
+            stateAdapter.getFilter().filter(s.toString());
+        } else if (IFSCType.equalsIgnoreCase("DISTRICT")) {
+            districtAdapter.getFilter().filter(s.toString());
+        } else if (IFSCType.equalsIgnoreCase("BRANCH")) {
+            branchAdapter.getFilter().filter(s.toString());
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }

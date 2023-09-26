@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 public class BankPreferences {
     public static final String BANK_NAME = "BANK_NAME";
+    public static final String STATE_NAME = "STATE_NAME";
+    public static final String DISTRICT_NAME = "DISTRICT_NAME";
+    public static final String BRANCH_NAME = "BRANCH_NAME";
     private SharedPreferences sharedPreferences;
     static final String BankPreferences = "BankPreferences";
 

@@ -26,5 +26,280 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RlHeaderBar">
 
+        <RelativeLayout
+            android:id="@+id/RlIFSCContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingRight="5dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/TxtBankTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:text="@string/bank_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtBankTitle"
+                android:layout_toEndOf="@+id/TxtBankTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtIFSCTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/TxtBank"
+                android:text="@string/ifsc_code_colan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtIFSCCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtIFSCTitle"
+                android:layout_toEndOf="@+id/TxtIFSCTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtAddressTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtAddress"
+                android:layout_marginStart="5dp"
+                android:layout_toStartOf="@+id/TxtAddress"
+                android:text="@string/address"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtIFSCTitle"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtStateTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtState"
+                android:layout_marginStart="5dp"
+                android:layout_toStartOf="@+id/TxtState"
+                android:text="@string/state_name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtAddress"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtDistrictTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtDistrict"
+                android:layout_marginStart="5dp"
+                android:layout_toStartOf="@+id/TxtDistrict"
+                android:text="@string/district_name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtStateTitle"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtBranchTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtBranch"
+                android:layout_marginStart="5dp"
+                android:layout_toStartOf="@+id/TxtBranch"
+                android:text="@string/branch_name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtBranch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtDistrictTitle"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtMICRCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtBranchTitle"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/TxtIFSCTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtMICRTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtMICRCode"
+                android:layout_alignEnd="@+id/TxtIFSCTitle"
+                android:layout_marginStart="5dp"
+                android:text="@string/micr_code"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtPhNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtMICRTitle"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/TxtAddressTitle"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtPhNoTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtPhNo"
+                android:layout_marginStart="5dp"
+                android:layout_toStartOf="@+id/TxtPhNo"
+                android:text="@string/phone_no"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TxtBranchCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtPhNo"
+                android:layout_alignStart="@+id/TxtPhNo"
+                android:layout_marginTop="20dp"
+                android:text="@string/dash"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/TxtBranchCodeTitle"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/TxtBranchCode"
+                android:layout_marginStart="5dp"
+                android:layout_toStartOf="@+id/TxtBranchCode"
+                android:text="@string/branch_code"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/LlButtonsIFSC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/RlIFSCContent">
+
+            <Button
+                android:id="@+id/IvCopyIFSC"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:backgroundTint="@color/black"
+                android:text="@string/copy_ifsc"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"  />
+
+            <Button
+                android:id="@+id/IvCopyAll"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/copy_all"
+                android:backgroundTint="@color/black"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

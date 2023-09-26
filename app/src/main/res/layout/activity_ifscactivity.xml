@@ -44,8 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <AutoCompleteTextView
-                    android:id="@+id/AutoIFSCSearch"
+                <EditText
+                    android:id="@+id/EdtIFSCSearch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@null"

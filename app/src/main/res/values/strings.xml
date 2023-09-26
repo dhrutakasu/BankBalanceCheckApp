@@ -132,7 +132,6 @@
     <string name="banking">Banking</string>
     <string name="near_by_atm">Near By ATM</string>
     <string name="net_banking">Net Banking</string>
-    <string name="ussd_banking">USSD Banking</string>
     <string name="bank_holiday">Bank Holiday</string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="bank_balance">Bank Balance</string>
@@ -140,4 +139,20 @@
     <string name="ifsc">IFSC</string>
     <string name="near_by">Near By</string>
     <string name="ussd_banking">USSD Banking</string>
+    <string name="copy_all">Copy All</string>
+    <string name="copy_ifsc">Copy IFSC</string>
+    <string name="branch_code">Branch Code :</string>
+    <string name="dash">-</string>
+    <string name="ifsc_code_colan">IFSC Code :</string>
+    <string name="micr_code">MICR Code :</string>
+    <string name="address">Address :</string>
+    <string name="phone_no">Phone no :</string>
+    <string name="bank_name">Bank Name :</string>
+    <string name="state_name">State Name :</string>
+    <string name="district_name">District Name :</string>
+    <string name="branch_name">Branch Name :</string>
+    <string name="ussd_code">USSD Code</string>
+    <string name="mini_statement">Mini Statement</string>
+    <string name="customer_card_number">Customer Card Number</string>
+    <string name="please_dial_from_registered_mobile_number_in_bank">*Please dial from registered mobile number in bank</string>
 </resources>

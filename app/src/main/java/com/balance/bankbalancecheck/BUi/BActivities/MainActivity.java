@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.R;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private Context context;
-    private Button BtnBankDetail, BtnCal, BtnScheme, BtnCreditLoan, BtnMutualFund, BtnNearBy, BtnIFSC;
+    private Button BtnBankDetail, BtnCal, BtnScheme, BtnCreditLoan, BtnMutualFund;
     private AutoCompleteTextView AutoBankSearch;
     private ImageView IvBankCancel, IvBankSearch;
     private ArrayList<String> BankList = new ArrayList<>();
@@ -37,13 +38,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void BankInitViews() {
         context = this;
+
         BtnBankDetail = (Button) findViewById(R.id.BtnBankDetail);
         BtnCal = (Button) findViewById(R.id.BtnCal);
         BtnScheme = (Button) findViewById(R.id.BtnScheme);
         BtnCreditLoan = (Button) findViewById(R.id.BtnCreditLoan);
         BtnMutualFund = (Button) findViewById(R.id.BtnMutualFund);
-        BtnNearBy = (Button) findViewById(R.id.BtnNearBy);
-        BtnIFSC = (Button) findViewById(R.id.BtnIFSC);
         AutoBankSearch = (AutoCompleteTextView) findViewById(R.id.AutoBankSearch);
         IvBankCancel = (ImageView) findViewById(R.id.IvBankCancel);
         IvBankSearch = (ImageView) findViewById(R.id.IvBankSearch);
@@ -51,13 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void BankInitListeners() {
         BtnCal.setOnClickListener(this);
+        BtnBankDetail.setOnClickListener(this);
         BtnScheme.setOnClickListener(this);
         BtnCreditLoan.setOnClickListener(this);
         BtnMutualFund.setOnClickListener(this);
-        BtnNearBy.setOnClickListener(this);
-        BtnIFSC.setOnClickListener(this);
         IvBankCancel.setOnClickListener(this);
-        IvBankSearch.setOnClickListener(this);
+//        IvBankSearch.setOnClickListener(this);
         AutoBankSearch.setOnItemClickListener(this);
     }
 
@@ -109,17 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.BtnMutualFund:
                 GotoMutualFund();
                 break;
-            case R.id.BtnNearBy:
-                GotoNearBy();
-                break;
-            case R.id.BtnIFSC:
-                GotoIFSC();
-                break;
             case R.id.IvBankCancel:
                 AutoBankSearch.setText("");
-                break;
-            case R.id.IvBankSearch:
-                GotoIFSC();
                 break;
         }
     }
@@ -144,16 +134,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(new Intent(context, MutualFundActivity.class));
     }
 
-    private void GotoNearBy() {
-        startActivity(new Intent(context, NearByActivity.class));
-    }
-
-    private void GotoIFSC() {
-        startActivity(new Intent(context, IFSCActivity.class));
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        new BankPreferences(context).putPrefString(BankPreferences.BANK_NAME, AutoBankSearch.getText().toString());
+        new BankPreferences(context).putPrefString(BankPreferences.STATE_NAME, "");
+        new BankPreferences(context).putPrefString(BankPreferences.DISTRICT_NAME, "");
+        new BankPreferences(context).putPrefString(BankPreferences.BRANCH_NAME, "");
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        new BankPreferences(context).putPrefString(BankPreferences.BANK_NAME, BankList.get(position).toString());
+    protected void onResume() {
+        if (AutoBankSearch != null) {
+            AutoBankSearch.setText(new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, ""));
+        }
+        super.onResume();
     }
 }
