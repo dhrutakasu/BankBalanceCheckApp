@@ -49,4 +49,8 @@ dependencies {
 
     //todo volley dependency
     implementation 'com.android.volley:volley:1.2.1'
+
+    //todo bottom navigation dependency
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
 }

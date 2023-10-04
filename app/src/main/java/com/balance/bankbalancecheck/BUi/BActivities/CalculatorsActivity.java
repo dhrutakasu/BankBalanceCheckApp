@@ -20,6 +20,7 @@ import com.balance.bankbalancecheck.BUi.BActivities.Calculators.PPFCalculatorAct
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.RdCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SIPCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SwapCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BAdapters.BankingAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.R;
 
@@ -63,7 +64,7 @@ public class CalculatorsActivity extends AppCompatActivity {
         strings.add(getString(R.string.inflation_calculator));
         strings.add(getString(R.string.gratuity_calculator));
         RvCalculators.setLayoutManager(new GridLayoutManager(context, 2));
-        RvCalculators.setAdapter(new CalculatorsAdapter(context, strings, new CalculatorsAdapter.setClickListener() {
+        RvCalculators.setAdapter(new BankingAdapter(context, strings, new BankingAdapter.setClickListener() {
             @Override
             public void CalculatorsClickListener(int position) {
                 GotoCalculatorActivity(position);

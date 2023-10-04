@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.balance.bankbalancecheck.BUi.BAdapters.BankingAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.R;
 
@@ -41,7 +42,7 @@ public class MutualFundActivity extends AppCompatActivity {
         strings.add(getString(R.string.popular_fund));
         strings.add(getString(R.string.explore_fund));
         RvMutualFund.setLayoutManager(new GridLayoutManager(context, 2));
-        RvMutualFund.setAdapter(new CalculatorsAdapter(context, strings, position -> GotoMutualFundActivity(position)));
+        RvMutualFund.setAdapter(new BankingAdapter(context, strings, position -> GotoMutualFundActivity(position)));
     }
 
     private void GotoMutualFundActivity(int position) {

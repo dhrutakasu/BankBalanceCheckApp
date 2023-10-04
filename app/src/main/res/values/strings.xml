@@ -127,8 +127,8 @@
     <string name="education_loan">Education Loan</string>
     <string name="credit_card">Credit Card</string>
     <string name="mutual_fund">Mutual Fund</string>
-    <string name="explore_fund">Explore Fund</string>
-    <string name="popular_fund">Popular Fund</string>
+    <string name="explore_fund">Explore Funds</string>
+    <string name="popular_fund">Popular Funds</string>
     <string name="banking">Banking</string>
     <string name="near_by_atm">Near By ATM</string>
     <string name="net_banking">Net Banking</string>
@@ -155,4 +155,9 @@
     <string name="mini_statement">Mini Statement</string>
     <string name="customer_card_number">Customer Card Number</string>
     <string name="please_dial_from_registered_mobile_number_in_bank">*Please dial from registered mobile number in bank</string>
+    <string name="credits_amp_loan_services"><![CDATA[Credits & Loan Services]]></string>
+    <string name="mutual_funds">Mutual Funds</string>
+    <string name="home">Home</string>
+    <string name="Setting">Setting</string>
+    <string name="Money">Funds</string>
 </resources>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context=".BUi.BActivities.HomeScreenActivity">
+
+    <ImageView
+        android:id="@+id/IvBankTranscationBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20ssp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_bank_transation"
+        app:layout_constraintBottom_toTopOf="@id/guide_Scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guide_transcation_top" />
+
+    <ScrollView
+        android:id="@+id/ScrollViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/ConsBottomMenu"
+        app:layout_constraintTop_toBottomOf="@id/IvBankTranscationBox">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginEnd="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/IvBankATMBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20ssp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_near_atm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/TxtCreditLoanTitles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16ssp"
+                android:gravity="center_vertical"
+                android:text="@string/credits_amp_loan_services"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IvBankATMBox" />
+
+            <TextView
+                android:id="@+id/TxtMutualFundTitles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16ssp"
+                android:gravity="center_vertical"
+                android:text="@string/mutual_funds"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RvCreditLoan" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RvCreditLoan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TxtCreditLoanTitles" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RvMutualFund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TxtMutualFundTitles" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/main_color"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/IvBankBalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_bank_balance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guide_bankbalance" />
+
+        <ImageView
+            android:id="@+id/IvBankBalanceTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginBottom="10dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_main_text"
+            app:layout_constraintBottom_toBottomOf="@+id/IvBankBalance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guide_bankbalance" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:src="@drawable/ic_bank_balance"
+            android:weightSum="4"
+            app:layout_constraintBottom_toBottomOf="@id/guide_bankoptions_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guide_bankoptions">
+
+            <ImageView
+                android:id="@+id/IvIFSCCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20ssp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_ifsc_code" />
+
+            <ImageView
+                android:id="@+id/IvUSSDCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20ssp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_ussd_code" />
+
+            <ImageView
+                android:id="@+id/IvNetBanking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20ssp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_net_banking" />
+
+            <ImageView
+                android:id="@+id/IvBankHoliday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20ssp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_bank_holiday" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_bankbalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.18" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_bankoptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_bankoptions_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.72" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConsBottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55sdp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.gauravk.bubblenavigation.BubbleNavigationLinearView
+            android:id="@+id/bottom_navigation_view_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/main_color"
+                app:bt_colorInactive="@color/white"
+                app:bt_icon="@drawable/ic_home_unpress"
+                app:bt_shape="@drawable/transition_background_drawable_home"
+                app:bt_title="@string/home" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_colorActive="@color/main_color"
+                app:bt_colorInactive="@color/white"
+                app:bt_icon="@drawable/ic_calculator"
+                app:bt_shape="@drawable/transition_background_drawable_home"
+                app:bt_title="@string/calculators" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_profile_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_colorActive="@color/main_color"
+                app:bt_colorInactive="@color/white"
+                app:bt_icon="@drawable/ic_money"
+                app:bt_shape="@drawable/transition_background_drawable_home"
+                app:bt_title="@string/Money" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_colorActive="@color/main_color"
+                app:bt_colorInactive="@color/white"
+                app:bt_icon="@drawable/ic_setting"
+                app:bt_shape="@drawable/transition_background_drawable_home"
+                app:bt_title="@string/Setting" />
+
+        </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_transcation_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_Scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+</androidx.constraintlayout.widget.ConstraintLayout>

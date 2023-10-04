@@ -5,10 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_5sdp">
 
-    <ImageView
+    <Button
         android:id="@+id/BtnCalculatorsName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

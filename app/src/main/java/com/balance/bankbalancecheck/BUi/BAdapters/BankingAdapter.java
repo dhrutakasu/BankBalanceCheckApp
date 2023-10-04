@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +15,12 @@ import com.balance.bankbalancecheck.R;
 
 import java.util.ArrayList;
 
-public class CalculatorsAdapter extends RecyclerView.Adapter<CalculatorsAdapter.MyViewHolder> {
+public class BankingAdapter extends RecyclerView.Adapter<BankingAdapter.MyViewHolder> {
     private final Context context;
-    private final ArrayList<LoanModel> strings;
+    private final ArrayList<String> strings;
     private final setClickListener clickListener;
 
-    public CalculatorsAdapter(Context context, ArrayList<LoanModel> strings, setClickListener clickListener) {
+    public BankingAdapter(Context context, ArrayList<String> strings, setClickListener clickListener) {
         this.context = context;
         this.strings = strings;
         this.clickListener = clickListener;
@@ -28,14 +28,14 @@ public class CalculatorsAdapter extends RecyclerView.Adapter<CalculatorsAdapter.
 
     @NonNull
     @Override
-    public CalculatorsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.layout_item_calculator_list, parent, false);
+    public BankingAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(context).inflate(R.layout.layout_item_bank_list, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CalculatorsAdapter.MyViewHolder holder, int position) {
-        holder.BtnCalculatorsName.setImageResource(strings.get(position).getIcons());
+    public void onBindViewHolder(@NonNull BankingAdapter.MyViewHolder holder, int position) {
+        holder.BtnCalculatorsName.setText(strings.get(position));
         holder.BtnCalculatorsName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +54,7 @@ public class CalculatorsAdapter extends RecyclerView.Adapter<CalculatorsAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView BtnCalculatorsName;
+        private final TextView BtnCalculatorsName;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

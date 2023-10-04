@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.BUi.BAdapters.BankingAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.R;
@@ -46,7 +47,7 @@ public class BankingActivity extends AppCompatActivity {
         strings.add(getString(R.string.net_banking));
         strings.add(getString(R.string.near_by_atm));
         RvBanking.setLayoutManager(new GridLayoutManager(context, 2));
-        RvBanking.setAdapter(new CalculatorsAdapter(context, strings, new CalculatorsAdapter.setClickListener() {
+        RvBanking.setAdapter(new BankingAdapter(context, strings, new BankingAdapter.setClickListener() {
             @Override
             public void CalculatorsClickListener(int position) {
                 GotoBankingActivity(position);

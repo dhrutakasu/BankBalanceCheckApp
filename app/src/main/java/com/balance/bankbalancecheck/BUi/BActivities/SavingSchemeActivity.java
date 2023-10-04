@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.BUi.BAdapters.BankingAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.BUtils.SchemesWebData;
 import com.balance.bankbalancecheck.R;
@@ -50,7 +51,7 @@ public class SavingSchemeActivity extends AppCompatActivity {
         strings.add(getString(R.string.pm_vaya));
         strings.add(getString(R.string.pm_jan_dhan));
         RvSavingSchemes.setLayoutManager(new GridLayoutManager(context, 1));
-        RvSavingSchemes.setAdapter(new CalculatorsAdapter(context, strings, new CalculatorsAdapter.setClickListener() {
+        RvSavingSchemes.setAdapter(new BankingAdapter(context, strings, new BankingAdapter.setClickListener() {
             @Override
             public void CalculatorsClickListener(int position) {
                 GotoSchemeActivity(position);

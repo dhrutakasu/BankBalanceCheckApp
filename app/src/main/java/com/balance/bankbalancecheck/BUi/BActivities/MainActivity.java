@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,8 +22,11 @@ import com.balance.bankbalancecheck.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class    MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private Context context;
     private Button BtnBankDetail, BtnCal, BtnScheme, BtnCreditLoan, BtnMutualFund;
     private AutoCompleteTextView AutoBankSearch;
@@ -88,6 +94,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, BankList);
         AutoBankSearch.setThreshold(1);
         AutoBankSearch.setAdapter(adapter);
+        GotoSMS();
+    }
+
+    private void GotoSMS() {
+        Uri uri = Uri.parse("content://sms/inbox");
+        String[] projection = {"_id", "address", "body", "date"};
+
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, "date desc");
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex("_id");
+            int addressIndex = cursor.getColumnIndex("address");
+            int bodyIndex = cursor.getColumnIndex("body");
+            int dateIndex = cursor.getColumnIndex("date");
+
+            do {
+                String id = cursor.getString(idIndex);
+                String address = cursor.getString(addressIndex);
+                String body = cursor.getString(bodyIndex);
+                long date = cursor.getLong(dateIndex);
+
+                // Do something with the SMS message data
+                Log.d("TAG", "ID: " + id);
+                Log.d("TAG", "Address: " + address);
+                Log.d("TAG", "Body: " + body);
+                Log.d("TAG", "Date: " + new Date(date).toString());
+                /*List<String> assetFileNames = Arrays.asList(getResources().getAssets().list(""));
+
+                for (String assetFileName : assetFileNames) {
+                    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                        String body = cursor.getString(bodyIndex); // SMS content
+
+                        if (body != null && body.contains(assetFileName)) {
+                            // Match found between SMS content and asset file name
+                            // You can take appropriate action here
+                        }
+                    }
+                }*/
+
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
     }
 
     @Override
