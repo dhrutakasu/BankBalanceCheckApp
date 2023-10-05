@@ -11,4 +11,6 @@
     <color name="gray_light">#DADADA</color>
     <color name="bg_color">#EEF2F8</color>
     <color name="main_color">#005CEE</color>
+    <color name="icon_color">#BAC3D2</color>
+    <color name="view_color">#EEF2F8</color>
 </resources>

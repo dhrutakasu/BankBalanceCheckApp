@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".BUi.BActivities.IFSCDetailsActivity">
 
     <RelativeLayout
@@ -26,6 +27,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RlHeaderBar">
 
+        <LinearLayout
+            android:id="@+id/LlButtonsIFSC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/RlIFSCContent">
+
+            <Button
+                android:id="@+id/IvCopyIFSC"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/black"
+                android:gravity="center"
+                android:text="@string/copy_ifsc"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+
+            <Button
+                android:id="@+id/IvCopyAll"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/black"
+                android:gravity="center"
+                android:text="@string/copy_all"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/RlIFSCContent"
             android:layout_width="match_parent"
@@ -35,11 +75,11 @@
             android:layout_marginRight="10dp"
             android:paddingLeft="5dp"
             android:paddingTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:paddingRight="5dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/TxtBankTitle"
@@ -48,6 +88,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/bank_name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
@@ -59,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/TxtBankTitle"
                 android:layout_toEndOf="@+id/TxtBankTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -68,10 +110,11 @@
                 android:id="@+id/TxtIFSCTitle"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/TxtBank"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@+id/TxtBank"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/ifsc_code_colan"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
@@ -83,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/TxtIFSCTitle"
                 android:layout_toEndOf="@+id/TxtIFSCTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -95,6 +139,7 @@
                 android:layout_alignTop="@+id/TxtAddress"
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/TxtAddress"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/address"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -108,6 +153,7 @@
                 android:layout_below="@+id/TxtIFSCTitle"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -120,6 +166,7 @@
                 android:layout_alignTop="@+id/TxtState"
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/TxtState"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/state_name"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -133,6 +180,7 @@
                 android:layout_below="@+id/TxtAddress"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -145,6 +193,7 @@
                 android:layout_alignTop="@+id/TxtDistrict"
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/TxtDistrict"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/district_name"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -158,6 +207,7 @@
                 android:layout_below="@+id/TxtStateTitle"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -170,6 +220,7 @@
                 android:layout_alignTop="@+id/TxtBranch"
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/TxtBranch"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/branch_name"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -183,6 +234,7 @@
                 android:layout_below="@+id/TxtDistrictTitle"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/TxtMICRTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -195,6 +247,7 @@
                 android:layout_below="@+id/TxtBranchTitle"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/TxtIFSCTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -207,6 +260,7 @@
                 android:layout_alignTop="@+id/TxtMICRCode"
                 android:layout_alignEnd="@+id/TxtIFSCTitle"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/micr_code"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -220,6 +274,7 @@
                 android:layout_below="@+id/TxtMICRTitle"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@+id/TxtAddressTitle"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -232,6 +287,7 @@
                 android:layout_alignTop="@+id/TxtPhNo"
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/TxtPhNo"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/phone_no"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -245,6 +301,7 @@
                 android:layout_below="@+id/TxtPhNo"
                 android:layout_alignStart="@+id/TxtPhNo"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/dash"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
@@ -257,49 +314,12 @@
                 android:layout_alignTop="@+id/TxtBranchCode"
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/TxtBranchCode"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/branch_code"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/LlButtonsIFSC"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/RlIFSCContent">
-
-            <Button
-                android:id="@+id/IvCopyIFSC"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:backgroundTint="@color/black"
-                android:text="@string/copy_ifsc"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp"  />
-
-            <Button
-                android:id="@+id/IvCopyAll"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/copy_all"
-                android:backgroundTint="@color/black"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

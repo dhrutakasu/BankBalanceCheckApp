@@ -2,10 +2,12 @@ package com.balance.bankbalancecheck.BUi.BActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +16,17 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.BModel.SMSModel;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.R;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,12 +34,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class    MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private Context context;
     private Button BtnBankDetail, BtnCal, BtnScheme, BtnCreditLoan, BtnMutualFund;
     private AutoCompleteTextView AutoBankSearch;
     private ImageView IvBankCancel, IvBankSearch;
     private ArrayList<String> BankList = new ArrayList<>();
+    private List<String> assetFileNames = new ArrayList<>();
+    private ProgressBar ProgressBankBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,7 @@ public class    MainActivity extends AppCompatActivity implements View.OnClickLi
         AutoBankSearch = (AutoCompleteTextView) findViewById(R.id.AutoBankSearch);
         IvBankCancel = (ImageView) findViewById(R.id.IvBankCancel);
         IvBankSearch = (ImageView) findViewById(R.id.IvBankSearch);
+        ProgressBankBalance = (ProgressBar) findViewById(R.id.ProgressBankBalance);
     }
 
     private void BankInitListeners() {
@@ -94,10 +105,61 @@ public class    MainActivity extends AppCompatActivity implements View.OnClickLi
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, BankList);
         AutoBankSearch.setThreshold(1);
         AutoBankSearch.setAdapter(adapter);
-        GotoSMS();
+        try {
+            assetFileNames = Arrays.asList(getResources().getAssets().list("IFSC Code"));
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+        ProgressBankBalance.bringToFront();
+        String s = Manifest.permission.READ_SMS;
+        Dexter.withActivity(this)
+                .withPermissions(s)
+                .withListener(new MultiplePermissionsListener() {
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            new AsyncTask<Void, Void, ArrayList<SMSModel>>() {
+                                @Override
+                                protected void onPreExecute() {
+                                    super.onPreExecute();
+                                    ProgressBankBalance.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                protected ArrayList<SMSModel> doInBackground(Void... voids) {
+                                    return GotoSMS();
+                                }
+
+                                @Override
+                                protected void onPostExecute(ArrayList<SMSModel> unused) {
+                                    super.onPostExecute(unused);
+                                    ProgressBankBalance.setVisibility(View.GONE);
+                                    for (SMSModel s1 : unused) {
+                                        for (String assetFileName : assetFileNames) {
+                                            Log.d("TAG", "assetFileNames: " + s1.getBody().contains(assetFileName.replace(".txt", "")));
+                                            if (s1.getBody().contains(assetFileName.replace(".txt", ""))) {
+                                                Log.d("TAG", "assetFileNames Matched: " + assetFileName.replace(".txt", ""));
+                                            }
+                                        }
+                                    }
+                                }
+                            }.execute();
+                        }
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            BankConstantsData.showSettingsDialog(MainActivity.this);
+                        }
+                    }
+
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken permissionToken) {
+                        BankConstantsData.showPermissionDialog(MainActivity.this, permissionToken);
+                    }
+                })
+                .onSameThread()
+                .check();
     }
 
-    private void GotoSMS() {
+    private ArrayList<SMSModel> GotoSMS() {
+        ArrayList<SMSModel> smsModels = new ArrayList<>();
         Uri uri = Uri.parse("content://sms/inbox");
         String[] projection = {"_id", "address", "body", "date"};
 
@@ -114,28 +176,17 @@ public class    MainActivity extends AppCompatActivity implements View.OnClickLi
                 String address = cursor.getString(addressIndex);
                 String body = cursor.getString(bodyIndex);
                 long date = cursor.getLong(dateIndex);
-
+                smsModels.add(new SMSModel(address, body, "", date));
                 // Do something with the SMS message data
                 Log.d("TAG", "ID: " + id);
                 Log.d("TAG", "Address: " + address);
                 Log.d("TAG", "Body: " + body);
                 Log.d("TAG", "Date: " + new Date(date).toString());
-                /*List<String> assetFileNames = Arrays.asList(getResources().getAssets().list(""));
-
-                for (String assetFileName : assetFileNames) {
-                    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                        String body = cursor.getString(bodyIndex); // SMS content
-
-                        if (body != null && body.contains(assetFileName)) {
-                            // Match found between SMS content and asset file name
-                            // You can take appropriate action here
-                        }
-                    }
-                }*/
 
             } while (cursor.moveToNext());
             cursor.close();
         }
+        return smsModels;
 
     }
 

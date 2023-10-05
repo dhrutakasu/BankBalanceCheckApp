@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".BUi.BActivities.USSDBankingActivity">
 
     <RelativeLayout
@@ -19,7 +20,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +40,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardRequestMoney"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,17 +57,19 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28" />
 
                     <TextView
                         android:id="@+id/TxtMyProfile"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="My Profile"
@@ -86,7 +89,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardPendingRequest"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,11 +106,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28"/>
 
                     <TextView
                         android:id="@+id/TxtRequestMoney"
@@ -116,6 +119,8 @@
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         android:text="Request Money"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvRequestMoney"
@@ -133,7 +138,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardTransaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -150,11 +155,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28"/>
 
                     <TextView
                         android:id="@+id/TxtPendingRequest"
@@ -164,6 +169,8 @@
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="Pending Request"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvPendingRequest"
                         app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +187,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardCheckBank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -197,11 +204,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28" />
 
                     <TextView
                         android:id="@+id/TxtTransaction"
@@ -211,6 +218,8 @@
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="Transactions"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvTransaction"
                         app:layout_constraintStart_toStartOf="parent"
@@ -227,7 +236,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardFirstTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -244,15 +253,17 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28"/>
 
                     <TextView
                         android:id="@+id/TxtCheckBank"
                         android:layout_width="0dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
@@ -274,7 +285,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardAllBank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -291,15 +302,17 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28"/>
 
                     <TextView
                         android:id="@+id/TxtFirstTime"
                         android:layout_width="0dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
@@ -321,7 +334,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardSendMoney"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -338,11 +351,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28" />
 
                     <TextView
                         android:id="@+id/TxtAllBank"
@@ -351,6 +364,8 @@
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         android:text="All Bank USSD Code"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvAllBank"
@@ -368,7 +383,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@id/CardUPIPin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -385,11 +400,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28" />
 
                     <TextView
                         android:id="@+id/TxtSendMoney"
@@ -399,6 +414,8 @@
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="Send Money"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvSendMoney"
                         app:layout_constraintStart_toStartOf="parent"
@@ -415,7 +432,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_3sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -432,11 +449,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/ic_call_now"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.12" />
+                        app:layout_constraintWidth_percent="0.28" />
 
                     <TextView
                         android:id="@+id/TxtUPIPin"
@@ -446,6 +463,8 @@
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="UPI Pin"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvUPIPin"
                         app:layout_constraintStart_toStartOf="parent"
