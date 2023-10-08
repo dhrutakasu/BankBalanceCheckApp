@@ -1,14 +1,14 @@
 package com.balance.bankbalancecheck.BUi.BActivities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,15 +31,23 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import androidx.appcompat.app.AppCompatActivity;
+import kotlin.jvm.internal.Ref;
+import kotlin.text.Regex;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private Context context;
     private Button BtnBankDetail, BtnCal, BtnScheme, BtnCreditLoan, BtnMutualFund;
     private AutoCompleteTextView AutoBankSearch;
     private ImageView IvBankCancel, IvBankSearch;
-    private ArrayList<String> BankList = new ArrayList<>();
+    private final ArrayList<String> BankList = new ArrayList<>();
     private List<String> assetFileNames = new ArrayList<>();
     private ProgressBar ProgressBankBalance;
 
@@ -55,15 +63,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void BankInitViews() {
         context = this;
 
-        BtnBankDetail = (Button) findViewById(R.id.BtnBankDetail);
-        BtnCal = (Button) findViewById(R.id.BtnCal);
-        BtnScheme = (Button) findViewById(R.id.BtnScheme);
-        BtnCreditLoan = (Button) findViewById(R.id.BtnCreditLoan);
-        BtnMutualFund = (Button) findViewById(R.id.BtnMutualFund);
-        AutoBankSearch = (AutoCompleteTextView) findViewById(R.id.AutoBankSearch);
-        IvBankCancel = (ImageView) findViewById(R.id.IvBankCancel);
-        IvBankSearch = (ImageView) findViewById(R.id.IvBankSearch);
-        ProgressBankBalance = (ProgressBar) findViewById(R.id.ProgressBankBalance);
+        BtnBankDetail = findViewById(R.id.BtnBankDetail);
+        BtnCal = findViewById(R.id.BtnCal);
+        BtnScheme = findViewById(R.id.BtnScheme);
+        BtnCreditLoan = findViewById(R.id.BtnCreditLoan);
+        BtnMutualFund = findViewById(R.id.BtnMutualFund);
+        AutoBankSearch = findViewById(R.id.AutoBankSearch);
+        IvBankCancel = findViewById(R.id.IvBankCancel);
+        IvBankSearch = findViewById(R.id.IvBankSearch);
+        ProgressBankBalance = findViewById(R.id.ProgressBankBalance);
     }
 
     private void BankInitListeners() {
@@ -134,14 +142,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 protected void onPostExecute(ArrayList<SMSModel> unused) {
                                     super.onPostExecute(unused);
                                     ProgressBankBalance.setVisibility(View.GONE);
-                                    for (SMSModel s1 : unused) {
-                                        for (String assetFileName : assetFileNames) {
+                                    for (SMSModel model : unused) {
+
+/*                                      for (String assetFileName : assetFileNames) {
                                             Log.d("TAG", "assetFileNames: " + s1.getBody().contains(assetFileName.replace(".txt", "")));
                                             if (s1.getBody().contains(assetFileName.replace(".txt", ""))) {
-                                                Log.d("TAG", "assetFileNames Matched: " + assetFileName.replace(".txt", ""));
+                                                System.out.println("--- -- -%%% : " + s1.getBody().contains("debited"));
+                                                if (s1.getBody().contains("Credited")
+//                                                        &&s1.getBody().contains("transferred")&&s1.getBody().contains("withdrawn")
+                                                        || s1.getBody().contains("debited")) {
+                                                    Log.d("TAG", "assetFileNames Matched: " + DateFormat.format("dd/MM/yyyy", new Date(s1.getDate())).toString() + " -- " + s1.getBody());
+                                                }
                                             }
-                                        }
+                                        }*/
+
+                                        getAvailableBalance(model);
                                     }
+                                    Collections.reverse(unused);
+                                    System.out.println("+++++ BALANCE : " + unused.get(unused.size() - 1).getBalance());
+                                    System.out.println("+++++ AMOUNt : " + unused.get(unused.size() - 1).getAmount());
+//                                        BankConstantsData.BankBalance=unused.get(unused.size()).getBalance()
                                 }
                             }.execute();
                         }
@@ -156,6 +176,456 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 })
                 .onSameThread()
                 .check();
+    }
+
+    private SMSModel getAvailableBalance(SMSModel model) {
+        SMSModel sm2 = null;
+        String str = "";
+        SMSModel sm3 = null;
+        String str2 = "";
+        SMSModel sm4 = null;
+        String str3 = "";
+        SMSModel sm5 = null;
+        String str4 = "";
+        Pattern pattern = Pattern.compile("(?i)(?:RS|INR|MRP)?(?:(?:RS|INR|MRP)\\.?\\s?)(\\d+(:?\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)+");
+        if (model.getBody().contains("curr o/s - ")) {
+            List<String> strings = Arrays.asList(model.getBody().split("o/s - ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
+            Matcher matcher = pattern.matcher(strings.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("The Balance is")) {
+            List<String> the_balance_is_ = Arrays.asList(model.getBody().split("The Balance is ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --2-- --> " + the_balance_is_);
+            Matcher matcher = pattern.matcher(the_balance_is_.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("The Available Balance is")) {
+            List<String> theAvailableBalanceIs = Arrays.asList(model.getBody().split("The Available Balance is ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --3-- --> " + theAvailableBalanceIs);
+            Matcher matcher = pattern.matcher(theAvailableBalanceIs.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("Avbl Lmt:")) {
+            List<String> list = Arrays.asList(model.getBody().split("Avbl Lmt:", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --4-- --> " + list);
+            Matcher matcher = pattern.matcher(list.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("Avlbal")) {
+            List<String> avlbal = Arrays.asList(model.getBody().split("Avlbal", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --5-- --> " + avlbal);
+            Matcher matcher = pattern.matcher(avlbal.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("balance is")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List<String> balanceIs = Arrays.asList(lowerCase.split("balance is ", 6));
+            Matcher matcher = pattern.matcher(balanceIs.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("AvBl Bal:")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List<String> stringList = Arrays.asList(lowerCase.split("avbl bal: ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --7-- --> " + stringList);
+            Matcher matcher = pattern.matcher(stringList.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("Avl. Bal:")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List<String> asList = Arrays.asList(lowerCase.split("avl. bal:", 6));
+            Matcher matcher = pattern.matcher(asList.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("AVl BAL")) {
+            if (model.getBody().contains("Avl. Bal:")) {
+                String lowerCase = model.getBody().toLowerCase(Locale.ROOT);
+                List<String> list = Arrays.asList(lowerCase.split("avl. bal:", 6));
+                Log.d("mTAG30Dec2022", "getAvailableBalance: newBody --9-- --> " + list);
+                if (list.isEmpty() || list.size() < 2) {
+                    return model;
+                }
+                Matcher matcher = pattern.matcher(list.get(1).trim());
+                if (matcher.find()) {
+                    String group = matcher.group(0);
+                    String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                    model.setBalance(replace);
+                    Log.e("mTAG30Dec2022", "getAvailableBalance: " + replace);
+                    return model;
+                }
+                model.setBalance(list.get(1).split(" ", 6)[0].trim());
+                return model;
+            }
+            String toLowerCase = model.getBody().toLowerCase(Locale.ROOT);
+            List<String> avlBal = Arrays.asList(toLowerCase.split("avl bal", 6));
+            Log.d("mTAG30Dec2022", "getAvailableBalance: newBody --10-- --> " + avlBal);
+            if (avlBal.isEmpty() || avlBal.size() < 2) {
+                return model;
+            }
+            Log.e("mTAG30Dec2022", "getAvailableBalance: 10-> 1");
+            Matcher matcher = pattern.matcher(avlBal.get(1).trim());
+            if (matcher.find()) {
+                Log.e("mTAG30Dec2022", "getAvailableBalance: 10-> 2");
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("mTAG30Dec2022", "getAvailableBalance: " + replace);
+                return model;
+            }
+            String[] split = avlBal.get(1).trim().split(" ", 6);
+            Log.e("mTAG30Dec2022", "getAvailableBalance: 10-> 3 -> " + avlBal.get(1).trim().split(" ", 6));
+            Ref.BooleanRef booleanRef = new Ref.BooleanRef();
+            for (String str5 : split) {
+                if (!booleanRef.element) {
+                    StringBuilder sb = new StringBuilder();
+                    int length = str5.length();
+                    for (int i2 = 0; i2 < length; i2++) {
+                        char charAt = str5.charAt(i2);
+                        if (Character.isDigit(charAt)) {
+                            sb.append(charAt);
+                        }
+                    }
+                    String sb2 = sb.toString();
+                    boolean z = sb2.length() > 0;
+                    booleanRef.element = z;
+                    if (z) {
+                        model.setBalance(str5);
+                    }
+                    StringBuilder sb3 = new StringBuilder();
+                    sb3.append("getAvailableBalance: 10-> 3 -> ");
+                    sb3.append(str5);
+                    sb3.append(" -> ");
+                    StringBuilder sb4 = new StringBuilder();
+                    int length2 = str5.length();
+                    for (int i3 = 0; i3 < length2; i3++) {
+                        char charAt2 = str5.charAt(i3);
+                        if (Character.isDigit(charAt2)) {
+                            sb4.append(charAt2);
+                        }
+                    }
+                    String sb5 = sb4.toString();
+                    sb3.append(sb5.length() > 0);
+                    Log.e("mTAG30Dec2022", sb3.toString());
+                }
+            }
+            if (booleanRef.element) {
+                return model;
+            }
+            String obj = avlBal.get(1).trim().split(" ", 6)[0];
+            Log.e("mTAG30Dec2022", "getAvailableBalance: amount::-> " + obj);
+            model.setBalance(obj);
+        } else if (model.getBody().contains("Avail Bal")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List<String> availBal = Arrays.asList(lowerCase.split("avail bal ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --11-- --> " + availBal);
+            Matcher matcher = pattern.matcher(new Regex("\\s").replace(availBal.get(1).trim(), ""));
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("The combine BAL is")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List balIs = Arrays.asList(lowerCase.split("bal is ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --12-- --> " + balIs);
+            Matcher matcher = pattern.matcher(balIs.get(1).toString().trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance(replace);
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("The balance in")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List<String> balanceIn = Arrays.asList(lowerCase.split("balance in ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --13-- --> " + balanceIn);
+            Matcher matcher = pattern.matcher(balanceIn.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                model.setBalance("N/A");
+                model.setAmount(replace);
+                model.setTypes("balance");
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("Available balance:")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List<String> strings = Arrays.asList(lowerCase.split("available balance:", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --14-- --> " + strings);
+            Matcher matcher = pattern.matcher(strings.get(1).trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                if (!model.getBody().contains("credited") && !model.getBody().contains("cash deposit")
+                        && !model.getBody().contains("credit")
+                        && !model.getBody().contains("deposited")
+                        && !model.getBody().contains("deposit")
+                        && !model.getBody().contains("received")) {
+                    if (model.getBody().contains("withdrawn")) {
+                        sm5 = model;
+                        str4 = "debited";
+                    } else {
+                        str4 = "debited";
+                        if (model.getBody().contains((CharSequence) str4)
+                                || model.getBody().contains("spent")
+                                || model.getBody().contains("paying")
+                                || model.getBody().contains("deducted")
+                                || model.getBody().contains("dr")
+                                || model.getBody().contains("txn")
+                                || model.getBody().contains("transfer")) {
+
+                            sm5 = model;
+                        } else {
+                            model.setTypes("balance");
+                            model.setBalance("N/A");
+                            model.setAmount(replace);
+                        }
+                    }
+//                    sm5.setTypes(str4);
+//                    sm5.setBalance(replace14);
+                } else {
+                    model.setTypes("credited");
+                    model.setBalance(replace);
+                }
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("Avlbl Amt:")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List asList = Arrays.asList(lowerCase.split("avlbl amt:", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --15-- --> " + asList);
+            Matcher matcher = pattern.matcher(asList.get(1).toString().trim());
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                Log.e("TAG", "getAvailableBalance: amount::-> " + replace);
+                if (!model.getBody().contains("credited") &&
+                        !model.getBody().contains("cash deposit") &&
+                        !model.getBody().contains("credit") &&
+                        !model.getBody().contains("deposited") &&
+                        !model.getBody().contains("deposit") &&
+                        !model.getBody().contains("received")) {
+                    if (model.getBody().contains("withdrawn")) {
+                        sm4 = model;
+                        str3 = "debited";
+                    } else {
+                        str3 = "debited";
+                        if (model.getBody().contains(str3)
+                                || model.getBody().contains("spent")
+                                || model.getBody().contains("paying")
+                                || model.getBody().contains("payment")
+                                || model.getBody().contains("deducted")
+                                || model.getBody().contains("debit")
+                                || model.getBody().contains("dr")
+                                || model.getBody().contains("txn")
+                                || model.getBody().contains("transfer")) {
+                            sm4 = model;
+                        } else {
+                            model.setTypes("balance");
+                            model.setBalance("N/A");
+                            model.setAmount(replace);
+                        }
+                    }
+//                    sm4.setTypes(str3);
+//                    sm4.setBalance(replace15);
+                } else {
+                    model.setTypes("credited");
+                    model.setBalance(replace);
+                }
+                Log.e("BALANCE", "getAvailableBalance: " + replace);
+            }
+        } else if (model.getBody().contains("Avl Bal")) {
+            String lowerCase = model.getBody().toLowerCase();
+            List avlBal = Arrays.asList(lowerCase.split("Avl Bal ", 6));
+            Log.d("TAG", "getAvailableBalance: newBody --16-- --> " + avlBal);
+            Matcher matcher = pattern.matcher(avlBal.get(1).toString().trim().toString());
+            Log.d("TAG", "getAvailableBalance: myTest Match --> " + matcher);
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                if (!model.getBody().contains("credited")
+                        && !model.getBody().contains("cash deposit")
+                        && !model.getBody().contains("credit")
+                        && !model.getBody().contains("deposited")
+                        && !model.getBody().contains("deposit")
+                        && !model.getBody().contains("received")) {
+                    if (model.getBody().contains("withdrawn")) {
+                        sm3 = model;
+                        str2 = "debited";
+                    } else {
+                        str2 = "debited";
+                        if (model.getBody().contains(str2)
+                                || model.getBody().contains("spent")
+                                || model.getBody().contains("paying")
+                                || model.getBody().contains("payment")
+                                || model.getBody().contains("debit")
+                                || model.getBody().contains("dr")
+                                || model.getBody().contains("txn")
+                                || model.getBody().contains("transfer")) {
+                            sm3 = model;
+                        } else {
+                            model.setTypes("balance");
+                            model.setBalance("N/A");
+                            model.setAmount(replace);
+                        }
+                    }
+//                    sm3.setTypes(str2);
+//                    sm3.setBalance(replace16);
+                } else {
+                    model.setTypes("credited");
+                    model.setBalance(replace);
+                }
+                Log.e("BALANCE", "getAvailableBalance: BOIIIII " + replace);
+                return model;
+            }
+            Log.d("TAG", "getAvailableBalance: myTest --Else--> 2");
+        } else if (model.getBody().contains("Available")) {
+            String lowerCase = model.getBody().toLowerCase(Locale.ROOT);
+            List available = Arrays.asList(lowerCase.split("Available", 4));
+            Log.d("mTAG30Dec2022", "getAvailableBalance: newBody --17-- --> " + available.get(1).toString().trim());
+            Matcher matcher = pattern.matcher(available.get(1).toString().trim().toString());
+            Log.d("mTAG30Dec2022", "getAvailableBalance: myTest Match --> " + matcher);
+            if (matcher.find()) {
+                String group = matcher.group(0);
+                String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
+                if (!model.getBody().contains("credited")
+                        && !model.getBody().contains("cash deposit")
+                        && !model.getBody().contains("credit")
+                        && !model.getBody().contains("deposited")
+                        && !model.getBody().contains("deposit")
+                        && !model.getBody().contains("received")) {
+                    if (model.getBody().contains("withdrawn")) {
+                        sm2 = model;
+                        str = "debited";
+                    } else {
+                        str = "debited";
+                        if (model.getBody().contains(str)
+                                || model.getBody().contains("spent")
+                                || model.getBody().contains("paying")
+                                || model.getBody().contains("payment")
+                                || model.getBody().contains("deducted")
+                                || model.getBody().contains("debit")
+                                || model.getBody().contains("dr")
+                                || model.getBody().contains("txn")
+                                || model.getBody().contains("transfer")) {
+                            sm2 = model;
+                        } else {
+                            model.setTypes("balance");
+                            model.setBalance("N/A");
+                            model.setAmount(replace);
+                        }
+                    }
+//                    sm2.setTypes(str);
+//                    sm2.setBalance(replace17);
+                } else {
+                    model.setTypes("credited");
+                    model.setBalance(replace);
+                }
+                Log.e("mTAG30Dec2022", "getAvailableBalance: BOIIIII " + replace);
+                return model;
+            }
+            Log.d("mTAG30Dec2022", "getAvailableBalance: myTest --Else--> 3");
+        } else {
+            model.setBalance("N/A");
+        }
+        return model;
+    }
+
+    public final String getTrasferedAmount(SMSModel sm) {
+        boolean bool;
+        String amount = sm.getAmount();
+        StringBuilder builder = new StringBuilder();
+        int length = amount.length();
+        int i = 0;
+        while (true) {
+            boolean b = true;
+            if (i >= length) {
+                break;
+            }
+            char at = amount.charAt(i);
+            if (!Character.isDigit(at) && at != '.') {
+                b = false;
+            }
+            if (b) {
+                builder.append(at);
+            }
+            i++;
+        }
+        String string = builder.toString();
+        bool = string.length() > 0;
+        if (bool && string.charAt(0) == '.') {
+            return string.replace(string, "").toString();
+        }
+        return string;
+    }
+
+    public final String getTrasfferedAvlBalance(SMSModel sm) {
+        String builder;
+        boolean bool;
+        boolean bool1;
+        String balance = sm.getBalance();
+        Locale locale = Locale.ROOT;
+        String lowerCase = balance.toLowerCase(locale);
+        String aCase = "N/A".toLowerCase(locale);
+        boolean b = true;
+        if (lowerCase.equals(aCase)) {
+            builder = sm.getBalance();
+        } else {
+            String smBalance = sm.getBalance();
+            StringBuilder stringBuilder = new StringBuilder();
+            int length = smBalance.length();
+            for (int i2 = 0; i2 < length; i2++) {
+                char charAt = smBalance.charAt(i2);
+                bool = Character.isDigit(charAt) || charAt == '.';
+                if (bool) {
+                    stringBuilder.append(charAt);
+                }
+            }
+            builder = stringBuilder.toString();
+        }
+        bool1 = builder.length() > 0;
+        if (bool1 && builder.charAt(0) == '.') {
+            builder = builder.replace(builder, "").toString();
+        }
+        if (builder.length() != 0) {
+            b = false;
+        }
+        if (b) {
+            return "N/A";
+        }
+        return builder;
     }
 
     private ArrayList<SMSModel> GotoSMS() {
@@ -176,18 +646,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String address = cursor.getString(addressIndex);
                 String body = cursor.getString(bodyIndex);
                 long date = cursor.getLong(dateIndex);
-                smsModels.add(new SMSModel(address, body, "", date));
+                smsModels.add(new SMSModel(id, address, body, "", date));
                 // Do something with the SMS message data
-                Log.d("TAG", "ID: " + id);
+             /*   Log.d("TAG", "ID: " + id);
                 Log.d("TAG", "Address: " + address);
                 Log.d("TAG", "Body: " + body);
-                Log.d("TAG", "Date: " + new Date(date).toString());
+                Log.d("TAG", "Date: " + new Date(date));*/
 
             } while (cursor.moveToNext());
             cursor.close();
         }
         return smsModels;
-
     }
 
     @Override

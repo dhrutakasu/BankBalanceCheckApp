@@ -1,5 +1,4 @@
 package com.balance.bankbalancecheck.BModel;
-
 public class USSDCodeModel {
     String BankName,CallNumber,ShortyName,IFSC;
 
