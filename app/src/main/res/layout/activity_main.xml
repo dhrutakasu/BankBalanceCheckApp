@@ -74,6 +74,151 @@
     </androidx.cardview.widget.CardView>
 
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConsBankTranscationBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20ssp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:paddingStart="@dimen/_20ssp"
+        android:paddingEnd="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@id/BtnBankDetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/CardBankSearchBar">
+
+        <ImageView
+            android:id="@+id/IvBankTranscationBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_bank_transation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/TxtBankName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_medium"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Bank Name"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/TxtBankAccNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_medium"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textSize="@dimen/_10sdp"
+                android:text="Bank Name"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TxtBankName"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/TxtBankAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_medium"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Bank Name"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TxtBankAccNumber"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/IvBankIcon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bank_icon"
+                app:layout_constraintBottom_toBottomOf="@id/TxtBankAmount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/TxtBankAccNumber"
+                app:layout_constraintTop_toTopOf="@+id/TxtBankName"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/TxtBankTranscation"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.6"
+                app:layout_constraintHeight_percent="0.3"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8ssp"
+                android:layout_marginBottom="@dimen/_8ssp"
+                android:gravity="center"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:background="@drawable/ic_transcation_btn"
+                android:text="@string/see_transactions"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TxtBankAmount" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/IvBank1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_10ssp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_balance_1"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/IvBank2"
+            app:layout_constraintEnd_toEndOf="@id/IvBankTranscationBox"
+            app:layout_constraintStart_toStartOf="@id/IvBankTranscationBox"
+            app:layout_constraintTop_toTopOf="@id/IvBankTranscationBox" />
+
+        <ImageView
+            android:id="@+id/IvBank2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_balance_2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/IvBankTranscationBox"
+            app:layout_constraintEnd_toEndOf="@id/IvBankTranscationBox"
+            app:layout_constraintStart_toStartOf="@id/IvBankTranscationBox"
+            app:layout_constraintTop_toBottomOf="@id/IvBank1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
         android:id="@+id/BtnBankDetail"
         android:layout_width="wrap_content"

@@ -21,7 +21,7 @@
     <item
         android:id="@+id/Menu_Funds"
         android:icon="@drawable/ic_money"
-        android:title="Funds"
+        android:title="Schemes"
         app:cnb_backgroundColor="@color/main_color"
         app:cnb_iconTintMode="src_in"
         app:cnb_textColor="@color/white"

@@ -58,7 +58,7 @@ public class CreditLoanActivity extends AppCompatActivity {
 
     private void GotoCreditLoanActivity(int position, ArrayList<LoanModel> strings) {
         Intent intent = new Intent(context, LoanDetailsActivity.class);
-        intent.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).toString());
+        intent.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
         switch (position) {
             case 0:
                 intent.putExtra(BankConstantsData.LOAN_WEB, "car loan");

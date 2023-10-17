@@ -162,4 +162,6 @@
     <string name="Money">Funds</string>
     <string name="MSG_ASK_PERMISSION">This app needs permissions to use this feature. You can grant them in app settings.</string>
     <string name="all_calculator">All Calculator</string>
+    <string name="see_transactions">See Transactions</string>
+    <string name="bank_transactions">Bank Transactions</string>
 </resources>
