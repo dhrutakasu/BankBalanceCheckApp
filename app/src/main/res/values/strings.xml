@@ -164,4 +164,5 @@
     <string name="all_calculator">All Calculator</string>
     <string name="see_transactions">See Transactions</string>
     <string name="bank_transactions">Bank Transactions</string>
+    <string name="active_balance">Active Balance</string>
 </resources>

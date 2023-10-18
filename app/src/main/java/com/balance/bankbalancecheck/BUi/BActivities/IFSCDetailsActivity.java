@@ -31,7 +31,7 @@ public class IFSCDetailsActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView RvIFSCDetail;
     private String[] IFSCDetailsArray;
     private TextView TxtBank, TxtState, TxtDistrict, TxtBranch, TxtIFSCCode, TxtAddress, TxtMICRCode, TxtPhNo, TxtBranchCode;
-    private Button IvCopyIFSC,IvCopyAll;
+    private TextView IvCopyIFSC,IvCopyAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,8 @@ public class IFSCDetailsActivity extends AppCompatActivity implements View.OnCli
         TxtMICRCode = (TextView) findViewById(R.id.TxtMICRCode);
         TxtPhNo = (TextView) findViewById(R.id.TxtPhNo);
         TxtBranchCode = (TextView) findViewById(R.id.TxtBranchCode);
-        IvCopyIFSC = (Button) findViewById(R.id.IvCopyIFSC);
-        IvCopyAll = (Button) findViewById(R.id.IvCopyAll);
+        IvCopyIFSC = (TextView) findViewById(R.id.IvCopyIFSC);
+        IvCopyAll = (TextView) findViewById(R.id.IvCopyAll);
     }
 
     private void BankIntents() {
@@ -114,6 +114,8 @@ public class IFSCDetailsActivity extends AppCompatActivity implements View.OnCli
                 TxtBranchCode.setText(IFSCDetailsArray[2].toString().substring(IFSCDetailsArray[2].toString().length() - 6));
                 TxtMICRCode.setText(IFSCDetailsArray[3].toString());
                 TxtPhNo.setText(IFSCDetailsArray[1].toString());
+                TxtAddress.setSelected(true);
+                TxtBank.setSelected(true);
             }
         } catch (Exception unused) {
             unused.getMessage();

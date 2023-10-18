@@ -62,7 +62,6 @@ public class USSDBankingActivity extends AppCompatActivity implements View.OnCli
 
     private void BankInitActions() {
         ImgBack.setVisibility(View.VISIBLE);
-        ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(R.string.ussd_banking);
     }
 

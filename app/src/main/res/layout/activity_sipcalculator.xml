@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".BUi.BActivities.Calculators.SIPCalculatorActivity">
 
     <RelativeLayout
@@ -20,14 +21,17 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RlHeaderBar">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,6 +41,65 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/TxtReset"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/ic_reset"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/reset"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/TxtCalculate"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/ic_reset"
+                        android:backgroundTint="@color/main_color"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/calculate"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/exp_annual_amount"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/investment_period"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -52,8 +115,8 @@
                     android:layout_height="@dimen/_40ssp"
                     android:layout_margin="@dimen/_1sdp"
                     android:padding="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    app:cardElevation="@dimen/_2sdp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="0dp">
 
                     <EditText
                         android:id="@+id/EdtMonthlyInvest"
@@ -68,54 +131,13 @@
                         android:textSize="@dimen/_12sdp" />
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:padding="@dimen/_3sdp"
-                    android:text="@string/exp_annual_amount"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40ssp"
                     android:layout_margin="@dimen/_1sdp"
                     android:padding="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    app:cardElevation="@dimen/_2sdp">
-
-                    <EditText
-                        android:id="@+id/EdtAnnualAmount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/annual_return"
-                        android:inputType="number"
-                        android:padding="@dimen/_8sdp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/gray"
-                        android:textSize="@dimen/_12sdp" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:padding="@dimen/_3sdp"
-                    android:text="@string/investment_period"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40ssp"
-                    android:layout_margin="@dimen/_1sdp"
-                    android:padding="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    app:cardElevation="@dimen/_2sdp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="0dp">
 
                     <EditText
                         android:id="@+id/EdtInvestmentPeriod"
@@ -136,9 +158,8 @@
                     android:layout_marginStart="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_1sdp"
-                    app:cardBackgroundColor="@color/gray_light"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    app:cardElevation="@dimen/_2sdp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -159,7 +180,7 @@
                                 android:layout_weight="0.6"
                                 android:padding="@dimen/_2sdp"
                                 android:text="@string/expected_amount"
-                                android:textColor="@color/black"
+                                android:textColor="@color/main_color"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
@@ -172,7 +193,7 @@
                                 android:gravity="end"
                                 android:padding="@dimen/_2sdp"
                                 android:text="@string/_00_0000"
-                                android:textColor="@color/black"
+                                android:textColor="@color/Txt_ans_color"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -191,7 +212,7 @@
                                 android:layout_weight="0.6"
                                 android:padding="@dimen/_2sdp"
                                 android:text="@string/amount_investment"
-                                android:textColor="@color/black"
+                                android:textColor="@color/main_color"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
@@ -204,7 +225,7 @@
                                 android:gravity="end"
                                 android:padding="@dimen/_2sdp"
                                 android:text="@string/_00_0000"
-                                android:textColor="@color/black"
+                                android:textColor="@color/Txt_ans_color"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -224,7 +245,7 @@
                                 android:layout_weight="0.6"
                                 android:padding="@dimen/_2sdp"
                                 android:text="@string/wealth_gain"
-                                android:textColor="@color/black"
+                                android:textColor="@color/main_color"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
@@ -237,48 +258,33 @@
                                 android:gravity="end"
                                 android:padding="@dimen/_2sdp"
                                 android:text="@string/_00_0000"
-                                android:textColor="@color/black"
+                                android:textColor="@color/Txt_ans_color"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:orientation="horizontal">
+                    android:layout_height="@dimen/_40ssp"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:padding="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="0dp">
 
-                    <TextView
-                        android:id="@+id/TxtReset"
-                        android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/EdtAnnualAmount"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:layout_weight="0.5"
-                        android:background="@color/black"
-                        android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/reset"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/TxtCalculate"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:layout_weight="0.5"
-                        android:background="@color/black"
-                        android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/calculate"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:background="@null"
+                        android:hint="@string/annual_return"
+                        android:inputType="number"
+                        android:padding="@dimen/_8sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/_12sdp" />
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

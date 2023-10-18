@@ -1,7 +1,6 @@
 package com.balance.bankbalancecheck.BUi.BActivities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,7 +8,6 @@ import android.icu.text.NumberFormat;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +32,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -147,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     ProgressBankBalance.setVisibility(View.GONE);
                                     ArrayList<SMSModel> result = new ArrayList<SMSModel>();
                                     for (int i = 0; i < unused.size(); i++) {
-                                        System.out.println("+++++ 11 BALANCE : " + getAvailableBalance(unused.get(i)).getBalance());
                                         if (getAvailableBalance(unused.get(i)).getBalance() != null) {
                                             if (!getAvailableBalance(unused.get(i)).getBalance().equals("N/A") && !getAvailableBalance(unused.get(i)).getAmount().equals("null")) {
                                                 result.add(getAvailableBalance(unused.get(i)));
@@ -158,13 +154,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     }
                                     Collections.reverse(result);
                                     if (unused.size() > 0) {
-                                        List<String> strings = Arrays.asList(result.get(result.size() - 1).getBody().split("UPI/", 12));
+                                        List<String> strings = Arrays.asList(result.get(result.size() - 1).getBodyMsg().split("UPI/", 12));
                                         Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
                                         String ANumber = strings.get(1).substring(0, strings.get(1).indexOf("."));
                                         String last4Digits = ANumber.substring(ANumber.length() - 4);
                                         System.out.println("+++++ strings.get(1) : " + last4Digits);
 
-                                        ((TextView) findViewById(R.id.TxtBankName)).setText(result.get(result.size() - 1).getBody().substring(result.get(result.size() - 1).getBody().lastIndexOf(" - ") + 1).replace("- ", ""));
+                                        ((TextView) findViewById(R.id.TxtBankName)).setText(result.get(result.size() - 1).getBodyMsg().substring(result.get(result.size() - 1).getBodyMsg().lastIndexOf(" - ") + 1).replace("- ", ""));
                                         ((TextView) findViewById(R.id.TxtBankAccNumber)).setText("A/c No:- " + last4Digits);
                                         NumberFormat numberFormat = null;
                                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -176,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         ((TextView) findViewById(R.id.TxtBankAccNumber)).setSelected(true);
                                         ((TextView) findViewById(R.id.TxtBankName)).setSelected(true);
 
-                                        System.out.println("+++++ getBody : " + result.get(result.size() - 1).getBody());
+                                        System.out.println("+++++ getBody : " + result.get(result.size() - 1).getBodyMsg());
                                         System.out.println("+++++ BALANCE : " + result.get(result.size() - 1).getBalance());
                                         System.out.println("+++++ AMOUNt : " + result.get(result.size() - 1).getAmount());
                                     }
@@ -202,8 +198,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String str3 = "";
         String str4 = "";
         Pattern pattern = Pattern.compile("(?i)(?:RS|INR|MRP)?(?:(?:RS|INR|MRP)\\.?\\s?)(\\d+(:?\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)+");
-        if (model.getBody().contains("curr o/s - ")) {
-            List<String> strings = Arrays.asList(model.getBody().split("o/s - ", 6));
+        if (model.getBodyMsg().contains("curr o/s - ")) {
+            List<String> strings = Arrays.asList(model.getBodyMsg().split("o/s - ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
             Matcher matcher = pattern.matcher(strings.get(1).trim());
             if (matcher.find()) {
@@ -212,8 +208,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 model.setBalance(replace);
                 Log.e("BALANCE", "getAvailableBalance: " + replace);
             }
-        } else if (model.getBody().contains("The Balance is")) {
-            List<String> the_balance_is_ = Arrays.asList(model.getBody().split("The Balance is ", 6));
+        } else if (model.getBodyMsg().contains("The Balance is")) {
+            List<String> the_balance_is_ = Arrays.asList(model.getBodyMsg().split("The Balance is ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --2-- --> " + the_balance_is_);
             Matcher matcher = pattern.matcher(the_balance_is_.get(1).trim());
             if (matcher.find()) {
@@ -223,8 +219,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("BALANCE", "getAvailableBalance: " + replace);
                 return model;
             }
-        } else if (model.getBody().contains("The Available Balance is")) {
-            List<String> theAvailableBalanceIs = Arrays.asList(model.getBody().split("The Available Balance is ", 6));
+        } else if (model.getBodyMsg().contains("The Available Balance is")) {
+            List<String> theAvailableBalanceIs = Arrays.asList(model.getBodyMsg().split("The Available Balance is ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --3-- --> " + theAvailableBalanceIs);
             Matcher matcher = pattern.matcher(theAvailableBalanceIs.get(1).trim());
             if (matcher.find()) {
@@ -234,8 +230,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("BALANCE", "getAvailableBalance: " + replace);
                 return model;
             }
-        } else if (model.getBody().contains("Avbl Lmt:")) {
-            List<String> list = Arrays.asList(model.getBody().split("Avbl Lmt:", 6));
+        } else if (model.getBodyMsg().contains("Avbl Lmt:")) {
+            List<String> list = Arrays.asList(model.getBodyMsg().split("Avbl Lmt:", 6));
             Log.d("TAG", "getAvailableBalance: newBody --4-- --> " + list);
             Matcher matcher = pattern.matcher(list.get(1).trim());
             if (matcher.find()) {
@@ -245,8 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("BALANCE", "getAvailableBalance: " + replace);
                 return model;
             }
-        } else if (model.getBody().contains("Avlbal")) {
-            List<String> avlbal = Arrays.asList(model.getBody().split("Avlbal", 6));
+        } else if (model.getBodyMsg().contains("Avlbal")) {
+            List<String> avlbal = Arrays.asList(model.getBodyMsg().split("Avlbal", 6));
             Log.d("TAG", "getAvailableBalance: newBody --5-- --> " + avlbal);
             Matcher matcher = pattern.matcher(avlbal.get(1).trim());
             if (matcher.find()) {
@@ -256,8 +252,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("BALANCE", "getAvailableBalance: " + replace);
                 return model;
             }
-        } else if (model.getBody().contains("balance is")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("balance is")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List<String> balanceIs = Arrays.asList(lowerCase.split("balance is ", 6));
             Matcher matcher = pattern.matcher(balanceIs.get(1).trim());
             if (matcher.find()) {
@@ -268,8 +264,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("AvBl Bal:")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("AvBl Bal:")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List<String> stringList = Arrays.asList(lowerCase.split("avbl bal: ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --7-- --> " + stringList);
             Matcher matcher = pattern.matcher(stringList.get(1).trim());
@@ -281,8 +277,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("Avl. Bal:")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("Avl. Bal:")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List<String> asList = Arrays.asList(lowerCase.split("avl. bal:", 6));
             Matcher matcher = pattern.matcher(asList.get(1).trim());
             if (matcher.find()) {
@@ -293,9 +289,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("AVl BAL")) {
-            if (model.getBody().contains("Avl. Bal:")) {
-                String lowerCase = model.getBody().toLowerCase(Locale.ROOT);
+        } else if (model.getBodyMsg().contains("AVl BAL")) {
+            if (model.getBodyMsg().contains("Avl. Bal:")) {
+                String lowerCase = model.getBodyMsg().toLowerCase(Locale.ROOT);
                 List<String> list = Arrays.asList(lowerCase.split("avl. bal:", 6));
                 Log.d("mTAG30Dec2022", "getAvailableBalance: newBody --9-- --> " + list);
                 if (list.isEmpty() || list.size() < 2) {
@@ -315,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-            String toLowerCase = model.getBody().toLowerCase(Locale.ROOT);
+            String toLowerCase = model.getBodyMsg().toLowerCase(Locale.ROOT);
             List<String> avlBal = Arrays.asList(toLowerCase.split("avl bal", 6));
             Log.d("mTAG30Dec2022", "getAvailableBalance: newBody --10-- --> " + avlBal);
             if (avlBal.isEmpty() || avlBal.size() < 2) {
@@ -378,8 +374,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             model.setBalance(obj);
 
             return model;
-        } else if (model.getBody().contains("Avail Bal")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("Avail Bal")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List<String> availBal = Arrays.asList(lowerCase.split("avail bal ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --11-- --> " + availBal);
             Matcher matcher = pattern.matcher(new Regex("\\s").replace(availBal.get(1).trim(), ""));
@@ -391,8 +387,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("The combine BAL is")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("The combine BAL is")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List balIs = Arrays.asList(lowerCase.split("bal is ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --12-- --> " + balIs);
             Matcher matcher = pattern.matcher(balIs.get(1).toString().trim());
@@ -405,8 +401,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("The balance in")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("The balance in")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List<String> balanceIn = Arrays.asList(lowerCase.split("balance in ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --13-- --> " + balanceIn);
             Matcher matcher = pattern.matcher(balanceIn.get(1).trim());
@@ -420,20 +416,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("Available balance:")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("Available balance:")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List<String> strings = Arrays.asList(lowerCase.split("available balance:", 6));
             Log.d("TAG", "getAvailableBalance: newBody --14-- --> " + strings);
             Matcher matcher = pattern.matcher(strings.get(1).trim());
             if (matcher.find()) {
                 String group = matcher.group(0);
                 String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
-                if (!model.getBody().contains("credited") && !model.getBody().contains("cash deposit")
-                        && !model.getBody().contains("credit")
-                        && !model.getBody().contains("deposited")
-                        && !model.getBody().contains("deposit")
-                        && !model.getBody().contains("received")) {
-                    if (model.getBody().contains("withdrawn")) {
+                if (!model.getBodyMsg().contains("credited") && !model.getBodyMsg().contains("cash deposit")
+                        && !model.getBodyMsg().contains("credit")
+                        && !model.getBodyMsg().contains("deposited")
+                        && !model.getBodyMsg().contains("deposit")
+                        && !model.getBodyMsg().contains("received")) {
+                    if (model.getBodyMsg().contains("withdrawn")) {
 
                         str4 = "debited";
                         model.setTypes(str4);
@@ -447,13 +443,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     } else {
                         str4 = "debited";
-                        if (model.getBody().contains((CharSequence) str4)
-                                || model.getBody().contains("spent")
-                                || model.getBody().contains("paying")
-                                || model.getBody().contains("deducted")
-                                || model.getBody().contains("dr")
-                                || model.getBody().contains("txn")
-                                || model.getBody().contains("transfer")) {
+                        if (model.getBodyMsg().contains((CharSequence) str4)
+                                || model.getBodyMsg().contains("spent")
+                                || model.getBodyMsg().contains("paying")
+                                || model.getBodyMsg().contains("deducted")
+                                || model.getBodyMsg().contains("dr")
+                                || model.getBodyMsg().contains("txn")
+                                || model.getBodyMsg().contains("transfer")) {
 
                             model.setTypes(str4);
                             model.setBalance(replace);
@@ -478,8 +474,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 return model;
             }
-        } else if (model.getBody().contains("Avlbl Amt:")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("Avlbl Amt:")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List asList = Arrays.asList(lowerCase.split("avlbl amt:", 6));
             Log.d("TAG", "getAvailableBalance: newBody --15-- --> " + asList);
             Matcher matcher = pattern.matcher(asList.get(1).toString().trim());
@@ -487,13 +483,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String group = matcher.group(0);
                 String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs.").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
                 Log.e("TAG", "getAvailableBalance: amount::-> " + replace);
-                if (!model.getBody().contains("credited") &&
-                        !model.getBody().contains("cash deposit") &&
-                        !model.getBody().contains("credit") &&
-                        !model.getBody().contains("deposited") &&
-                        !model.getBody().contains("deposit") &&
-                        !model.getBody().contains("received")) {
-                    if (model.getBody().contains("withdrawn")) {
+                if (!model.getBodyMsg().contains("credited") &&
+                        !model.getBodyMsg().contains("cash deposit") &&
+                        !model.getBodyMsg().contains("credit") &&
+                        !model.getBodyMsg().contains("deposited") &&
+                        !model.getBodyMsg().contains("deposit") &&
+                        !model.getBodyMsg().contains("received")) {
+                    if (model.getBodyMsg().contains("withdrawn")) {
 //                        sm4 = model;
                         str3 = "debited";
                         model.setTypes(str3);
@@ -511,15 +507,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return model;
                     } else {
                         str3 = "debited";
-                        if (model.getBody().contains(str3)
-                                || model.getBody().contains("spent")
-                                || model.getBody().contains("paying")
-                                || model.getBody().contains("payment")
-                                || model.getBody().contains("deducted")
-                                || model.getBody().contains("debit")
-                                || model.getBody().contains("dr")
-                                || model.getBody().contains("txn")
-                                || model.getBody().contains("transfer")) {
+                        if (model.getBodyMsg().contains(str3)
+                                || model.getBodyMsg().contains("spent")
+                                || model.getBodyMsg().contains("paying")
+                                || model.getBodyMsg().contains("payment")
+                                || model.getBodyMsg().contains("deducted")
+                                || model.getBodyMsg().contains("debit")
+                                || model.getBodyMsg().contains("dr")
+                                || model.getBodyMsg().contains("txn")
+                                || model.getBodyMsg().contains("transfer")) {
                             model.setTypes("credited");
                             model.setBalance(replace);
                             pattern = Pattern.compile("\\d+");
@@ -551,8 +547,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return model;
                 }
             }
-        } else if (model.getBody().contains("Avl Bal")) {
-            String lowerCase = model.getBody().toLowerCase();
+        } else if (model.getBodyMsg().contains("Avl Bal")) {
+            String lowerCase = model.getBodyMsg().toLowerCase();
             List avlBal = Arrays.asList(lowerCase.split("Avl Bal ", 6));
             Log.d("TAG", "getAvailableBalance: newBody --16-- --> " + avlBal);
             Matcher matcher = pattern.matcher(avlBal.get(1).toString().trim().toString());
@@ -560,13 +556,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (matcher.find()) {
                 String group = matcher.group(0);
                 String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
-                if (!model.getBody().contains("credited")
-                        && !model.getBody().contains("cash deposit")
-                        && !model.getBody().contains("credit")
-                        && !model.getBody().contains("deposited")
-                        && !model.getBody().contains("deposit")
-                        && !model.getBody().contains("received")) {
-                    if (model.getBody().contains("withdrawn")) {
+                if (!model.getBodyMsg().contains("credited")
+                        && !model.getBodyMsg().contains("cash deposit")
+                        && !model.getBodyMsg().contains("credit")
+                        && !model.getBodyMsg().contains("deposited")
+                        && !model.getBodyMsg().contains("deposit")
+                        && !model.getBodyMsg().contains("received")) {
+                    if (model.getBodyMsg().contains("withdrawn")) {
                         str2 = "debited";
                         model.setTypes(str2);
                         model.setBalance(replace);
@@ -579,14 +575,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     } else {
                         str2 = "debited";
-                        if (model.getBody().contains(str2)
-                                || model.getBody().contains("spent")
-                                || model.getBody().contains("paying")
-                                || model.getBody().contains("payment")
-                                || model.getBody().contains("debit")
-                                || model.getBody().contains("dr")
-                                || model.getBody().contains("txn")
-                                || model.getBody().contains("transfer")) {
+                        if (model.getBodyMsg().contains(str2)
+                                || model.getBodyMsg().contains("spent")
+                                || model.getBodyMsg().contains("paying")
+                                || model.getBodyMsg().contains("payment")
+                                || model.getBodyMsg().contains("debit")
+                                || model.getBodyMsg().contains("dr")
+                                || model.getBodyMsg().contains("txn")
+                                || model.getBodyMsg().contains("transfer")) {
                             model.setTypes(str2);
                             model.setBalance(replace);
                             pattern = Pattern.compile("\\d+");
@@ -611,8 +607,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return model;
             }
             Log.d("TAG", "getAvailableBalance: myTest --Else--> 2");
-        } else if (model.getBody().contains("Available")) {
-            String lowerCase = model.getBody().toLowerCase(Locale.ROOT);
+        } else if (model.getBodyMsg().contains("Available")) {
+            String lowerCase = model.getBodyMsg().toLowerCase(Locale.ROOT);
             List available = Arrays.asList(lowerCase.split("Available", 4));
             Log.d("mTAG30Dec2022", "getAvailableBalance: newBody --17-- --> " + available.get(1).toString().trim());
             Matcher matcher = pattern.matcher(available.get(1).toString().trim().toString());
@@ -620,13 +616,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (matcher.find()) {
                 String group = matcher.group(0);
                 String replace = new Regex(",").replace(new Regex(" ").replace(new Regex("inr").replace(new Regex("rs").replace(new Regex("inr").replace(group, ""), ""), ""), ""), "");
-                if (!model.getBody().contains("credited")
-                        && !model.getBody().contains("cash deposit")
-                        && !model.getBody().contains("credit")
-                        && !model.getBody().contains("deposited")
-                        && !model.getBody().contains("deposit")
-                        && !model.getBody().contains("received")) {
-                    if (model.getBody().contains("withdrawn")) {
+                if (!model.getBodyMsg().contains("credited")
+                        && !model.getBodyMsg().contains("cash deposit")
+                        && !model.getBodyMsg().contains("credit")
+                        && !model.getBodyMsg().contains("deposited")
+                        && !model.getBodyMsg().contains("deposit")
+                        && !model.getBodyMsg().contains("received")) {
+                    if (model.getBodyMsg().contains("withdrawn")) {
                         str = "debited";
                         model.setTypes(str);
                         model.setBalance(replace);
@@ -639,15 +635,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     } else {
                         str = "debited";
-                        if (model.getBody().contains(str)
-                                || model.getBody().contains("spent")
-                                || model.getBody().contains("paying")
-                                || model.getBody().contains("payment")
-                                || model.getBody().contains("deducted")
-                                || model.getBody().contains("debit")
-                                || model.getBody().contains("dr")
-                                || model.getBody().contains("txn")
-                                || model.getBody().contains("transfer")) {
+                        if (model.getBodyMsg().contains(str)
+                                || model.getBodyMsg().contains("spent")
+                                || model.getBodyMsg().contains("paying")
+                                || model.getBodyMsg().contains("payment")
+                                || model.getBodyMsg().contains("deducted")
+                                || model.getBodyMsg().contains("debit")
+                                || model.getBodyMsg().contains("dr")
+                                || model.getBodyMsg().contains("txn")
+                                || model.getBodyMsg().contains("transfer")) {
                             model.setTypes(str);
                             model.setBalance(replace);
                             pattern = Pattern.compile("\\d+");

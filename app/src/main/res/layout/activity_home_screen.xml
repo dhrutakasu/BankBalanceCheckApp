@@ -100,6 +100,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TxtCalculators" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RvSchemes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TxtCalculators" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -213,27 +222,62 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstBalance"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@color/main_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/IvBankBalance"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_20ssp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_bank_balance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.3" />
+
+                <ImageView
+                    android:id="@+id/IvBankBalanceTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_20ssp"
+                    android:layout_marginBottom="10dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_main_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/IvBankBalance"
+                android:id="@+id/IvBankBalance2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20ssp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:adjustViewBounds="true"
+                android:visibility="gone"
                 android:src="@drawable/ic_bank_balance"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guide_bankbalance" />
 
             <ImageView
-                android:id="@+id/IvBankBalanceTitle"
+                android:id="@+id/IvBankBalanceTitle2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20ssp"
                 android:layout_marginBottom="10dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_main_text"
-                app:layout_constraintBottom_toBottomOf="@+id/IvBankBalance"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/IvBankBalance2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guide_bankbalance" />
 
@@ -294,7 +338,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.12" />
+                app:layout_constraintGuide_percent="0.08" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide_bankoptions"

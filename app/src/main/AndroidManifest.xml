@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
-            android:name=".BUi.BActivities.TranscationActivity"
+            android:name=".BUi.BActivities.TransactionActivity"
             android:exported="false" />
         <activity
             android:name=".BUi.BActivities.MainActivity"

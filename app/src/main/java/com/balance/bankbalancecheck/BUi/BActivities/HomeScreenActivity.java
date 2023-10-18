@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.NumberFormat;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.BHelper.BankBalanceHelper;
 import com.balance.bankbalancecheck.BModel.LoanModel;
 import com.balance.bankbalancecheck.BModel.SMSModel;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.BrokerageCalculatorActivity;
@@ -35,6 +36,7 @@ import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SIPCalculatorAct
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SwapCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.FundsAdapter;
+import com.balance.bankbalancecheck.BUtils.SchemesWebData;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.R;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -53,12 +55,13 @@ import java.util.Locale;
 public class HomeScreenActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context context;
-    private RecyclerView RvCreditLoan, RvMutualFund, RvCalculators;
+    private RecyclerView RvCreditLoan, RvMutualFund, RvCalculators, RvSchemes;
     private ImageView IvIFSCCode, IvUSSDCode, IvNetBanking, IvBankATMBox, IvBankHoliday;
     private ChipNavigationBar bottom_menu;
     private ConstraintLayout ConsHome, ConsCalculators, ConsAccountDetail;
     private ProgressBar ProgressBankAcoount;
     private TextView TxtBankName, TxtBankAccNumber, TxtBankAmount, TxtBankTranscation;
+    private BankBalanceHelper SmsHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         ConsHome = (ConstraintLayout) findViewById(R.id.ConsHome);
         ConsCalculators = (ConstraintLayout) findViewById(R.id.ConsCalculators);
         RvCalculators = (RecyclerView) findViewById(R.id.RvCalculators);
+        RvSchemes = (RecyclerView) findViewById(R.id.RvSchemes);
         IvIFSCCode = (ImageView) findViewById(R.id.IvIFSCCode);
         IvUSSDCode = (ImageView) findViewById(R.id.IvUSSDCode);
         IvNetBanking = (ImageView) findViewById(R.id.IvNetBanking);
@@ -106,24 +110,29 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 case R.id.Menu_Calculators:
                     ConsHome.setVisibility(View.GONE);
                     ConsCalculators.setVisibility(View.VISIBLE);
+                    RvSchemes.setVisibility(View.GONE);
+                    RvCalculators.setVisibility(View.VISIBLE);
                     break;
                 case R.id.Menu_Funds:
                     ConsHome.setVisibility(View.GONE);
                     ConsCalculators.setVisibility(View.VISIBLE);
+                    RvSchemes.setVisibility(View.VISIBLE);
+                    RvCalculators.setVisibility(View.GONE);
                     break;
                 case R.id.Menu_Settings:
-                    ConsHome.setVisibility(View.GONE);
-                    ConsCalculators.setVisibility(View.VISIBLE);
+                    ConsHome.setVisibility(View.VISIBLE);
+                    ConsCalculators.setVisibility(View.GONE);
                     break;
             }
         });
     }
 
     private void BankInitActions() {
-
         GetCreditLoan();
         GetMutualFund();
         GetCalculators();
+        GetSchemes();
+        SmsHelper = new BankBalanceHelper(context);
         bottom_menu.setItemSelected(R.id.Menu_Home, true);
         TxtBankName.setText("-- --");
         TxtBankAccNumber.setText("xxxx");
@@ -141,64 +150,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 .withListener(new MultiplePermissionsListener() {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            new AsyncTask<Void, Void, ArrayList<SMSModel>>() {
-                                @Override
-                                protected void onPreExecute() {
-                                    super.onPreExecute();
-                                    ProgressBankAcoount.setVisibility(View.VISIBLE);
-                                    ConsAccountDetail.setVisibility(View.VISIBLE);
-                                }
-
-                                @Override
-                                protected ArrayList<SMSModel> doInBackground(Void... voids) {
-                                    return BankConstantsData.GotoSMS(context);
-                                }
-
-                                @Override
-                                protected void onPostExecute(ArrayList<SMSModel> unused) {
-                                    super.onPostExecute(unused);
-                                    ArrayList<SMSModel> result = new ArrayList<SMSModel>();
-                                    for (int i = 0; i < unused.size(); i++) {
-                                        System.out.println("+++++ 11 BALANCE : " + BankConstantsData.getAvailableBalance(unused.get(i)).getBalance());
-                                        if (BankConstantsData.getAvailableBalance(unused.get(i)).getBalance() != null) {
-                                            if (!BankConstantsData.getAvailableBalance(unused.get(i)).getBalance().equals("N/A") && !BankConstantsData.getAvailableBalance(unused.get(i)).getAmount().equals("null")) {
-                                                result.add(BankConstantsData.getAvailableBalance(unused.get(i)));
-                                                System.out.println("+++++ 22 BALANCE : " + BankConstantsData.getAvailableBalance(unused.get(i)).getBalance());
-                                                System.out.println("+++++ 22 AMOUNt : " + BankConstantsData.getAvailableBalance(unused.get(i)).getAmount());
-                                            }
-                                        }
-                                    }
-                                    Collections.reverse(result);
-                                    if (unused.size() > 0) {
-                                        ;
-                                        List<String> strings = Arrays.asList(result.get(result.size() - 1).getBody().split("UPI/", 12));
-                                        Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
-                                        String ANumber = strings.get(1).substring(0, strings.get(1).indexOf("."));
-                                        String last4Digits = ANumber.substring(ANumber.length() - 4);
-                                        System.out.println("+++++ strings.get(1) : " + last4Digits);
-
-                                        TxtBankName.setText(result.get(result.size() - 1).getBody().substring(result.get(result.size() - 1).getBody().lastIndexOf(" - ") + 1).replace("- ", ""));
-                                        TxtBankAccNumber.setText("A/c No:- " + last4Digits);
-                                        NumberFormat numberFormat = null;
-                                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                                            double number = Double.parseDouble(result.get(result.size() - 1).getBalance());
-                                            numberFormat = NumberFormat.getNumberInstance(Locale.US);
-                                            TxtBankAmount.setText("INR :- " + numberFormat.format(number));
-                                        }
-                                        TxtBankAmount.setSelected(true);
-                                        TxtBankAccNumber.setSelected(true);
-                                        TxtBankName.setSelected(true);
-                                        ConsAccountDetail.setVisibility(View.VISIBLE);
-                                        ProgressBankAcoount.setVisibility(View.GONE);
-
-
-                                        System.out.println("+++++ getBody : " + result.get(result.size() - 1).getBody());
-                                        System.out.println("+++++ BALANCE : " + result.get(result.size() - 1).getBalance());
-                                        System.out.println("+++++ AMOUNt : " + result.get(result.size() - 1).getAmount());
-                                    }
-                                    BankConstantsData.TranscationsResult.addAll(result);
-                                }
-                            }.execute();
+                            GoTOAvaliableBalance();
                         }
                         if (report.isAnyPermissionPermanentlyDenied()) {
                             BankConstantsData.showSettingsDialog(HomeScreenActivity.this);
@@ -214,6 +166,103 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         ConsHome.setVisibility(View.VISIBLE);
         ConsCalculators.setVisibility(View.GONE);
 
+    }
+
+    private void GoTOAvaliableBalance() {
+        try {
+            new AsyncTask<Void, Void, ArrayList<SMSModel>>() {
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    ProgressBankAcoount.setVisibility(View.VISIBLE);
+                    ConsAccountDetail.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                protected ArrayList<SMSModel> doInBackground(Void... voids) {
+                    return BankConstantsData.GotoSMS(context);
+                }
+
+                @Override
+                protected void onPostExecute(ArrayList<SMSModel> unused) {
+                    super.onPostExecute(unused);
+                    ArrayList<SMSModel> result = new ArrayList<SMSModel>();
+                    Log.d("TAG", "getAvailableBalance: unused --1-- --> " + unused.size());
+
+                    new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            for (int i = 0; i < unused.size(); i++) {
+                                System.out.println("+++++address BALANCE==: " + BankConstantsData.getAvailableBalance(unused.get(i)).getBalance());
+                                System.out.println("+++++address BALANCE-- : " + BankConstantsData.getAvailableBalance(unused.get(i)).getAmount());
+                                if (BankConstantsData.getAvailableBalance(unused.get(i)).getBalance() != null) {
+                                    if (!BankConstantsData.getAvailableBalance(unused.get(i)).getBalance().equals("N/A") && !BankConstantsData.getAvailableBalance(unused.get(i)).getAmount().equals("null")) {
+                                        result.add(BankConstantsData.getAvailableBalance(unused.get(i)));
+//                                        System.out.println("+++++address BALANCE: " + BankConstantsData.getAvailableBalance(unused.get(i)).toString());
+//                                        System.out.println("+++++BALANCE BODY: " + BankConstantsData.getAvailableBalance(unused.get(i)).getBodyMsg());
+                                    }
+                                }
+                            }
+
+                            Collections.reverse(result);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void used) {
+                            super.onPostExecute(used);
+                            if (result.size() != SmsHelper.SMSCount()) {
+                                SmsHelper.DeleteSMS();
+                                for (int i = 0; i < result.size(); i++) {
+                                    SmsHelper.InsertSMS(BankConstantsData.getAvailableBalance(result.get(i)));
+                                }
+                            }
+                            if (result.size() > 0) {
+                                Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + result.get(result.size() - 1).getBodyMsg());
+                                List<String> strings = Arrays.asList(result.get(result.size() - 1).getBodyMsg().split("A/c ...", 4));
+                                Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
+                                String ANumber, last4Digits;
+                                if (strings.contains("to")) {
+                                    ANumber = strings.get(1).substring(0, strings.get(1).indexOf(" to"));
+                                    last4Digits = ANumber.substring(ANumber.length() - 4);
+                                    System.out.println("+++++ strings.get(1) : " + last4Digits);
+                                } else {
+                                    ANumber = strings.get(1).substring(0, strings.get(1).indexOf(" thru"));
+                                    last4Digits = ANumber.substring(ANumber.length() - 4);
+                                    System.out.println("+++++ strings.get(1) : " + last4Digits);
+                                }
+
+                                TxtBankName.setText(result.get(result.size() - 1).getBodyMsg().substring(result.get(result.size() - 1).getBodyMsg().lastIndexOf(" - ") + 1).replace("- ", ""));
+                                TxtBankAccNumber.setText("A/c No:- " + last4Digits);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    String Currency = result.get(result.size() - 1).getBodyMsg().substring(0, result.get(result.size() - 1).getBodyMsg().indexOf(".") + 1);
+
+                                    double number = Double.parseDouble(result.get(result.size() - 1).getBalance());
+                                    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+                                    TxtBankAmount.setText(Currency + " " + numberFormat.format(number));
+                                }
+                                TxtBankAmount.setSelected(true);
+                                TxtBankAccNumber.setSelected(true);
+                                TxtBankName.setSelected(true);
+                                ConsAccountDetail.setVisibility(View.VISIBLE);
+                                ProgressBankAcoount.setVisibility(View.GONE);
+
+                                System.out.println("+++++ getBody : " + result.get(result.size() - 1).getBodyMsg());
+                                System.out.println("+++++ BALANCE : " + result.get(result.size() - 1).getBalance());
+                                System.out.println("+++++ AMOUNt : " + result.get(result.size() - 1).getAmount());
+                            }
+                            BankConstantsData.TranscationsResult.addAll(result);
+                        }
+                    }.execute();
+                    Log.d("TAG", "getAvailableBalance: result --1-- --> " + result.size() + " -- --- " + SmsHelper.SMSCount());
+
+                    Log.d("TAG", "getAvailableBalance: result --1-- --> " + result.size() + " -- --- " + SmsHelper.SMSCount());
+                }
+            }.execute();
+        } catch (Exception e) {
+            System.out.println("--- - -- - - catch : "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void GetCreditLoan() {
@@ -320,7 +369,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(context, NearByActivity.class));
                 break;
             case R.id.TxtBankTranscation:
-                startActivity(new Intent(context, TranscationActivity.class));
+                startActivity(new Intent(context, TransactionActivity.class));
                 break;
         }
     }
@@ -394,5 +443,60 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(context, GratuityCalculatorActivity.class));
                 break;
         }
+    }
+
+    private void GetSchemes() {
+        ArrayList<LoanModel> strings = new ArrayList<>();
+        LoanModel model = new LoanModel(getString(R.string.public_pf), R.drawable.ic_public_pf);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.employee_pf), R.drawable.ic_employee_pf);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.natinal_ps), R.drawable.ic_national_ps);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.sensor_cs), R.drawable.ic_senior_cs);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.national_sc), R.drawable.ic_national_sc);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.post_office_ss), R.drawable.ic_postoffice_ss);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.pm_vaya), R.drawable.ic_pm_vaya);
+        strings.add(model);
+        model = new LoanModel(getString(R.string.pm_jan_dhan), R.drawable.ic_pm_jhan_dhan);
+        strings.add(model);
+        RvSchemes.setLayoutManager(new GridLayoutManager(context, 2, RecyclerView.VERTICAL, false));
+        RvSchemes.setAdapter(new CalculatorsAdapter(context, strings, position -> GotoSchemeActivity(position, strings)));
+    }
+
+    private void GotoSchemeActivity(int position, ArrayList<LoanModel> strings) {
+        Intent intent = new Intent(context, ViewSchemesDetailsActivity.class);
+        System.out.println("===== : " + new SchemesWebData().getSCHEME_PM_VAYA());
+        switch (position) {
+            case 0:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PUBLIC_PF());
+                break;
+            case 1:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_EMPLOYEE_PF());
+                break;
+            case 2:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_NATIONAL_PS());
+                break;
+            case 3:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_SENIOR_CS());
+                break;
+            case 4:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_NATIONAL_SC());
+                break;
+            case 5:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_POST_OFFICE_SS());
+                break;
+            case 6:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PM_VAYA());
+                break;
+            case 7:
+                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PM_JAN_DHAN());
+                break;
+        }
+        intent.putExtra(BankConstantsData.SCHEMES_TITLE, strings.get(position).toString());
+        startActivity(intent);
     }
 }

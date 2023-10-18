@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".BUi.BActivities.Calculators.GratuityCalculatorActivity">
 
     <RelativeLayout
@@ -20,7 +21,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +50,8 @@
                 android:layout_height="@dimen/_40ssp"
                 android:layout_margin="@dimen/_1sdp"
                 android:padding="@dimen/_10sdp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="@+id/TxtMonthlySalary"
                 app:layout_constraintStart_toStartOf="@+id/TxtMonthlySalary"
                 app:layout_constraintTop_toBottomOf="@+id/TxtMonthlySalary">
@@ -87,8 +90,8 @@
                 android:layout_marginStart="@dimen/_1sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="@+id/TxtYearService"
                 app:layout_constraintStart_toStartOf="@+id/TxtYearService"
                 app:layout_constraintTop_toBottomOf="@+id/TxtYearService">
@@ -113,9 +116,8 @@
                 android:layout_marginStart="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_1sdp"
-                app:cardBackgroundColor="@color/gray_light"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_2sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="@+id/CardYearService"
                 app:layout_constraintStart_toStartOf="@+id/CardYearService"
                 app:layout_constraintTop_toBottomOf="@+id/CardYearService">
@@ -130,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_5sdp"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_10sdp">
 
@@ -142,7 +145,7 @@
                             android:layout_weight="0.6"
                             android:padding="@dimen/_2sdp"
                             android:text="@string/total_pf_balance"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_color"
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/TxtLoanAmountFirst"
@@ -158,7 +161,7 @@
                             android:gravity="end"
                             android:padding="@dimen/_2sdp"
                             android:text="@string/_00_0000"
-                            android:textColor="@color/black"
+                            android:textColor="@color/Txt_ans_color"
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toTopOf="@+id/TxtLoanAmountSecond"
@@ -187,12 +190,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/_5sdp"
                     android:layout_weight="0.5"
-                    android:background="@color/black"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@drawable/ic_reset"
                     android:gravity="center"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/reset"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -201,12 +205,14 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/_5sdp"
                     android:layout_weight="0.5"
-                    android:background="@color/black"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@drawable/ic_reset"
+                    android:backgroundTint="@color/main_color"
                     android:gravity="center"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/calculate"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,24 +2,28 @@ package com.balance.bankbalancecheck.BModel;
 
 public class SMSModel {
 
-    String id,address,body,Title,Balance,Amount,Types;
+    String id,address,body, bankName,Balance,Amount,Types;
     long date;
 
-    public SMSModel(String address, String body, String title, String balance, String amount, long date) {
+    public SMSModel(String address, String body, String bankName, String balance, String amount, long date) {
         this.address = address;
         this.body = body;
-        Title = title;
+        this.bankName = bankName;
         Balance = balance;
         Amount = amount;
         this.date = date;
     }
 
-    public SMSModel(String id, String address, String body, String title, long date) {
+    public SMSModel(String id, String address, String body, String bankName, long date) {
         this.id = id;
         this.address = address;
         this.body = body;
-        Title = title;
+        this.bankName = bankName;
         this.date = date;
+    }
+
+    public SMSModel() {
+
     }
 
     public String getId() {
@@ -38,7 +42,7 @@ public class SMSModel {
         this.address = address;
     }
 
-    public String getBody() {
+    public String getBodyMsg() {
         return body;
     }
 
@@ -46,12 +50,12 @@ public class SMSModel {
         this.body = body;
     }
 
-    public String getTitle() {
-        return Title;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public long getDate() {
@@ -92,7 +96,7 @@ public class SMSModel {
                 "id='" + id + '\'' +
                 ", address='" + address + '\'' +
                 ", body='" + body + '\'' +
-                ", Title='" + Title + '\'' +
+                ", Title='" + bankName + '\'' +
                 ", Balance='" + Balance + '\'' +
                 ", Amount='" + Amount + '\'' +
                 ", Types='" + Types + '\'' +

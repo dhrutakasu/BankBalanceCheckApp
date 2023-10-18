@@ -1,18 +1,21 @@
 package com.balance.bankbalancecheck.BHelper;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.balance.bankbalancecheck.BModel.BankBalanceModel;
+import com.balance.bankbalancecheck.BModel.SMSModel;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class BankBalanceHelper extends SQLiteOpenHelper {
     private Context context;
@@ -32,11 +35,12 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
 
     private static String SMS_TABLE = "SmsInformation";
     private static String SMS_ID = "Sms_Id";
-    private static String SMS_TITLE = "Sms_Title";
+    private static String SMS_TYPES = "Sms_Title";
     private static String SMS_BANK_NAME = "Bank_Name";
     private static String SMS_MESSAGE = "Message";
-    private static String SMS_INFO = "Information";
-    private static String SMS_PH_No = "Phone_No";
+    private static String SMS_DATE = "date";
+    private static String SMS_BALANCE = "balance";
+    private static String SMS_AMOUNT = "amount";
 
     public BankBalanceHelper(Context context) {
         super(context, DATABASE_NAME, null, 2);
@@ -53,12 +57,23 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS " + SMS_TABLE + " (" +
+                SMS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                SMS_TYPES + " TEXT," +
+                SMS_BANK_NAME + " TEXT," +
+                SMS_MESSAGE + " TEXT," +
+                SMS_DATE + " TEXT," +
+                SMS_BALANCE + " TEXT," +
+                SMS_AMOUNT + " TEXT)";
+        db.execSQL(createTableQuery);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        String dropTableQuery = "DROP TABLE IF EXISTS " + SMS_TABLE;
+        db.execSQL(dropTableQuery);
+        onCreate(db);
     }
 
     private boolean isDatabaseExists() {
@@ -124,4 +139,58 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
         return miniStatement;
     }
 
+    //todo SMS insert
+    public void InsertSMS(SMSModel smsModel) {
+        SQLiteDatabase db = getWritableDatabase();
+        System.out.println("----- - - - - modelss : " + smsModel.toString());
+        ContentValues values = new ContentValues();
+//        values.put(SMS_ID, smsModel.getId());
+        values.put(SMS_TYPES, smsModel.getTypes());
+        values.put(SMS_BANK_NAME, smsModel.getBankName());
+        values.put(SMS_MESSAGE, smsModel.getBodyMsg());
+        values.put(SMS_DATE, String.valueOf(smsModel.getDate()));
+        values.put(SMS_BALANCE, smsModel.getBalance());
+        values.put(SMS_AMOUNT, smsModel.getAmount());
+        db.insert(SMS_TABLE, null, values);
+    }
+
+    //todo SMS delete
+    public void DeleteSMS() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(SMS_TABLE, null, null);
+    }
+
+    //todo get record count SMS
+    public int SMSCount() {
+        String countQuery = "SELECT  * FROM " + SMS_TABLE;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<SMSModel> getAllSMS() {
+        ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String table_name = "SELECT *FROM " + SMS_TABLE + " ORDER BY " + SMS_DATE + " DESC";
+        Cursor cursor = db.rawQuery(table_name, null);
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    SMSModel smsModel = new SMSModel();
+                    smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
+                    smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
+                    smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
+                    smsModel.setBody(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+                    smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
+                    smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
+                    smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));
+                    smsModelArrayList.add(smsModel);
+                } while (cursor.moveToNext());
+            }
+        }
+        return smsModelArrayList;
+    }
 }

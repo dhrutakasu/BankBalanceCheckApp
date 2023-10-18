@@ -4,14 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/drawable/home_background_oval.xml" value="0.121" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/drawable/ic_btn_boarder.xml" value="0.1" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/drawable/ic_edt_boarder.xml" value="0.121" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/drawable/ic_reset.xml" value="0.1" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/drawable/transition_background_drawable_home.xml" value="0.121" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_all_bank_ussdactivitiy.xml" value="0.2" />
-        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_home_screen.xml" value="0.2" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_brokerage_calculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_emicalculator.xml" value="0.18" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_epf_calculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_fdcalculator.xml" value="0.2" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_gratuity_calculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_gstcalculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_home_screen.xml" value="0.14" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_ifscactivity.xml" value="0.18" />
-        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_ifscdetails.xml" value="0.2" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_ifscdetails.xml" value="0.18" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_inflation_calculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_loan_amountcalculator.xml" value="0.16" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_ppf_calculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_rd_calculator.xml" value="0.10925925925925926" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_sipcalculator.xml" value="0.10925925925925926" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_swap_calculator.xml" value="0.25" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/activity_ussdbanking.xml" value="0.2" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/layout_header.xml" value="0.2" />
         <entry key="..\:/Dhruta/Dhruta project/Client/Manish patel/Bank Balancer Check/Bank Balance Check App/app/src/main/res/layout/layout_item_all_bank_ussd.xml" value="0.22" />

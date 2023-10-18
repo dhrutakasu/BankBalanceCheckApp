@@ -40,7 +40,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardRequestMoney"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,28 +55,39 @@
                         android:id="@+id/IvMyProfile"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28" />
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtMyProfile"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@null"
                         android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="My Profile"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvMyProfile"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/IvMyProfileIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvMyProfileIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -89,7 +100,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardPendingRequest"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,28 +115,39 @@
                         android:id="@+id/IvRequestMoney"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28"/>
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtRequestMoney"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/black"
                         android:text="Request Money"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvRequestMoney"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/IvRequestMoneyIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvRequestMoneyIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -138,7 +160,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardTransaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -153,28 +175,39 @@
                         android:id="@+id/IvPendingRequest"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28"/>
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtPendingRequest"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="Pending Request"
-                        android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvPendingRequest"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/IvPendingRequestIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvPendingRequestIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -187,7 +220,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardCheckBank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -202,28 +235,39 @@
                         android:id="@+id/IvTransaction"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28" />
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtTransaction"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="Transactions"
-                        android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvTransaction"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/IvTransactionIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvTransactionIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -236,7 +280,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardFirstTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -251,28 +295,39 @@
                         android:id="@+id/IvCheckBank"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28"/>
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtCheckBank"
                         android:layout_width="0dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/black"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="Check Bank Balance"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvCheckBank"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/IvCheckBankIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvCheckBankIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -285,7 +340,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardAllBank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -300,28 +355,39 @@
                         android:id="@+id/IvFirstTime"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28"/>
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtFirstTime"
                         android:layout_width="0dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/black"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="First Time Setup Dial *99#"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvFirstTime"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/IvFirstTimeIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvFirstTimeIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -334,7 +400,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardSendMoney"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -349,28 +415,39 @@
                         android:id="@+id/IvAllBank"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28" />
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtAllBank"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/_8sdp"
                         android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:padding="@dimen/_8sdp"
                         android:text="All Bank USSD Code"
+                        android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvAllBank"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/IvAllBankIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvAllBankIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -383,7 +460,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toTopOf="@id/CardUPIPin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -398,28 +475,39 @@
                         android:id="@+id/IvSendMoney"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28" />
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtSendMoney"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:text="Send Money"
-                        android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvSendMoney"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/IvSendMoneyIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvSendMoneyIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -432,7 +520,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_5sdp"
-                app:cardElevation="@dimen/_3sdp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -447,28 +535,39 @@
                         android:id="@+id/IvUPIPin"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:src="@drawable/ic_call_now"
+                        android:src="@drawable/ic_call"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.28" />
+                        app:layout_constraintWidth_percent="0.18" />
 
                     <TextView
                         android:id="@+id/TxtUPIPin"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@null"
+                        android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:padding="@dimen/_8sdp"
                         android:text="UPI Pin"
-                        android:fontFamily="@font/poppins_medium"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/IvUPIPin"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/IvUPIPinIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/IvUPIPinIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_ussd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.18" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

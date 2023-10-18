@@ -192,32 +192,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/TxtBankAmount" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <ImageView
-            android:id="@+id/IvBank1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/_10ssp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_balance_1"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/IvBank2"
-            app:layout_constraintEnd_toEndOf="@id/IvBankTranscationBox"
-            app:layout_constraintStart_toStartOf="@id/IvBankTranscationBox"
-            app:layout_constraintTop_toTopOf="@id/IvBankTranscationBox" />
-
-        <ImageView
-            android:id="@+id/IvBank2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/_10sdp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_balance_2"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/IvBankTranscationBox"
-            app:layout_constraintEnd_toEndOf="@id/IvBankTranscationBox"
-            app:layout_constraintStart_toStartOf="@id/IvBankTranscationBox"
-            app:layout_constraintTop_toBottomOf="@id/IvBank1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
         android:id="@+id/BtnBankDetail"

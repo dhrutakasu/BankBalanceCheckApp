@@ -1,6 +1,7 @@
 package com.balance.bankbalancecheck.BUi.BActivities.Calculators;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -51,7 +52,6 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
         TxtMonthlyEMIBtn.setOnClickListener(this);
         TxtTotalInterestBtn.setOnClickListener(this);
         TxtTotalPaymentBtn.setOnClickListener(this);
-//        PosLevel = PagerEMI.getCurrentItem();
         PagerEMI.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -61,13 +61,13 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    GotoButtonsCheck(TxtLoanAmountBtn,position);
+                    GotoButtonsCheck(TxtLoanAmountBtn, position);
                 } else if (position == 1) {
-                    GotoButtonsCheck(TxtMonthlyEMIBtn,position);
+                    GotoButtonsCheck(TxtMonthlyEMIBtn, position);
                 } else if (position == 2) {
-                    GotoButtonsCheck(TxtTotalInterestBtn,position);
+                    GotoButtonsCheck(TxtTotalInterestBtn, position);
                 } else if (position == 3) {
-                    GotoButtonsCheck(TxtTotalPaymentBtn,position);
+                    GotoButtonsCheck(TxtTotalPaymentBtn, position);
                 }
 
             }
@@ -80,17 +80,17 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
     }
 
     private void GotoButtonsCheck(TextView view, int position) {
-        TxtLoanAmountBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtLoanAmountBtn.setTextColor(getResources().getColor(R.color.black));
-        TxtMonthlyEMIBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtMonthlyEMIBtn.setTextColor(getResources().getColor(R.color.black));
-        TxtTotalInterestBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtTotalInterestBtn.setTextColor(getResources().getColor(R.color.black));
-        TxtTotalPaymentBtn.setBackgroundColor(getResources().getColor(R.color.gray_light));
-        TxtTotalPaymentBtn.setTextColor(getResources().getColor(R.color.black));
-        view.setBackgroundColor(getResources().getColor(R.color.black));
+        TxtLoanAmountBtn.setBackgroundResource(R.drawable.ic_btn_boarder);
+        TxtLoanAmountBtn.setTextColor(getResources().getColor(R.color.main_color));
+        TxtMonthlyEMIBtn.setBackgroundResource(R.drawable.ic_btn_boarder);
+        TxtMonthlyEMIBtn.setTextColor(getResources().getColor(R.color.main_color));
+        TxtTotalInterestBtn.setBackgroundResource(R.drawable.ic_btn_boarder);
+        TxtTotalInterestBtn.setTextColor(getResources().getColor(R.color.main_color));
+        TxtTotalPaymentBtn.setBackgroundResource(R.drawable.ic_btn_boarder);
+        TxtTotalPaymentBtn.setTextColor(getResources().getColor(R.color.main_color));
+        view.setBackgroundResource(R.drawable.ic_reset);
+        view.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.main_color));
         view.setTextColor(getResources().getColor(R.color.white));
-//        PosLevel = position;
         emiAdapter.getItem(position);
     }
 
@@ -114,27 +114,19 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.TxtLoanAmountBtn:
                 PagerEMI.setCurrentItem(0);
-//                PosLevel = PagerEMI.getCurrentItem();
                 GotoButtonsCheck(TxtLoanAmountBtn, PagerEMI.getCurrentItem());
-//                emiAdapter.getItem(PosLevel);
                 break;
             case R.id.TxtMonthlyEMIBtn:
                 PagerEMI.setCurrentItem(1);
-//                PosLevel = PagerEMI.getCurrentItem();
                 GotoButtonsCheck(TxtMonthlyEMIBtn, PagerEMI.getCurrentItem());
-//                emiAdapter.getItem(PosLevel);
                 break;
             case R.id.TxtTotalInterestBtn:
                 PagerEMI.setCurrentItem(2);
-//                PosLevel = PagerEMI.getCurrentItem();
                 GotoButtonsCheck(TxtTotalInterestBtn, PagerEMI.getCurrentItem());
-//                emiAdapter.getItem(PosLevel);
                 break;
             case R.id.TxtTotalPaymentBtn:
                 PagerEMI.setCurrentItem(3);
-//                PosLevel = PagerEMI.getCurrentItem();
                 GotoButtonsCheck(TxtTotalPaymentBtn, PagerEMI.getCurrentItem());
-//                emiAdapter.getItem(PosLevel);
                 break;
         }
     }
@@ -142,14 +134,14 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
     private void GotoShare() {
         try {
             String shareMessage = "download.\n\n";
-            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
+            shareMessage = shareMessage + "https: play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "Share link:"));
         } catch (Exception e) {
-            //e.toString();
+            e.toString();
         }
     }
 }

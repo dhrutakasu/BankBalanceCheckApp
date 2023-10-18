@@ -29,7 +29,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CardIFSCSearchBar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_38sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_5sdp"
@@ -42,11 +42,11 @@
             <EditText
                 android:id="@+id/EdtIFSCSearch"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="Select Bank"
                 android:fontFamily="@font/poppins_medium"
-                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:padding="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/IvIFSCSearch"
