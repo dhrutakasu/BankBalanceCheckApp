@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="bank_short">
+        <item>ACB</item>
+        <item>ALB</item>
+        <item>ANB</item>
+        <item>APN</item>
+        <item>AXB</item>
+        <item>BOB</item>
+        <item>BOM</item>
+        <item>BMB</item>
+        <item>CAN</item>
+        <item>CNB</item>
+        <item>CBI</item>
+        <item>CRB</item>
+        <item>DCB</item>
+        <item>DNB</item>
+        <item>FBL</item>
+        <item>GSC</item>
+        <item>HCB</item>
+        <item>HDF</item>
+        <item>ICI</item>
+        <item>IDB</item>
+        <item>INB</item>
+        <item>IOB</item>
+        <item>IIB</item>
+        <item>ING</item>
+        <item>JSB</item>
+        <item>KTB</item>
+        <item>KVB</item>
+        <item>KMB</item>
+        <item>MUC</item>
+        <item>NTB</item>
+        <item>NGB</item>
+        <item>OBC</item>
+        <item>PMC</item>
+        <item>PSB</item>
+        <item>PNB</item>
+        <item>RBL</item>
+        <item>SRC</item>
+        <item>SBJ</item>
+        <item>SBH</item>
+        <item>SBI</item>
+        <item>SBM</item>
+        <item>SBP</item>
+        <item>SBT</item>
+        <item>SYB</item>
+        <item>TMB</item>
+        <item>SIB</item>
+        <item>UCO</item>
+        <item>UOB</item>
+        <item>UBI</item>
+        <item>VJB</item>
+        <item>YBL</item>
+        <item>BOI</item>
+    </array>
+
+    <array name="bank_full">
+        <item>Abhyudaya Co-operative</item>
+        <item>Allahabad</item>
+        <item>Andhra</item>
+        <item>Apna Sahakari</item>
+        <item>Axis</item>
+        <item>Bank of Baroda</item>
+        <item>Bank of Maharashtra</item>
+        <item>Bhartiya Mahila Bank</item>
+        <item>Canara</item>
+        <item>Canara</item>
+        <item>Central Bank of India</item>
+        <item>Corporation</item>
+        <item>DCB</item>
+        <item>Dena</item>
+        <item>Federa</item>
+        <item>Gujarat State Co-operative</item>
+        <item>Hasti Co-op</item>
+        <item>HDFC</item>
+        <item>ICICI</item>
+        <item>IDBI</item>
+        <item>Indian</item>
+        <item>Indian Overseas</item>
+        <item>IndusInd</item>
+        <item>ING Vysya</item>
+        <item>Janata Sahakari</item>
+        <item>Karnataka</item>
+        <item>Karur Vysya</item>
+        <item>Kotak Mahindra</item>
+        <item>Mehsana Urban Co-operative</item>
+        <item>Nainital</item>
+        <item>NKGSB Co-operative</item>
+        <item>Oriental Bank of Commerce</item>
+        <item>Punjab and Maharashtra Co-operative</item>
+        <item>Punjab and Sind</item>
+        <item>Punjab National</item>
+        <item>RBL</item>
+        <item>Saraswat</item>
+        <item>State Bank of Bikaner and Jaipur</item>
+        <item>State Bank of Hyderabad</item>
+        <item>State Bank of India</item>
+        <item>State Bank of Mysore</item>
+        <item>State Bank of Patiala</item>
+        <item>State Bank of Travancore</item>
+        <item>Syndicate</item>
+        <item>Tamilnad Mercantile</item>
+        <item>The South Indian</item>
+        <item>UCO</item>
+        <item>Union Bank of India</item>
+        <item>United Bank of India</item>
+        <item>Vijaya</item>
+        <item>Yes</item>
+        <item>Bank of India</item>
+    </array>
+</resources>

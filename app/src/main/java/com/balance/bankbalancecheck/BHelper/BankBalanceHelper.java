@@ -174,7 +174,7 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
     public ArrayList<SMSModel> getAllSMS() {
         ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String table_name = "SELECT *FROM " + SMS_TABLE + " ORDER BY " + SMS_DATE + " DESC";
+        String table_name = "SELECT *FROM " + SMS_TABLE;
         Cursor cursor = db.rawQuery(table_name, null);
         if (cursor.getCount() > 0) {
             if (cursor.moveToFirst()) {
@@ -183,7 +183,31 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
                     smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
                     smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
                     smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
-                    smsModel.setBody(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+                    smsModel.setBodyMsg(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+                    smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
+                    smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
+                    smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));
+                    smsModelArrayList.add(smsModel);
+                } while (cursor.moveToNext());
+            }
+        }
+        return smsModelArrayList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<SMSModel> getAllSMSGroup() {
+        ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String table_name = "SELECT *FROM " + SMS_TABLE + " GROUP BY " + SMS_BANK_NAME;
+        Cursor cursor = db.rawQuery(table_name, null);
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    SMSModel smsModel = new SMSModel();
+                    smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
+                    smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
+                    smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
+                    smsModel.setBodyMsg(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
                     smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
                     smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
                     smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));

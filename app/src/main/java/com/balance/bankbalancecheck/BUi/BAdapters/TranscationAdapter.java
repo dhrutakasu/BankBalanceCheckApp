@@ -50,16 +50,16 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
         System.out.println("--- - - - - - body ::: " + strings.get(position).getBodyMsg());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StringBuilder stringBuilder = new StringBuilder();
-            double number = Double.parseDouble(strings.get(position).getAmount());
-            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+//            double number = Double.parseDouble(strings.get(position).getAmount());
+//            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
             if (strings.get(position).getTypes().contains("credit")) {
                 stringBuilder.append("+ ");
 
-                stringBuilder.append(numberFormat.format(number));
+                stringBuilder.append(strings.get(position).getAmount());
                 holder.TxtAmount.setTextColor(context.getColor(R.color.Txt_green_color));
             } else {
                 stringBuilder.append("- ");
-                stringBuilder.append(numberFormat.format(number));
+                stringBuilder.append(strings.get(position).getAmount());
                 holder.TxtAmount.setTextColor(context.getColor(R.color.Txt_red_color));
             }
             holder.TxtAmount.setText(stringBuilder);
@@ -75,7 +75,7 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
                 ANumber = string.get(1).substring(0, string.get(1).indexOf(" "));
                 holder.TxtRefNo.setText(ANumber.replace("UPI/", "Ref no. "));
             }
-            holder.TxtStartLetter.setText(holder.TxtRefNo.getText().toString().substring(0,1).toUpperCase());
+            holder.TxtStartLetter.setText(holder.TxtRefNo.getText().toString().substring(0, 1).toUpperCase());
         }
         if (!DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString().equalsIgnoreCase(date)) {
             holder.TxtFormateDate.setVisibility(View.VISIBLE);
@@ -85,7 +85,12 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
         }
         holder.TxtDate.setText(DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString());
         holder.TxtFormateDate.setText(DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listern.TransactionClick(position, strings);
+            }
+        });
     }
 
     @Override

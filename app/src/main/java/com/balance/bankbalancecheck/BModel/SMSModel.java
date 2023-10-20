@@ -4,6 +4,7 @@ public class SMSModel {
 
     String id,address,body, bankName,Balance,Amount,Types;
     long date;
+    boolean confirmed,aBoolean ;
 
     public SMSModel(String address, String body, String bankName, String balance, String amount, long date) {
         this.address = address;
@@ -26,6 +27,12 @@ public class SMSModel {
 
     }
 
+    public SMSModel(String body, String bankName, long date) {
+        this.body = body;
+        this.bankName = bankName;
+        this.date = date;
+    }
+
     public String getId() {
         return id;
     }
@@ -46,7 +53,7 @@ public class SMSModel {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBodyMsg(String body) {
         this.body = body;
     }
 
@@ -90,17 +97,35 @@ public class SMSModel {
         Types = types;
     }
 
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public boolean isaBoolean() {
+        return aBoolean;
+    }
+
+    public void setaBoolean(boolean aBoolean) {
+        this.aBoolean = aBoolean;
+    }
+
     @Override
     public String toString() {
         return "SMSModel{" +
                 "id='" + id + '\'' +
                 ", address='" + address + '\'' +
                 ", body='" + body + '\'' +
-                ", Title='" + bankName + '\'' +
+                ", bankName='" + bankName + '\'' +
                 ", Balance='" + Balance + '\'' +
                 ", Amount='" + Amount + '\'' +
                 ", Types='" + Types + '\'' +
                 ", date=" + date +
+                ", confirmed=" + confirmed +
+                ", aBoolean=" + aBoolean +
                 '}';
     }
 }

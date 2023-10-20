@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_8sdp"
-                android:src="@drawable/ic_cancel"
+                android:src="@drawable/ic_close"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/EdtSearchIFSC"
                 app:layout_constraintEnd_toEndOf="@id/EdtSearchIFSC"

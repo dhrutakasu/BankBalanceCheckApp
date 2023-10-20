@@ -165,4 +165,15 @@
     <string name="see_transactions">See Transactions</string>
     <string name="bank_transactions">Bank Transactions</string>
     <string name="active_balance">Active Balance</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="update_apps">Update Apps</string>
+    <string name="version_v_0_01">version v %1$s</string>
+    <string name="rate_app">Rate app</string>
+    <string name="share_msg">Download it. \n\n https://play.google.com/store/apps/details?id=</string>
+    <string name="share_app">Share app</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="transaction_filter">Transaction Filter</string>
+    <string name="date_wise_filter">Date Wise Filter</string>
+    <string name="amount_wise_filter">Amount Wise Filter</string>
+    <string name="ok">Ok</string>
 </resources>

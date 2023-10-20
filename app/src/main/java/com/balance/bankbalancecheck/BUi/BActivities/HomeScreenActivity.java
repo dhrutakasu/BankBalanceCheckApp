@@ -1,14 +1,11 @@
 package com.balance.bankbalancecheck.BUi.BActivities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.NumberFormat;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,10 +31,12 @@ import com.balance.bankbalancecheck.BUi.BActivities.Calculators.PPFCalculatorAct
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.RdCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SIPCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SwapCalculatorActivity;
+import com.balance.bankbalancecheck.BUi.BAdapters.BankBalanceAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.FundsAdapter;
 import com.balance.bankbalancecheck.BUtils.SchemesWebData;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
+import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.karumi.dexter.Dexter;
@@ -48,20 +47,30 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class HomeScreenActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context context;
-    private RecyclerView RvCreditLoan, RvMutualFund, RvCalculators, RvSchemes;
+    private RecyclerView RvCreditLoan, RvMutualFund, RvCalculators, RvSchemes, RvBankTranscationBox;
     private ImageView IvIFSCCode, IvUSSDCode, IvNetBanking, IvBankATMBox, IvBankHoliday;
     private ChipNavigationBar bottom_menu;
-    private ConstraintLayout ConsHome, ConsCalculators, ConsAccountDetail;
+    private ConstraintLayout ConsHome, ConsCalculators, ConsAccountDetail, ConsSetting;
     private ProgressBar ProgressBankAcoount;
-    private TextView TxtBankName, TxtBankAccNumber, TxtBankAmount, TxtBankTranscation;
+    private TextView TxtBankName, TxtBankAccNumber, TxtBankAmount, TxtBankTranscation, TxtVersion;
     private BankBalanceHelper SmsHelper;
+    private CardView CardPrivacy, CardShare, CardRate, CardUpdate;
+    private boolean IsTransc = false;
+    private ImageView IvBankTranscationBox;
+    private CardView CardBankTranscationArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +85,10 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         context = this;
         ConsHome = (ConstraintLayout) findViewById(R.id.ConsHome);
         ConsCalculators = (ConstraintLayout) findViewById(R.id.ConsCalculators);
+        ConsSetting = (ConstraintLayout) findViewById(R.id.ConsSetting);
         RvCalculators = (RecyclerView) findViewById(R.id.RvCalculators);
         RvSchemes = (RecyclerView) findViewById(R.id.RvSchemes);
+        RvBankTranscationBox = (RecyclerView) findViewById(R.id.RvBankTranscationBox);
         IvIFSCCode = (ImageView) findViewById(R.id.IvIFSCCode);
         IvUSSDCode = (ImageView) findViewById(R.id.IvUSSDCode);
         IvNetBanking = (ImageView) findViewById(R.id.IvNetBanking);
@@ -92,6 +103,13 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         TxtBankAccNumber = (TextView) findViewById(R.id.TxtBankAccNumber);
         TxtBankAmount = (TextView) findViewById(R.id.TxtBankAmount);
         TxtBankTranscation = (TextView) findViewById(R.id.TxtBankTranscation);
+        CardPrivacy = (CardView) findViewById(R.id.CardPrivacy);
+        CardShare = (CardView) findViewById(R.id.CardShare);
+        CardRate = (CardView) findViewById(R.id.CardRate);
+        CardUpdate = (CardView) findViewById(R.id.CardUpdate);
+        TxtVersion = (TextView) findViewById(R.id.TxtVersion);
+        IvBankTranscationBox = (ImageView) findViewById(R.id.IvBankTranscationBox);
+        CardBankTranscationArrow = (CardView) findViewById(R.id.CardBankTranscationArrow);
     }
 
     private void BankInitListeners() {
@@ -101,27 +119,39 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         IvBankHoliday.setOnClickListener(this);
         IvBankATMBox.setOnClickListener(this);
         TxtBankTranscation.setOnClickListener(this);
+        CardPrivacy.setOnClickListener(this);
+        CardShare.setOnClickListener(this);
+        CardRate.setOnClickListener(this);
+        CardUpdate.setOnClickListener(this);
         bottom_menu.setOnItemSelectedListener(i -> {
             switch (i) {
                 case R.id.Menu_Home:
                     ConsHome.setVisibility(View.VISIBLE);
                     ConsCalculators.setVisibility(View.GONE);
+                    ConsSetting.setVisibility(View.GONE);
+                    RvSchemes.setVisibility(View.GONE);
+                    RvCalculators.setVisibility(View.GONE);
                     break;
                 case R.id.Menu_Calculators:
                     ConsHome.setVisibility(View.GONE);
+                    ConsSetting.setVisibility(View.GONE);
                     ConsCalculators.setVisibility(View.VISIBLE);
                     RvSchemes.setVisibility(View.GONE);
                     RvCalculators.setVisibility(View.VISIBLE);
                     break;
                 case R.id.Menu_Funds:
                     ConsHome.setVisibility(View.GONE);
+                    ConsSetting.setVisibility(View.GONE);
                     ConsCalculators.setVisibility(View.VISIBLE);
                     RvSchemes.setVisibility(View.VISIBLE);
                     RvCalculators.setVisibility(View.GONE);
                     break;
                 case R.id.Menu_Settings:
-                    ConsHome.setVisibility(View.VISIBLE);
+                    ConsHome.setVisibility(View.GONE);
+                    ConsSetting.setVisibility(View.VISIBLE);
                     ConsCalculators.setVisibility(View.GONE);
+                    RvSchemes.setVisibility(View.GONE);
+                    RvCalculators.setVisibility(View.GONE);
                     break;
             }
         });
@@ -132,6 +162,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         GetMutualFund();
         GetCalculators();
         GetSchemes();
+        TxtVersion.setText(getResources().getString(R.string.version_v_0_01, BuildConfig.VERSION_NAME));
         SmsHelper = new BankBalanceHelper(context);
         bottom_menu.setItemSelected(R.id.Menu_Home, true);
         TxtBankName.setText("-- --");
@@ -144,6 +175,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         }
 
         ConsAccountDetail.setVisibility(View.VISIBLE);
+        RvBankTranscationBox.setVisibility(View.GONE);
+        CardBankTranscationArrow.setVisibility(View.GONE);
         String s = Manifest.permission.READ_SMS;
         Dexter.withActivity(this)
                 .withPermissions(s)
@@ -165,7 +198,10 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 .check();
         ConsHome.setVisibility(View.VISIBLE);
         ConsCalculators.setVisibility(View.GONE);
+        ConsSetting.setVisibility(View.GONE);
 
+        RvSchemes.setVisibility(View.GONE);
+        RvCalculators.setVisibility(View.GONE);
     }
 
     private void GoTOAvaliableBalance() {
@@ -180,87 +216,115 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
                 @Override
                 protected ArrayList<SMSModel> doInBackground(Void... voids) {
-                    return BankConstantsData.GotoSMS(context);
+                    return BankConstantsData.GotoSMS(context, SmsHelper);
                 }
 
                 @Override
                 protected void onPostExecute(ArrayList<SMSModel> unused) {
                     super.onPostExecute(unused);
-                    ArrayList<SMSModel> result = new ArrayList<SMSModel>();
+//                    ArrayList<SMSModel> result = new ArrayList<SMSModel>();
                     Log.d("TAG", "getAvailableBalance: unused --1-- --> " + unused.size());
 
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... voids) {
-                            for (int i = 0; i < unused.size(); i++) {
-                                System.out.println("+++++address BALANCE==: " + BankConstantsData.getAvailableBalance(unused.get(i)).getBalance());
-                                System.out.println("+++++address BALANCE-- : " + BankConstantsData.getAvailableBalance(unused.get(i)).getAmount());
-                                if (BankConstantsData.getAvailableBalance(unused.get(i)).getBalance() != null) {
-                                    if (!BankConstantsData.getAvailableBalance(unused.get(i)).getBalance().equals("N/A") && !BankConstantsData.getAvailableBalance(unused.get(i)).getAmount().equals("null")) {
-                                        result.add(BankConstantsData.getAvailableBalance(unused.get(i)));
-//                                        System.out.println("+++++address BALANCE: " + BankConstantsData.getAvailableBalance(unused.get(i)).toString());
-//                                        System.out.println("+++++BALANCE BODY: " + BankConstantsData.getAvailableBalance(unused.get(i)).getBodyMsg());
-                                    }
-                                }
-                            }
+//                    for (int i = 0; i < unused.size(); i++) {
+//                        try {
+//                            BankConstantsData.a(unused.get(i),context);
+//                        } catch (Exception e) {
+//                            System.out.println("------ exexex : "+e.getMessage());
+//                            throw new RuntimeException(e);
+//                        }
+//                    }
+//                    new AsyncTask<Void, Void, Void>() {
+//                        @Override
+//                        protected Void doInBackground(Void... voids) {
+//                            for (int i = 0; i < unused.size(); i++) {
+//                                System.out.println("+++++address BALANCE==: " + BankConstantsData.getAvailableBalance(unused.get(i)).getBalance());
+//                                System.out.println("+++++address BALANCE-- : " + BankConstantsData.getAvailableBalance(unused.get(i)).getAmount());
+//                                if (BankConstantsData.getAvailableBalance(unused.get(i)).getBalance() != null) {
+//                                    if (!BankConstantsData.getAvailableBalance(unused.get(i)).getBalance().equals("N/A") && !BankConstantsData.getAvailableBalance(unused.get(i)).getAmount().equals("null")) {
+//                                        result.add(BankConstantsData.getAvailableBalance(unused.get(i)));
+////                                        System.out.println("+++++address BALANCE: " + BankConstantsData.getAvailableBalance(unused.get(i)).toString());
+////                                        System.out.println("+++++BALANCE BODY: " + BankConstantsData.getAvailableBalance(unused.get(i)).getBodyMsg());
+//                                    }
+//                                }
+//                            }
+//
+//                            Collections.reverse(result);
+//                            return null;
+//                        }
+//
+//                        @Override
+//                        protected void onPostExecute(Void used) {
+//                            super.onPostExecute(used);
+//                            if (result.size() != SmsHelper.SMSCount()) {
+//                                SmsHelper.DeleteSMS();
+//                                for (int i = 0; i < result.size(); i++) {
+//                                    SmsHelper.InsertSMS(BankConstantsData.getAvailableBalance(result.get(i)));
+//                                }
+//                            }
+                    if (unused.size() > 0) {
+//                                Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + result.get(result.size() - 1).getBodyMsg());
+//                                List<String> strings = Arrays.asList(unused.get(unused.size() - 1).getBodyMsg().split("A/c ...", 4));
+//                                Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
+//                                String ANumber, last4Digits;
+//                                if (strings.contains("to")) {
+//                                    ANumber = strings.get(1).substring(0, strings.get(1).indexOf(" to"));
+//                                    last4Digits = ANumber.substring(ANumber.length() - 4);
+//                                    System.out.println("+++++ strings.get(1) : " + last4Digits);
+//                                } else {
+//                                    ANumber = strings.get(1).substring(0, strings.get(1).indexOf(" thru"));
+//                                    last4Digits = ANumber.substring(ANumber.length() - 4);
+//                                    System.out.println("+++++ strings.get(1) : " + last4Digits);
+//                                }
+                        ArrayList<SMSModel> smsModelArrayList = SmsHelper.getAllSMSGroup();
+                        if (smsModelArrayList.size() > 1) {
+                            RvBankTranscationBox.setVisibility(View.VISIBLE);
+                            CardBankTranscationArrow.setVisibility(View.VISIBLE);
+                            ConsAccountDetail.setVisibility(View.GONE);
+                            IvBankTranscationBox.setVisibility(View.GONE);
+                            RvBankTranscationBox.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                            RvBankTranscationBox.setAdapter(new BankBalanceAdapter(context, smsModelArrayList, new BankBalanceAdapter.BankListener() {
+                                @Override
+                                public void BankClick(int pos, ArrayList<String> strings) {
 
-                            Collections.reverse(result);
-                            return null;
+                                }
+                            }));
+                        } else {
+                            RvBankTranscationBox.setVisibility(View.GONE);
+                            CardBankTranscationArrow.setVisibility(View.GONE);
+                            String a2 = BankConstantsData.a(unused.get(0).getBodyMsg());
+                            if (a2.length() > 4) {
+                                a2 = a2.substring(a2.length() - 4);
+                            }
+                            TxtBankName.setText(unused.get(0).getBankName());
+                            TxtBankAccNumber.setText("A/c No:- " + a2);
+                            String Currency = unused.get(0).getBodyMsg().substring(0, unused.get(0).getBodyMsg().indexOf(".") + 1);
+
+//                                    double number = Double.parseDouble(unused.get(unused.size()-1).getBalance());
+//                                    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+                            TxtBankAmount.setText(Currency + " " + unused.get(0).getBalance());
+                            TxtBankAmount.setSelected(true);
+                            TxtBankAccNumber.setSelected(true);
+                            TxtBankName.setSelected(true);
+                            ConsAccountDetail.setVisibility(View.VISIBLE);
                         }
-
-                        @Override
-                        protected void onPostExecute(Void used) {
-                            super.onPostExecute(used);
-                            if (result.size() != SmsHelper.SMSCount()) {
-                                SmsHelper.DeleteSMS();
-                                for (int i = 0; i < result.size(); i++) {
-                                    SmsHelper.InsertSMS(BankConstantsData.getAvailableBalance(result.get(i)));
-                                }
-                            }
-                            if (result.size() > 0) {
-                                Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + result.get(result.size() - 1).getBodyMsg());
-                                List<String> strings = Arrays.asList(result.get(result.size() - 1).getBodyMsg().split("A/c ...", 4));
-                                Log.d("TAG", "getAvailableBalance: newBody --1-- --> " + strings);
-                                String ANumber, last4Digits;
-                                if (strings.contains("to")) {
-                                    ANumber = strings.get(1).substring(0, strings.get(1).indexOf(" to"));
-                                    last4Digits = ANumber.substring(ANumber.length() - 4);
-                                    System.out.println("+++++ strings.get(1) : " + last4Digits);
-                                } else {
-                                    ANumber = strings.get(1).substring(0, strings.get(1).indexOf(" thru"));
-                                    last4Digits = ANumber.substring(ANumber.length() - 4);
-                                    System.out.println("+++++ strings.get(1) : " + last4Digits);
-                                }
-
-                                TxtBankName.setText(result.get(result.size() - 1).getBodyMsg().substring(result.get(result.size() - 1).getBodyMsg().lastIndexOf(" - ") + 1).replace("- ", ""));
-                                TxtBankAccNumber.setText("A/c No:- " + last4Digits);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    String Currency = result.get(result.size() - 1).getBodyMsg().substring(0, result.get(result.size() - 1).getBodyMsg().indexOf(".") + 1);
-
-                                    double number = Double.parseDouble(result.get(result.size() - 1).getBalance());
-                                    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-                                    TxtBankAmount.setText(Currency + " " + numberFormat.format(number));
-                                }
-                                TxtBankAmount.setSelected(true);
-                                TxtBankAccNumber.setSelected(true);
-                                TxtBankName.setSelected(true);
-                                ConsAccountDetail.setVisibility(View.VISIBLE);
-                                ProgressBankAcoount.setVisibility(View.GONE);
-
-                                System.out.println("+++++ getBody : " + result.get(result.size() - 1).getBodyMsg());
-                                System.out.println("+++++ BALANCE : " + result.get(result.size() - 1).getBalance());
-                                System.out.println("+++++ AMOUNt : " + result.get(result.size() - 1).getAmount());
-                            }
-                            BankConstantsData.TranscationsResult.addAll(result);
-                        }
-                    }.execute();
-                    Log.d("TAG", "getAvailableBalance: result --1-- --> " + result.size() + " -- --- " + SmsHelper.SMSCount());
-
-                    Log.d("TAG", "getAvailableBalance: result --1-- --> " + result.size() + " -- --- " + SmsHelper.SMSCount());
+                        ProgressBankAcoount.setVisibility(View.GONE);
+//
+                        System.out.println("+++++ getBody : " + unused.get(0).getBodyMsg());
+                        System.out.println("+++++ getBankName : " + unused.get(0).getBankName());
+                        System.out.println("+++++ BALANCE : " + unused.get(0).getBalance());
+                        System.out.println("+++++ AMOUNt : " + unused.get(0).getAmount());
+                    }
+//                            BankConstantsData.TranscationsResult.addAll(result);
+                    IsTransc = true;
+//                        }
+//                    }.execute();
+//                    Log.d("TAG", "getAvailableBalance: result --1-- --> " + result.size() + " -- --- " + SmsHelper.SMSCount());
+//
+//                    Log.d("TAG", "getAvailableBalance: result --1-- --> " + result.size() + " -- --- " + SmsHelper.SMSCount());
                 }
             }.execute();
         } catch (Exception e) {
-            System.out.println("--- - -- - - catch : "+e.getMessage());
+            System.out.println("--- - -- - - catch : " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -369,7 +433,22 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(context, NearByActivity.class));
                 break;
             case R.id.TxtBankTranscation:
-                startActivity(new Intent(context, TransactionActivity.class));
+                if (IsTransc) {
+                    startActivity(new Intent(context, TransactionActivity.class));
+                }
+                break;
+            case R.id.CardPrivacy:
+                startActivity(new Intent(context, BankPrivacyActivity.class));
+                break;
+            case R.id.CardShare:
+                GotoShareApp();
+                break;
+            case R.id.CardRate:
+                GotoRateUs();
+                break;
+            case R.id.CardUpdate:
+                break;
+            case R.id.CardVersion:
                 break;
         }
     }
@@ -498,5 +577,29 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         }
         intent.putExtra(BankConstantsData.SCHEMES_TITLE, strings.get(position).toString());
         startActivity(intent);
+    }
+
+    private void GotoShareApp() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_msg) + context.getPackageName());
+            Intent createChooser = Intent.createChooser(intent, "Share via");
+            createChooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(createChooser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void GotoRateUs() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException unused) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+        }
     }
 }
