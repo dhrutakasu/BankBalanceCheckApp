@@ -4,7 +4,7 @@ public class SMSModel {
 
     String id,address,body, bankName,Balance,Amount,Types;
     long date;
-    boolean confirmed,aBoolean ;
+    boolean confirmed, IsTrans;
 
     public SMSModel(String address, String body, String bankName, String balance, String amount, long date) {
         this.address = address;
@@ -105,12 +105,12 @@ public class SMSModel {
         this.confirmed = confirmed;
     }
 
-    public boolean isaBoolean() {
-        return aBoolean;
+    public boolean isTrans() {
+        return IsTrans;
     }
 
-    public void setaBoolean(boolean aBoolean) {
-        this.aBoolean = aBoolean;
+    public void setTrans(boolean trans) {
+        this.IsTrans = trans;
     }
 
     @Override
@@ -125,7 +125,7 @@ public class SMSModel {
                 ", Types='" + Types + '\'' +
                 ", date=" + date +
                 ", confirmed=" + confirmed +
-                ", aBoolean=" + aBoolean +
+                ", aBoolean=" + IsTrans +
                 '}';
     }
 }

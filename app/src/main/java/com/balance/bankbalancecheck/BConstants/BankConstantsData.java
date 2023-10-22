@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,6 +44,7 @@ public class BankConstantsData {
     public static final String IFSC_STATE = "IFSC_STATE";
     public static final String IFSC_DISTRICT = "IFSC_DISTRICT";
     public static final String IFSC_BRANCH = "IFSC_BRANCH";
+    public static final String BANK_NAME = "BANK_NAME";
     public static String EMI_Pos = "EMI_Pos";
     public static ArrayList<SMSModel> TranscationsResult = new ArrayList<SMSModel>();
 
@@ -113,8 +113,8 @@ public class BankConstantsData {
 //        String[] projection = {"_id", "address", "body", "date"};
         int i = 0;
         int i2 = 0;
-        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc");
-//        smsHelper.DeleteSMS();
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc limit 1000");
+        smsHelper.DeleteSMS();
         if (cursor != null && cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex("_id");
             int addressIndex = cursor.getColumnIndex("address");
@@ -135,20 +135,13 @@ public class BankConstantsData {
                     i2++;
                 }
 
-//                sms.add(new SMS(string2, string, date));
-//                smsModels.add(new SMSModel(string2, string, date));
                 try {
-                    BankConstantsData.a(cursor, context, smsModels, smsHelper);
+                    BankConstantsData.FetchSMSData(cursor, context, smsModels, smsHelper);
                 } catch (Exception e) {
                     System.out.println("------ exexex : " + e.getMessage());
                     throw new RuntimeException(e);
                 }
 
-//                if (string2.contains("-")) {
-//                    smsModels.add(new SMSModel(id, address, string2, string2.substring(string2.lastIndexOf(" - ") + 1).replace("- ", ""), date));
-//                } else {
-//                    smsModels.add(new SMSModel(id, address, string2, "", date));
-//                }
             } while (cursor.moveToNext());
             cursor.close();
             System.out.println("------ unused --1-- --> : " + smsModels.size());
@@ -157,27 +150,27 @@ public class BankConstantsData {
         return smsModels;
     }
 
-    private static String a(String r8, String r9) {
+    public static String FetchSMSData(String body, String addbreks) {
         String result = "";
 
-        if (r8.contains("IMPS")) {
-            int index = r8.indexOf("IMPS");
-            String substring = r8.substring(index);
+        if (body.contains("IMPS")) {
+            int index = body.indexOf("IMPS");
+            String substring = body.substring(index);
             result = substring;
-        } else if (r8.contains("NEFT")) {
-            int index = r8.indexOf("NEFT");
-            String substring = r8.substring(index);
+        } else if (body.contains("NEFT")) {
+            int index = body.indexOf("NEFT");
+            String substring = body.substring(index);
             result = substring;
-        } else if (r8.contains("UPI")) {
-            int index = r8.indexOf("UPI");
-            String substring = r8.substring(index);
+        } else if (body.contains("UPI")) {
+            int index = body.indexOf("UPI");
+            String substring = body.substring(index);
             result = substring;
-        } else if (r8.contains("towards")) {
-            int index = r8.indexOf("towards");
-            String substring = r8.substring(index);
+        } else if (body.contains("towards")) {
+            int index = body.indexOf("towards");
+            String substring = body.substring(index);
             result = substring;
-        } else if (r8.contains(" at")) {
-            String[] parts = r8.split(" at");
+        } else if (body.contains(" at")) {
+            String[] parts = body.split(" at");
             if (parts.length == 2) {
                 String part = parts[1].trim();
                 if (part.contains(".")) {
@@ -189,8 +182,8 @@ public class BankConstantsData {
                     result = part.substring(1);
                 }
             }
-        } else if (r8.contains("being")) {
-            String[] parts = r8.split("being");
+        } else if (body.contains("being")) {
+            String[] parts = body.split("being");
             if (parts.length == 2) {
                 String part = parts[1].trim();
                 if (part.contains(".")) {
@@ -202,8 +195,8 @@ public class BankConstantsData {
                     result = part.substring(1);
                 }
             }
-        } else if (r8.contains("for")) {
-            String[] parts = r8.split("for");
+        } else if (body.contains("for")) {
+            String[] parts = body.split("for");
             if (parts.length == 2) {
                 String part = parts[1].trim();
                 if (part.contains(".")) {
@@ -216,9 +209,9 @@ public class BankConstantsData {
                 }
             }
         } else {
-            r9 = r9.replaceAll("\\(", "");
-            r9 = r9.replaceAll("\\)", "");
-            String[] parts = r8.split(r9);
+            addbreks = addbreks.replaceAll("\\(", "");
+            addbreks = addbreks.replaceAll("\\)", "");
+            String[] parts = body.split(addbreks);
             if (parts.length == 2) {
                 String part = parts[1].trim();
                 if (part.contains(".")) {
@@ -242,20 +235,20 @@ public class BankConstantsData {
         return result;
     }
 
-    public static boolean d(String str) {
-        if (str.toLowerCase().contains("otp")) {
+    public static boolean GetMsgPattern(String msg) {
+        if (msg.toLowerCase().contains("otp")) {
             return false;
         }
-        if (Pattern.compile("(?:[Aa]ccount|[Aa]\\/[Cc]|[Aa][Cc][Cc][Tt]|[Cc][Aa][Rr][Dd] |[Cc]redited|[Dd]ebited)").matcher(str.toLowerCase()).find()) {
-            return !a(str).equals("NA") && !str.toLowerCase().contains("talktime") && !str.toLowerCase().contains("recharge") && !a(str).contains("#");
-        } else if (a(str).equals("NA")) {
+        if (Pattern.compile("(?:[Aa]ccount|[Aa]\\/[Cc]|[Aa][Cc][Cc][Tt]|[Cc][Aa][Rr][Dd] |[Cc]redited|[Dd]ebited)").matcher(msg.toLowerCase()).find()) {
+            return !getAmountFormat(msg).equals("NA") && !msg.toLowerCase().contains("talktime") && !msg.toLowerCase().contains("recharge") && !getAmountFormat(msg).contains("#");
+        } else if (getAmountFormat(msg).equals("NA")) {
             return false;
         } else {
-            return (str.toLowerCase().contains("deposited") || str.toLowerCase().contains("debited") || str.toLowerCase().contains("transaction") || str.toLowerCase().contains("credited") || str.toLowerCase().contains("balance") || str.toLowerCase().contains("txn") || str.toLowerCase().contains("bal")) && !str.toLowerCase().contains("talktime") && !str.toLowerCase().contains("recharge") && !a(str).contains("#");
+            return (msg.toLowerCase().contains("deposited") || msg.toLowerCase().contains("debited") || msg.toLowerCase().contains("transaction") || msg.toLowerCase().contains("credited") || msg.toLowerCase().contains("balance") || msg.toLowerCase().contains("txn") || msg.toLowerCase().contains("bal")) && !msg.toLowerCase().contains("talktime") && !msg.toLowerCase().contains("recharge") && !getAmountFormat(msg).contains("#");
         }
     }
 
-    public static String a(String str) {
+    public static String getAmountFormat(String str) {
         boolean z;
 //        int i2 = 0;
         String str2 = " " + str;
@@ -299,10 +292,6 @@ public class BankConstantsData {
                         sb.append(split[i3 - 2]);
                         sb.append("");
                         sb.append(split[i5]);
-                        if (!sb.toString().equalsIgnoreCase("account no")) {
-//                            if ((split[i2] + "" + split[i5]).toLowerCase().equals("a/c no")) {
-//                            }
-                        }
                         System.out.println("------ sb.toString().toLowerCase().equals(\"account no\") break " + split[i3]);
                         return split[i3];
                     }
@@ -318,163 +307,106 @@ public class BankConstantsData {
 
     static ArrayList<SMSModel> arrayList = new ArrayList();
 
-    public static ArrayList<SMSModel> a(Cursor cursor, Context context, ArrayList<SMSModel> smsModels, BankBalanceHelper smsHelper) {
-        boolean z;
-        String str;
-        boolean z2;
+    public static ArrayList<SMSModel> FetchSMSData(Cursor cursor, Context context, ArrayList<SMSModel> smsModels, BankBalanceHelper smsHelper) {
+        boolean bool;
         int addressIndex = cursor.getColumnIndex("address");
         int bodyIndex = cursor.getColumnIndex("body");
         int dateIndex = cursor.getColumnIndex("date");
-        String string = cursor.getString(addressIndex);
-        String string2 = cursor.getString(bodyIndex);
-//        String string = cursor.getBankName();
-//        String string2 = cursor.getBodyMsg();
-        System.out.println("------ string2 " + string2);
+        String address = cursor.getString(addressIndex);
+        String body = cursor.getString(bodyIndex);
         SMSModel smsModel = new SMSModel();
-        if (d(string2) && !string.contains("paytm")) {
-            String a2 = a(string2);
-            if (a2.length() > 4) {
-                a2 = a2.substring(a2.length() - 4);
+        String msg = FetchMsg(body);
+
+        if (GetMsgPattern(body) && !address.contains("paytm")) {
+            String amountFormat = getAmountFormat(body);
+            if (amountFormat.length() > 4) {
+                amountFormat = amountFormat.substring(amountFormat.length() - 4);
             }
-            System.out.println("------ setBodyMsg(a2) " + a2);
             Date date = new Date(cursor.getLong(dateIndex));
             smsModel.setDate(cursor.getLong(dateIndex));
-            System.out.println("------ setDate(cursor.getLong(2) " + date.getTime());
-            smsModel.setaBoolean(e(string2));
-            if (!string2.toLowerCase().contains("card") || string2.toLowerCase().contains("debit card of acct") || string2.toLowerCase().contains("debit card of a/c") || string2.toLowerCase().contains("debit card of account")) {
+            smsModel.setTrans(IsTrans(body));
+            if (!body.toLowerCase().contains("card") || body.toLowerCase().contains("debit card of acct") || body.toLowerCase().contains("debit card of a/c") || body.toLowerCase().contains("debit card of account")) {
                 smsModel.setConfirmed(false);
-                System.out.println("------ card ");
             } else {
-                System.out.println("------ not card ");
-                smsModel.setaBoolean(true);
+                smsModel.setTrans(true);
                 smsModel.setConfirmed(true);
             }
 
-            String str4 = null;
-            String g2 = g(" " + string2);
-            String g3 = g(" " + string2);
-            System.out.println("------ g2 = g(\" \" + string2) " + g(" " + string2));
-            System.out.println("------ g3 = g(\" \" + string2) " + g(" " + string2));
-            String f2 = f(string2);
-            if (g2 != null) {
-                str4 = c(string2);
-                System.out.println("------ c(string2) " + c(string2));
-                if (g2.contains(",")) {
-                    g2 = g2.replace(",", "");
-                    System.out.println("------ g2.replace(\",\", \"\") " + g2);
+            String format = null;
+            String amFormat = FetchAmount(" " + body);
+            String Breaks = FetchAmount(" " + body);
+            if (amFormat != null) {
+                format = MsgFormats(body);
+                if (amFormat.contains(",")) {
+                    amFormat = amFormat.replace(",", "");
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    g2 = a(b(g2).doubleValue());
-                    System.out.println("------ a(b(g2).doubleValue()) " + g2);
+                    amFormat = getAmountFormat(GetDoubleAMount(amFormat).doubleValue());
                 }
 
-                if (f2 == null) {
-                    f2 = a(string2, g3);
+                if (msg == null) {
+                    msg = FetchSMSData(body, Breaks);
                 }
-                System.out.println("------ f(string2) " + f2);
-                if (str4 != null) {
-                    if (str4.contains(",")) {
-                        str4 = str4.replace(",", "");
-                        System.out.println("------ 112str4.replace(\",\", \"\") " + str4);
+                if (format != null) {
+                    if (format.contains(",")) {
+                        format = format.replace(",", "");
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        str4 = a(b(str4).doubleValue());
-                        System.out.println("------ 112a(b(str4).doubleValue()) " + str4);
+                        format = getAmountFormat(GetDoubleAMount(format).doubleValue());
                     }
-                    smsModel.setBalance(str4);
-                    smsModel.setAmount(g2);
+                    smsModel.setBalance(format);
+                    smsModel.setAmount(amFormat);
                 } else {
-                    if (!string2.toLowerCase().contains("bal") && !string2.toLowerCase().contains("balance") && !string2.toLowerCase().contains("net")) {
-                        smsModel.setAmount(g2);
-                        str = "setDescription:4 ";
-                        System.out.println("------ 11Bal " + string2);
-                    } else if (string2.toLowerCase().contains("netbank")) {
-                        smsModel.setAmount(g2);
-                        str = "setDescription:1 ";
-                        System.out.println("------ 11netbank " + string2);
+                    if (!body.toLowerCase().contains("bal") && !body.toLowerCase().contains("balance") && !body.toLowerCase().contains("net")) {
+                        smsModel.setAmount(amFormat);
+                    } else if (body.toLowerCase().contains("netbank")) {
+                        smsModel.setAmount(amFormat);
                     } else {
-                        String h2 = h(string2);
-                        System.out.println("------ 11elseBank " + string2);
-                        System.out.println("------ 11h(string2) " + h2);
-                        if (h2 != null) {
-                            smsModel.setAmount(g2);
-                            smsModel.setBalance(h2);
-                            System.out.println("------ 11h2 != null " + h2 + " ^^^ " + g2);
+                        String balance = GetBalance(body);
+                        if (balance != null) {
+                            smsModel.setAmount(amFormat);
+                            smsModel.setBalance(balance);
                         } else {
-                            System.out.println("------ 11h2 == null " + g2);
-                            smsModel.setAmount(g2);
+                            smsModel.setAmount(amFormat);
                         }
-                        str = "setDescription:2 ";
                     }
-                    System.out.println("------ 11sb.append(str) " + str + " ^^^^ " + f2);
                 }
-                System.out.println("------ 11aVar2.d(f2) " + string2 + " ^^^^ " + f2);
             }
-            String[] strArr = context.getResources().getStringArray(R.array.bank_short);
-            for (int i = 0; i < strArr.length; i++) {
-                if (i >= strArr.length) {
-                    z = false;
-                    System.out.println("------ z = false break " + z);
+            String[] bankShort = context.getResources().getStringArray(R.array.bank_short);
+            for (int i = 0; i < bankShort.length; i++) {
+                if (i >= bankShort.length) {
+                    bool = false;
                     break;
                 }
-                String lowerCase = context.getResources().getStringArray(R.array.bank_full)[i].toLowerCase();
-                System.out.println("------ strArr2.valuesss : " + string);
-                System.out.println("------ strArr2.value : " + context.getResources().getStringArray(R.array.bank_full)[i]);
-                if (string.contains(strArr[i]) || string.toLowerCase().contains(lowerCase) || string2.contains(strArr[i]) || string2.toLowerCase().contains(lowerCase)) {
+                String BankName = context.getResources().getStringArray(R.array.bank_full)[i].toLowerCase();
+                if (address.contains(bankShort[i]) || address.toLowerCase().contains(BankName) || body.contains(bankShort[i]) || body.toLowerCase().contains(BankName)) {
                     smsModel.setBankName(context.getResources().getStringArray(R.array.bank_full)[i]);
-                    smsModel.setBodyMsg(string2);
-                    System.out.println("------ string.contains(str2) || string.toLowerCase().contains(lowerCase) break");
+                    smsModel.setBodyMsg(body);
                     break;
                 }
             }
 
-            z = true;
-            if (!z) {
-                if (string.toLowerCase().contains("paytm")) {
-                    string = "Paytm Bank";
+            bool = true;
+            if (!bool) {
+                if (address.toLowerCase().contains("paytm")) {
+                    address = "Paytm Bank";
                 }
-                smsModel.setBankName(string);
-                System.out.println("------ -string = \"Paytm Bank\" " + string);
+                smsModel.setBankName(address);
             }
-            System.out.println("------ getBBBBBodyMsg " + string2);
-            if (g2 != null && str4 != null && !a2.equals("NA") && !a2.equals("") && !a2.contains("*") && !a2.contains("#")) {
-                int i3 = 0;
-                System.out.println("------ getBg2 != null || str4 != null " + g2 + " ^^^ " + str4);
-                System.out.println("------ getBa2.equals(\"NA\") " + f2);
-                System.out.println("------ getBodyMsg " + smsModel.getBodyMsg());
-                System.out.println("------ getDate " + smsModel.getDate());
-                System.out.println("------ getBankName " + smsModel.getBankName());
-                System.out.println("------ getBalance " + smsModel.getBalance());
-                System.out.println("------ getAmount " + smsModel.getAmount());
+            if (amFormat != null && format != null && !amountFormat.equals("NA") && !amountFormat.equals("") && !amountFormat.contains("*") && !amountFormat.contains("#")) {
                 if (smsModel.getBodyMsg() != null && smsModel.getBankName() != null) {
-                    smsModel.setAddress(string);
+                    smsModel.setAddress(address);
                     if (smsModel.getBodyMsg().toLowerCase().contains("credit")) {
                         smsModel.setTypes("credit");
                     } else {
                         smsModel.setTypes("debit");
                     }
-                    while (true) {
-                        if (i3 >= smsHelper.getAllSMS().size()) {
-                            z2 = true;
-                            break;
-                        }
-                        long seconds = TimeUnit.MILLISECONDS.toSeconds(new Date(smsHelper.getAllSMS().get(i3).getDate()).getTime() - date.getTime());
-                        if (seconds < 60 && 0 <= seconds && g2 != null && g3 != null && ((smsHelper.getAllSMS().get(i3).getBodyMsg().contains(a2) || a2.contains(smsHelper.getAllSMS().get(i3).getBodyMsg())) && g2.equals(smsHelper.getAllSMS().get(i3).getBodyMsg()))) {
-                            z2 = false;
-                            break;
-                        }
-                        i3++;
-                    }
-                    if (z2) {
-                        smsHelper.InsertSMS(smsModel);
-                        smsModels.add(smsModel);
-                    }
+                    smsHelper.InsertSMS(smsModel);
+                    smsModels.add(smsModel);
                     return smsModels;
                 }
             }
         }
-        System.out.println("------ -string = str3 " + string);
-        System.out.println("getAvailableBalance: unused --1-- --> bbb " + smsModels.size());
         return smsModels;
     }
 
@@ -498,8 +430,8 @@ public class BankConstantsData {
 //        String string2 = cursor.getBodyMsg();
         System.out.println("------ string2 " + string2);
         SMSModel smsModel = new SMSModel();
-        if (d(string2) && !string.contains("paytm")) {
-            String a2 = a(string2);
+        if (GetMsgPattern(string2) && !string.contains("paytm")) {
+            String a2 = getAmountFormat(string2);
             if (a2.length() > 4) {
                 a2 = a2.substring(a2.length() - 4);
             }
@@ -509,7 +441,7 @@ public class BankConstantsData {
             smsModel.setDate(cursor.getLong(dateIndex));
             System.out.println("------ setDate(cursor.getLong(2) " + date.getTime());
 // //                       aVar2.a(date);
-            smsModel.setaBoolean(e(string2));
+            smsModel.setTrans(IsTrans(string2));
 //                        System.out.println("------ setaBoolean(e(string2)) " + e(string2));
 //     //                   aVar2.b(e(string2));
             if (!string2.toLowerCase().contains("card") || string2.toLowerCase().contains("debit card of acct") || string2.toLowerCase().contains("debit card of a/c") || string2.toLowerCase().contains("debit card of account")) {
@@ -518,7 +450,7 @@ public class BankConstantsData {
 ////                            aVar2.a(false);
             } else {
                 System.out.println("------ not card ");
-                smsModel.setaBoolean(true);
+                smsModel.setTrans(true);
                 smsModel.setConfirmed(true);
 //                            aVar2.b(true);
 //                            aVar2.a(true);
@@ -527,25 +459,25 @@ public class BankConstantsData {
 //            String[] strArr2 = context.getResources().getStringArray(R.array.bank_full);
 
             String str4 = null;
-            String g2 = g(" " + string2);
-            String g3 = g(" " + string2);
-            System.out.println("------ g2 = g(\" \" + string2) " + g(" " + string2));
-            System.out.println("------ g3 = g(\" \" + string2) " + g(" " + string2));
-            String f2 = f(string2);
+            String g2 = FetchAmount(" " + string2);
+            String g3 = FetchAmount(" " + string2);
+            System.out.println("------ g2 = g(\" \" + string2) " + FetchAmount(" " + string2));
+            System.out.println("------ g3 = g(\" \" + string2) " + FetchAmount(" " + string2));
+            String f2 = FetchMsg(string2);
             if (g2 != null) {
-                str4 = c(string2);
-                System.out.println("------ c(string2) " + c(string2));
+                str4 = MsgFormats(string2);
+                System.out.println("------ c(string2) " + MsgFormats(string2));
                 if (g2.contains(",")) {
                     g2 = g2.replace(",", "");
                     System.out.println("------ g2.replace(\",\", \"\") " + g2);
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    g2 = a(b(g2).doubleValue());
+                    g2 = getAmountFormat(GetDoubleAMount(g2).doubleValue());
                     System.out.println("------ a(b(g2).doubleValue()) " + g2);
                 }
 
                 if (f2 == null) {
-                    f2 = a(string2, g3);
+                    f2 = FetchSMSData(string2, g3);
                 }
                 System.out.println("------ f(string2) " + f2);
                 if (str4 != null) {
@@ -554,7 +486,7 @@ public class BankConstantsData {
                         System.out.println("------ 112str4.replace(\",\", \"\") " + str4);
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        str4 = a(b(str4).doubleValue());
+                        str4 = getAmountFormat(GetDoubleAMount(str4).doubleValue());
                         System.out.println("------ 112a(b(str4).doubleValue()) " + str4);
                     }
                     smsModel.setBalance(str4);
@@ -576,7 +508,7 @@ public class BankConstantsData {
                         str = "setDescription:1 ";
                         System.out.println("------ 11netbank " + string2);
                     } else {
-                        String h2 = h(string2);
+                        String h2 = GetBalance(string2);
                         System.out.println("------ 11elseBank " + string2);
                         System.out.println("------ 11h(string2) " + h2);
                         if (h2 != null) {
@@ -593,11 +525,13 @@ public class BankConstantsData {
 //                                    sb = new StringBuilder();
                         str = "setDescription:2 ";
                     }
-                    System.out.println("------ 11sb.append(str) " + str + " ^^^^ " + f2);
+                    System.out.println("------ 11sb.append(str) " + smsModel.getBankName() + " ^^^^^ " + smsModel.getBalance() + " ^^^^ " + f2);
 //                                sb.append(str);
 //                                sb.append(f2);
 //                                sb2 = sb.toString();
                 }
+                System.out.println("------ ff3333333111 " + string2);
+                System.out.println("------ ff3333333 " + f2);
                 System.out.println("------ 11aVar2.d(f2) " + string2 + " ^^^^ " + f2);
 //                            Log.d("TAG", sb2);
 //                            aVar2.d(f2);
@@ -718,7 +652,7 @@ public class BankConstantsData {
 //        C();
     }
 
-    private static String h(String str) {
+    private static String GetBalance(String str) {
         Matcher matcher = Pattern.compile("(?i)(?:(?:.?rs|inr| mrp)\\.?\\s?)(\\'?\\d+(:?\\,\\d+)?(\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)").matcher(str);
         if (matcher.find() && matcher.find()) {
             System.out.println("------ String h break " + matcher.group(0));
@@ -728,18 +662,18 @@ public class BankConstantsData {
         return null;
     }
 
-    private static String f(String str) {
-        if (str.contains("Info")) {
-            String[] split = str.split("Info");
-            if (split.length == 2) {
-                if (!split[1].contains(".") || split[1].length() <= 1) {
-                    split[1] = split[1].replace(":", "");
-                    System.out.println("------ split[1] break " + split[1]);
-                    return split[1];
+    public static String FetchMsg(String msg) {
+        if (msg.contains("Info")) {
+            String[] splitInfo = msg.split("Info");
+            if (splitInfo.length == 2) {
+                if (!splitInfo[1].contains(".") || splitInfo[1].length() <= 1) {
+                    splitInfo[1] = splitInfo[1].replace(":", "");
+                    System.out.println("------ split[1] break " + splitInfo[1]);
+                    return splitInfo[1];
                 }
-                String trim = split[1].substring(1, split[1].indexOf(".", 1)).trim();
-                System.out.println("------ trim break " + trim);
-                return trim + ".";
+                String StrTrim = splitInfo[1].substring(1, splitInfo[1].indexOf(".", 1)).trim();
+                System.out.println("------ trim break " + StrTrim);
+                return StrTrim + ".";
             }
             System.out.println("------ String f break ");
             return null;
@@ -749,53 +683,53 @@ public class BankConstantsData {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static String a(double d2) {
-        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("en", "IN"));
-        numberFormat.setMinimumFractionDigits(2);
-        return numberFormat.format(d2);
+    public static String getAmountFormat(double amount) {
+        NumberFormat instance = NumberFormat.getInstance(new Locale("en", "IN"));
+        instance.setMinimumFractionDigits(2);
+        return instance.format(amount);
     }
 
-    public static Double b(String str) {
-        StringBuilder sb = new StringBuilder();
-        if (str != null) {
-            for (char c2 : str.toCharArray()) {
-                Character valueOf = Character.valueOf(c2);
+    public static Double GetDoubleAMount(String amount) {
+        StringBuilder builder = new StringBuilder();
+        if (amount != null) {
+            for (char val : amount.toCharArray()) {
+                Character valueOf = Character.valueOf(val);
                 if (Character.isDigit(valueOf.charValue()) || valueOf.toString().equals(".")) {
-                    sb.append(valueOf);
+                    builder.append(valueOf);
                 }
             }
-            String substring = sb.toString().indexOf(".") == 0 ? sb.substring(1) : sb.toString();
-            if (substring.contains(",")) {
-                substring.replace(",", "");
+            String str = builder.toString().indexOf(".") == 0 ? builder.substring(1) : builder.toString();
+            if (str.contains(",")) {
+                str.replace(",", "");
             }
-            if (a(substring, '.') > 1) {
-                substring = substring.substring(0, substring.indexOf(46));
+            if (getAmountFormat(str, '.') > 1) {
+                str = str.substring(0, str.indexOf(46));
             }
-            Log.d("ASD", str + "  Net balance---" + substring);
-            if (!substring.equals("")) {
+            Log.d("ASD", amount + "  Net balance---" + str);
+            if (!str.equals("")) {
                 try {
-                    Double valueOf2 = Double.valueOf(Double.parseDouble(substring));
+                    Double valueOf2 = Double.valueOf(Double.parseDouble(str));
                     Log.d("ASD", "Net balance Double---" + valueOf2);
                     return valueOf2;
                 } catch (NumberFormatException unused) {
-//                    com.google.firebase.crashlytics.g.a().a("Number", substring);
+                    unused.getMessage();
                 }
             }
         }
         return Double.valueOf(0.0d);
     }
 
-    public static int a(String str, char c2) {
-        int i2 = 0;
-        for (int i3 = 0; i3 < str.length(); i3++) {
-            if (str.charAt(i3) == c2) {
-                i2++;
+    public static int getAmountFormat(String sb, char val) {
+        int var = 0;
+        for (int i3 = 0; i3 < sb.length(); i3++) {
+            if (sb.charAt(i3) == val) {
+                var++;
             }
         }
-        return i2;
+        return var;
     }
 
-    public static String c(String str) {
+    public static String MsgFormats(String str) {
         Matcher matcher = Pattern.compile("(?i)(?:(?:balance|bal)\\.{0,2}\\s?\\:?)(?:\\s?(?:rs|inr|INR)?)\\.?\\s?\\|?(\\'?\\d+(:?\\,\\d+)?(\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)").matcher(str);
         if (matcher.find()) {
             return str.substring(matcher.start(), matcher.end());
@@ -803,7 +737,7 @@ public class BankConstantsData {
         return null;
     }
 
-    private static String g(String str) {
+    public static String FetchAmount(String str) {
         Matcher matcher = Pattern.compile("(?i)(?:(?:.?rs|inr| mrp)\\.?\\s?)(\\'?\\d+(:?\\,\\d+)?(\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)").matcher(str);
         if (matcher.find()) {
             return str.substring(matcher.start(), matcher.end());
@@ -811,21 +745,21 @@ public class BankConstantsData {
         return null;
     }
 
-    private static boolean e(String str) {
-        boolean z = false;
-        boolean z2 = !str.toLowerCase().contains("credit") && !str.toLowerCase().contains("credited") && !str.toLowerCase().contains("credited with") && (str.toLowerCase().contains("txn") || str.toLowerCase().contains("debit") || str.toLowerCase().contains("debited") || str.toLowerCase().contains("debited with") || str.toLowerCase().contains("withdrawn"));
-        if (str.toLowerCase().contains("credited") && str.toLowerCase().contains("debited")) {
-            z2 = str.toLowerCase().indexOf("credited") > str.toLowerCase().indexOf("debited");
+    private static boolean IsTrans(String amount) {
+        boolean boole = false;
+        boolean tobool = !amount.toLowerCase().contains("credit") && !amount.toLowerCase().contains("credited") && !amount.toLowerCase().contains("credited with") && (amount.toLowerCase().contains("txn") || amount.toLowerCase().contains("debit") || amount.toLowerCase().contains("debited") || amount.toLowerCase().contains("debited with") || amount.toLowerCase().contains("withdrawn"));
+        if (amount.toLowerCase().contains("credited") && amount.toLowerCase().contains("debited")) {
+            tobool = amount.toLowerCase().indexOf("credited") > amount.toLowerCase().indexOf("debited");
         }
-        if (str.toLowerCase().contains("from your account")) {
-            z = true;
-        } else if (!str.toLowerCase().contains("to your account")) {
-            z = z2;
+        if (amount.toLowerCase().contains("from your account")) {
+            boole = true;
+        } else if (!amount.toLowerCase().contains("to your account")) {
+            boole = tobool;
         }
-        if (str.toLowerCase().contains("transaction") || str.toLowerCase().contains("transferred") || str.toLowerCase().contains("deducted")) {
+        if (amount.toLowerCase().contains("transaction") || amount.toLowerCase().contains("transferred") || amount.toLowerCase().contains("deducted")) {
             return true;
         }
-        return z;
+        return boole;
     }
 
     public static SMSModel getAvailableBalance(SMSModel model) {

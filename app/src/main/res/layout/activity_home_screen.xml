@@ -655,23 +655,14 @@
             android:id="@+id/ConsBankTranscationBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20ssp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:paddingStart="@dimen/_20ssp"
-            android:paddingEnd="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_12ssp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:paddingStart="@dimen/_15ssp"
+            android:paddingEnd="@dimen/_15sdp"
             app:layout_constraintBottom_toTopOf="@id/guide_Scroll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/guide_transcation_top">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RvBankTranscationBox"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
                 android:id="@+id/IvBankTranscationBox"
@@ -710,7 +701,7 @@
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.5" />
+                    app:layout_constraintWidth_percent="0.6" />
 
                 <TextView
                     android:id="@+id/TxtBankAccNumber"
@@ -727,7 +718,7 @@
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/TxtBankName"
-                    app:layout_constraintWidth_percent="0.5" />
+                    app:layout_constraintWidth_percent="0.6" />
 
                 <TextView
                     android:id="@+id/TxtBankAmount"
@@ -744,7 +735,7 @@
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/TxtBankAccNumber"
-                    app:layout_constraintWidth_percent="0.5" />
+                    app:layout_constraintWidth_percent="0.6" />
 
                 <ImageView
                     android:id="@+id/IvBankView"
@@ -766,7 +757,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/IvBankView"
                     app:layout_constraintTop_toTopOf="@+id/TxtBankName"
-                    app:layout_constraintWidth_percent="0.3" />
+                    app:layout_constraintWidth_percent="0.15" />
 
                 <TextView
                     android:id="@+id/TxtBankTranscation"
@@ -799,6 +790,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/CardBankTranscationArrow"
             android:layout_width="@dimen/_40sdp"

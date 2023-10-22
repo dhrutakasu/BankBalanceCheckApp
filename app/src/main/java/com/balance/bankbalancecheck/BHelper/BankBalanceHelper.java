@@ -171,11 +171,11 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<SMSModel> getAllSMS() {
+    public ArrayList<SMSModel> getAllSMS(String BankName) {
         ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String table_name = "SELECT *FROM " + SMS_TABLE;
-        Cursor cursor = db.rawQuery(table_name, null);
+        String table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + "=? ";
+        Cursor cursor = db.rawQuery(table_name, new String[]{BankName});
         if (cursor.getCount() > 0) {
             if (cursor.moveToFirst()) {
                 do {

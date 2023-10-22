@@ -65,6 +65,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:gravity="center_vertical"
                     android:text="T"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="parent"

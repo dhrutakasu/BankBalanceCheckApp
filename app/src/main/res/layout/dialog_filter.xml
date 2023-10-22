@@ -23,12 +23,11 @@
                 android:id="@+id/IvBankClose"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_margin="@dimen/_12sdp"
                 android:src="@drawable/ic_close"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.15"/>
+                app:layout_constraintWidth_percent="0.15" />
 
             <TextView
                 android:id="@+id/TxtFilterDetail"
@@ -46,6 +45,76 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/IvBankClose" />
 
+            <TextView
+                android:id="@+id/TxtDayWise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/date_wise_filter"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ConsDebit" />
+
+            <TextView
+                android:id="@+id/TxtAmountWise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/amount_wise_filter"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ConsDateWise" />
+
+            <TextView
+                android:id="@+id/TxtOkFilter"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_weight="0.5"
+                android:background="@drawable/ic_reset"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideCenter"
+                app:layout_constraintTop_toBottomOf="@+id/ConsAmount"
+                app:layout_constraintWidth_percent="0.35" />
+
+            <TextView
+                android:id="@+id/TxtResetFilter"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical|end"
+                android:text="@string/reset"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideCenter"
+                app:layout_constraintTop_toBottomOf="@+id/ConsAmount"
+                app:layout_constraintWidth_percent="0.25" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="2dp"
@@ -55,6 +124,26 @@
                 app:layout_constraintEnd_toEndOf="@id/TxtFilterDetail"
                 app:layout_constraintStart_toStartOf="@id/TxtFilterDetail"
                 app:layout_constraintTop_toBottomOf="@id/TxtFilterDetail" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:background="@color/main_color"
+                app:layout_constraintEnd_toEndOf="@id/TxtDayWise"
+                app:layout_constraintStart_toStartOf="@id/TxtDayWise"
+                app:layout_constraintTop_toBottomOf="@id/TxtDayWise" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:background="@color/main_color"
+                app:layout_constraintEnd_toEndOf="@id/TxtAmountWise"
+                app:layout_constraintStart_toStartOf="@id/TxtAmountWise"
+                app:layout_constraintTop_toBottomOf="@id/TxtAmountWise" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConsAllTrans"
@@ -78,21 +167,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.15" />
 
-                <TextView
-                    android:id="@+id/TxtAllTrans"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:padding="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:text="All Transaction"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/IvAllTrans"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <ImageView
                     android:id="@+id/IvAllTransRadio"
                     android:layout_width="0dp"
@@ -103,6 +177,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.15" />
+
+                <TextView
+                    android:id="@+id/TxtAllTrans"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="@dimen/_10sdp"
+                    android:text="All Transaction"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/IvAllTrans"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -127,31 +216,31 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.15" />
 
+                <ImageView
+                    android:id="@+id/IvCreditRadio"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/ic_radio_off"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.15" />
+
                 <TextView
                     android:id="@+id/TxtCredit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
+                    android:text="Credit"
                     android:textColor="@color/Txt_green_color"
                     android:textSize="@dimen/_12sdp"
-                    android:text="Credit"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/IvCredit"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/IvCreditRadio"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/ic_radio_on"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.15" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -176,58 +265,32 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.15" />
 
+                <ImageView
+                    android:id="@+id/IvDebitRadio"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/ic_radio_off"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.15" />
+
                 <TextView
                     android:id="@+id/TxtDebit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
+                    android:text="Debit"
                     android:textColor="@color/Txt_red_color"
                     android:textSize="@dimen/_12sdp"
-                    android:text="Debit"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/IvDebit"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/IvDebitRadio"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/ic_radio_on"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.15" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/TxtDayWise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center"
-                android:padding="@dimen/_5sdp"
-                android:text="@string/date_wise_filter"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ConsDebit" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginEnd="@dimen/_40sdp"
-                android:background="@color/main_color"
-                app:layout_constraintEnd_toEndOf="@id/TxtDayWise"
-                app:layout_constraintStart_toStartOf="@id/TxtDayWise"
-                app:layout_constraintTop_toBottomOf="@id/TxtDayWise" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConsDateWise"
@@ -257,19 +320,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/ViewDate"
-                    android:layout_width="3dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@color/main_color"
-                    app:layout_constraintBottom_toBottomOf="@id/TxtEndDate"
-                    app:layout_constraintEnd_toStartOf="@+id/IvCalender"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/TxtEndDate" />
-
                 <EditText
                     android:id="@+id/TxtEndDate"
                     android:layout_width="0dp"
@@ -291,38 +341,26 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_12sdp"
+                    android:padding="@dimen/_3sdp"
                     android:src="@drawable/ic_calender"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.15" />
+
+                <View
+                    android:id="@+id/ViewDate"
+                    android:layout_width="3dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@color/main_color"
+                    app:layout_constraintBottom_toBottomOf="@id/TxtEndDate"
+                    app:layout_constraintEnd_toStartOf="@+id/IvCalender"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/TxtEndDate" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/TxtAmountWise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center"
-                android:padding="@dimen/_5sdp"
-                android:text="@string/amount_wise_filter"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ConsDateWise" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginEnd="@dimen/_40sdp"
-                android:background="@color/main_color"
-                app:layout_constraintEnd_toEndOf="@id/TxtAmountWise"
-                app:layout_constraintStart_toStartOf="@id/TxtAmountWise"
-                app:layout_constraintTop_toBottomOf="@id/TxtAmountWise" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConsAmount"
@@ -352,19 +390,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/ViewAmount"
-                    android:layout_width="3dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@color/main_color"
-                    app:layout_constraintBottom_toBottomOf="@id/TxtEndAmount"
-                    app:layout_constraintEnd_toStartOf="@+id/IvRupee"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/TxtEndAmount" />
-
                 <EditText
                     android:id="@+id/TxtEndAmount"
                     android:layout_width="0dp"
@@ -386,54 +411,34 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_12sdp"
+                    android:padding="@dimen/_3sdp"
                     android:src="@drawable/ic_rupees"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.15" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/TxtOkFilter"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_weight="0.5"
-                android:background="@drawable/ic_reset"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="@string/ok"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/guideCenter"
-                app:layout_constraintTop_toBottomOf="@+id/ConsAmount"
-                app:layout_constraintWidth_percent="0.35" />
-            <TextView
-                android:id="@+id/TxtResetFilter"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_weight="0.5"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="@string/reset"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guideCenter"
-                app:layout_constraintTop_toBottomOf="@+id/ConsAmount"
-                app:layout_constraintWidth_percent="0.25" />
+                <View
+                    android:id="@+id/ViewAmount"
+                    android:layout_width="3dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@color/main_color"
+                    app:layout_constraintBottom_toBottomOf="@id/TxtEndAmount"
+                    app:layout_constraintEnd_toStartOf="@+id/IvRupee"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/TxtEndAmount" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideCenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5"
-                app:layout_constraintGuide_begin="20dp" />
+                app:layout_constraintGuide_begin="20dp"
+                app:layout_constraintGuide_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

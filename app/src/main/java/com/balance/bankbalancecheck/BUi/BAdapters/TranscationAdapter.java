@@ -1,10 +1,8 @@
 package com.balance.bankbalancecheck.BUi.BAdapters;
 
 import android.content.Context;
-import android.icu.text.NumberFormat;
 import android.os.Build;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BModel.SMSModel;
 import com.balance.bankbalancecheck.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.MyViewHolder> implements Filterable {
     private final Context context;
@@ -47,11 +43,38 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TranscationAdapter.MyViewHolder holder, int position) {
-        System.out.println("--- - - - - - body ::: " + strings.get(position).getBodyMsg());
+        String getMsg = BankConstantsData.FetchMsg(strings.get(position).getBodyMsg());
+        String getAmount = BankConstantsData.FetchAmount(" " + strings.get(position).getBodyMsg());
+        if (getMsg == null) {
+            getMsg = BankConstantsData.FetchSMSData(strings.get(position).getBodyMsg(), getAmount);
+        }
+        String str2;
+
+        if (!strings.get(position).getBodyMsg().toLowerCase().contains("card") || strings.get(position).getBodyMsg().toLowerCase().contains("debit card of acct") || strings.get(position).getBodyMsg().toLowerCase().contains("debit card of a/c") || strings.get(position).getBodyMsg().toLowerCase().contains("debit card of account")) {
+            str2 = getMsg;
+            if (!str2.isEmpty()) {
+                holder.TxtStartLetter.setText(str2.substring(0, 1).toUpperCase());
+            }
+        } else {
+            if (getMsg.toLowerCase().contains("credit card")) {
+                str2 = "(Card Transaction) " + getMsg.substring(0, getMsg.lastIndexOf(" "));
+            } else if (getMsg.toLowerCase().contains("debit card")) {
+                str2 = "(Card Transaction)";
+            } else {
+                String[] SplitsSpace = String.valueOf(strings.get(position).getBodyMsg()).split(" ");
+                StringBuilder sb = null;
+                if (strings.get(position).getBodyMsg() != null) {
+                    sb = new StringBuilder();
+                    sb.append(SplitsSpace[1]);
+                }
+                str2 = sb.toString();
+            }
+            if (!str2.isEmpty()) {
+                holder.TxtStartLetter.setText(str2.substring(1, 2).toUpperCase());
+            }
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StringBuilder stringBuilder = new StringBuilder();
-//            double number = Double.parseDouble(strings.get(position).getAmount());
-//            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
             if (strings.get(position).getTypes().contains("credit")) {
                 stringBuilder.append("+ ");
 
@@ -64,19 +87,8 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
             }
             holder.TxtAmount.setText(stringBuilder);
         }
-        if (strings.get(position).getBodyMsg().contains("UPI/")) {
-            String ANumber;
-            if (strings.get(position).getBodyMsg().contains("to:")) {
-                List<String> string = Arrays.asList(strings.get(position).getBodyMsg().split("to:", 16));
-                ANumber = string.get(1).substring(0, string.get(1).indexOf("."));
-                holder.TxtRefNo.setText(ANumber);
-            } else {
-                List<String> string = Arrays.asList(strings.get(position).getBodyMsg().split("thru ", 16));
-                ANumber = string.get(1).substring(0, string.get(1).indexOf(" "));
-                holder.TxtRefNo.setText(ANumber.replace("UPI/", "Ref no. "));
-            }
-            holder.TxtStartLetter.setText(holder.TxtRefNo.getText().toString().substring(0, 1).toUpperCase());
-        }
+
+        holder.TxtRefNo.setText(str2);
         if (!DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString().equalsIgnoreCase(date)) {
             holder.TxtFormateDate.setVisibility(View.VISIBLE);
             date = DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString();
