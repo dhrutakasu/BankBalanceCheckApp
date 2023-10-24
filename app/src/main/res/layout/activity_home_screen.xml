@@ -49,12 +49,12 @@
             android:id="@+id/TxtSetting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_16ssp"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center_vertical"
             android:text="@string/Setting"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppins_semibold"
-            android:layout_marginStart="@dimen/_14sdp"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,15 +93,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/CardPrivacy"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="0dp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_14sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TxtSetting">
@@ -126,13 +127,13 @@
                     android:id="@+id/TxtPrivacy"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow"
+                    android:drawableTint="@color/main_color"
+                    android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/privacy_policy"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:drawableEnd="@drawable/ic_arrow"
-                    android:drawableTint="@color/main_color"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -140,15 +141,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/CardShare"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="0dp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/CardPrivacy">
@@ -173,13 +175,13 @@
                     android:id="@+id/TxtShare"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow"
+                    android:drawableTint="@color/main_color"
+                    android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/share_app"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:drawableEnd="@drawable/ic_arrow"
-                    android:drawableTint="@color/main_color"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -187,15 +189,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/CardRate"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="0dp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/CardShare">
@@ -220,13 +223,13 @@
                     android:id="@+id/TxtRate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow"
+                    android:drawableTint="@color/main_color"
+                    android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/rate_app"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:drawableEnd="@drawable/ic_arrow"
-                    android:drawableTint="@color/main_color"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -234,15 +237,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/CardUpdate"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="0dp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/CardRate">
@@ -267,13 +271,13 @@
                     android:id="@+id/TxtUpdat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow"
+                    android:drawableTint="@color/main_color"
+                    android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/update_apps"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:drawableEnd="@drawable/ic_arrow"
-                    android:drawableTint="@color/main_color"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -281,15 +285,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/CardVersion"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="0dp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/CardUpdate">
@@ -314,13 +319,13 @@
                     android:id="@+id/TxtVersion"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow"
+                    android:drawableTint="@color/main_color"
+                    android:fontFamily="@font/poppins_semibold"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/version_v_0_01"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:drawableEnd="@drawable/ic_arrow"
-                    android:drawableTint="@color/main_color"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -329,6 +334,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ConsCalculators"
         android:layout_width="match_parent"
@@ -419,8 +425,7 @@
             android:id="@+id/ScrollViewMain"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ConsBankTranscationBox">
 
@@ -434,7 +439,6 @@
                     android:id="@+id/IvBankATMBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20ssp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_near_atm"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -518,6 +522,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConstBalance"
                 android:layout_width="0dp"
@@ -559,8 +564,8 @@
                 android:layout_marginStart="@dimen/_20ssp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:adjustViewBounds="true"
-                android:visibility="gone"
                 android:src="@drawable/ic_bank_balance"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guide_bankbalance" />
 
@@ -641,28 +646,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.4" />
+                app:layout_constraintGuide_percent="0.3" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide_bankoptions_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_percent="0.65" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ConsBankTranscationBox"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12ssp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:paddingStart="@dimen/_15ssp"
-            android:paddingEnd="@dimen/_15sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginEnd="@dimen/_20ssp"
             app:layout_constraintBottom_toTopOf="@id/guide_Scroll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guide_transcation_top">
+            app:layout_constraintTop_toTopOf="@+id/guide_transcation_top">
 
             <ImageView
                 android:id="@+id/IvBankTranscationBox"
@@ -679,11 +682,10 @@
                 android:id="@+id/ConsAccountDetail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="@dimen/_10ssp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toBottomOf="@id/GuideBoxBottom"
+                app:layout_constraintEnd_toEndOf="@id/GuideBoxEnd"
+                app:layout_constraintStart_toStartOf="@id/GuideBoxStart"
+                app:layout_constraintTop_toTopOf="@id/GuideBoxTop">
 
                 <TextView
                     android:id="@+id/TxtBankName"
@@ -784,34 +786,66 @@
                     android:layout_height="wrap_content"
                     android:indeterminateTint="@color/purple_200"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/TxtBankTranscation"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/CardBankTranscationArrow"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             app:cardCornerRadius="@dimen/_50ssp"
             app:cardElevation="@dimen/_5ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            app:layout_constraintTop_toTopOf="@id/ConsBankTranscationBox"
             app:layout_constraintBottom_toBottomOf="@id/ConsBankTranscationBox"
-            app:cardBackgroundColor="@color/main_color">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ConsBankTranscationBox">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@color/main_color"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_12sdp"
+                    android:background="@color/main_color"
                     android:src="@drawable/ic_arrow"
                     app:tint="@color/white" />
             </LinearLayout>
@@ -822,7 +856,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35" />
+            app:layout_constraintGuide_percent="0.4" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_transcation_top"

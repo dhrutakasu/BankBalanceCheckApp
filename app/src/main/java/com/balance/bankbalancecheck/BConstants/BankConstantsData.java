@@ -113,39 +113,28 @@ public class BankConstantsData {
 //        String[] projection = {"_id", "address", "body", "date"};
         int i = 0;
         int i2 = 0;
-        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc limit 1000");
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc");
+//        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc limit 1000");
         smsHelper.DeleteSMS();
         if (cursor != null && cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex("_id");
             int addressIndex = cursor.getColumnIndex("address");
             int bodyIndex = cursor.getColumnIndex("body");
             int dateIndex = cursor.getColumnIndex("date");
-            System.out.println("------ cursor : " + cursor.getCount());
             do {
                 String id = cursor.getString(idIndex);
                 String string = cursor.getString(addressIndex);
                 String string2 = cursor.getString(bodyIndex);
                 long date = cursor.getLong(dateIndex);
-                String dateString = DateFormat.format("dd MMM ,yyyy", new Date(date)).toString();
-                if (string.contains("BOBTXN")) {
-                    System.out.println("------ addre : " + string + " - " + string2);
-                    i++;
-                }
-                if (string2.contains("Bank of Baroda")) {
-                    i2++;
-                }
 
                 try {
                     BankConstantsData.FetchSMSData(cursor, context, smsModels, smsHelper);
                 } catch (Exception e) {
-                    System.out.println("------ exexex : " + e.getMessage());
                     throw new RuntimeException(e);
                 }
 
             } while (cursor.moveToNext());
             cursor.close();
-            System.out.println("------ unused --1-- --> : " + smsModels.size());
-            System.out.println("------ unused --1-- -->iiii : " + i + " - " + i2);
         }
         return smsModels;
     }
@@ -255,11 +244,9 @@ public class BankConstantsData {
         Matcher matcher = Pattern.compile("(xx\\d+)|ending\\s*\\d+").matcher(str2);
         Matcher matcher2 = Pattern.compile("[.]{2,}[0-9]{2,}|[0-9]*[Xx\\*]*[0-9]*[Xx\\*]+[0-9]{3,}").matcher(str2);
         if (matcher2.find()) {
-            System.out.println("------ str2.substring(matcher2.start(), matcher2.end())) break " + str2.substring(matcher2.start(), matcher2.end()));
             return str2.substring(matcher2.start(), matcher2.end());
         }
         if (matcher.find()) {
-            System.out.println("------ matcher.group(0) break " + matcher.group(0));
             return matcher.group(0);
         }
         if (str2.toLowerCase().contains("account") || str2.toLowerCase().contains("a/c") || str2.toLowerCase().contains("a/c no") || str2.toLowerCase().contains("account no")) {
@@ -271,11 +258,9 @@ public class BankConstantsData {
                 while (true) {
                     if (i4 >= length) {
                         z = false;
-                        System.out.println("------ i4 >= length break " + z);
                         break;
                     } else if (!Character.isDigit(Character.valueOf(charArray[i4]).charValue())) {
                         z = true;
-                        System.out.println("------ i4 <= length break " + z);
                         break;
                     } else {
                         i4++;
@@ -284,7 +269,6 @@ public class BankConstantsData {
                 if (!z) {
                     int i5 = i3 - 1;
                     if (split[i5].equalsIgnoreCase("account") || split[i5].equalsIgnoreCase("a/c")) {
-                        System.out.println("------ split[i5].toLowerCase().equals(\"account\") || split[i5].toLowerCase().equals(\"a/c\") break " + split[i3]);
                         return split[i3];
                     }
                     if (i3 > 1) {
@@ -292,16 +276,13 @@ public class BankConstantsData {
                         sb.append(split[i3 - 2]);
                         sb.append("");
                         sb.append(split[i5]);
-                        System.out.println("------ sb.toString().toLowerCase().equals(\"account no\") break " + split[i3]);
                         return split[i3];
                     }
                     continue;
                 }
             }
-            System.out.println("------ \"NA\" break");
             return "NA";
         }
-        System.out.println("------ \"NA\"222 break");
         return "NA";
     }
 
@@ -428,14 +409,12 @@ public class BankConstantsData {
         String string2 = cursor.getString(bodyIndex);
 //        String string = cursor.getBankName();
 //        String string2 = cursor.getBodyMsg();
-        System.out.println("------ string2 " + string2);
         SMSModel smsModel = new SMSModel();
         if (GetMsgPattern(string2) && !string.contains("paytm")) {
             String a2 = getAmountFormat(string2);
             if (a2.length() > 4) {
                 a2 = a2.substring(a2.length() - 4);
             }
-            System.out.println("------ setBodyMsg(a2) " + a2);
 //                        aVar2.a(a2);
             Date date = new Date(cursor.getLong(dateIndex));
             smsModel.setDate(cursor.getLong(dateIndex));
@@ -655,10 +634,8 @@ public class BankConstantsData {
     private static String GetBalance(String str) {
         Matcher matcher = Pattern.compile("(?i)(?:(?:.?rs|inr| mrp)\\.?\\s?)(\\'?\\d+(:?\\,\\d+)?(\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)").matcher(str);
         if (matcher.find() && matcher.find()) {
-            System.out.println("------ String h break " + matcher.group(0));
             return matcher.group(0);
         }
-        System.out.println("------ String h break ");
         return null;
     }
 
@@ -668,17 +645,13 @@ public class BankConstantsData {
             if (splitInfo.length == 2) {
                 if (!splitInfo[1].contains(".") || splitInfo[1].length() <= 1) {
                     splitInfo[1] = splitInfo[1].replace(":", "");
-                    System.out.println("------ split[1] break " + splitInfo[1]);
                     return splitInfo[1];
                 }
                 String StrTrim = splitInfo[1].substring(1, splitInfo[1].indexOf(".", 1)).trim();
-                System.out.println("------ trim break " + StrTrim);
                 return StrTrim + ".";
             }
-            System.out.println("------ String f break ");
             return null;
         }
-        System.out.println("------ String f null break ");
         return null;
     }
 
@@ -705,11 +678,9 @@ public class BankConstantsData {
             if (getAmountFormat(str, '.') > 1) {
                 str = str.substring(0, str.indexOf(46));
             }
-            Log.d("ASD", amount + "  Net balance---" + str);
             if (!str.equals("")) {
                 try {
                     Double valueOf2 = Double.valueOf(Double.parseDouble(str));
-                    Log.d("ASD", "Net balance Double---" + valueOf2);
                     return valueOf2;
                 } catch (NumberFormatException unused) {
                     unused.getMessage();

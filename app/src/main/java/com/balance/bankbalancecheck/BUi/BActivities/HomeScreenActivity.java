@@ -67,8 +67,14 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private boolean IsTransc = false;
     private ImageView IvBankTranscationBox;
     private CardView CardBankTranscationArrow;
+    private ImageView IvBankBalance;
+    private ImageView IvBankBalance1;
+    private ImageView IvBankBalance3;
     private int getBalance = 0;
     private ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+
+    public HomeScreenActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         CardUpdate = (CardView) findViewById(R.id.CardUpdate);
         TxtVersion = (TextView) findViewById(R.id.TxtVersion);
         IvBankTranscationBox = (ImageView) findViewById(R.id.IvBankTranscationBox);
+        IvBankBalance = (ImageView) findViewById(R.id.IvBankBalance);
+        IvBankBalance1 = (ImageView) findViewById(R.id.IvBankBalance1);
+        IvBankBalance3 = (ImageView) findViewById(R.id.IvBankBalance3);
         CardBankTranscationArrow = (CardView) findViewById(R.id.CardBankTranscationArrow);
     }
 
@@ -120,6 +129,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         CardShare.setOnClickListener(this);
         CardRate.setOnClickListener(this);
         CardUpdate.setOnClickListener(this);
+        IvBankBalance.setOnClickListener(this);
+        IvBankBalance1.setOnClickListener(this);
+        IvBankBalance3.setOnClickListener(this);
         bottom_menu.setOnItemSelectedListener(i -> {
             switch (i) {
                 case R.id.Menu_Home:
@@ -173,6 +185,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
         ConsAccountDetail.setVisibility(View.VISIBLE);
         CardBankTranscationArrow.setVisibility(View.INVISIBLE);
+        TxtBankTranscation.setVisibility(View.INVISIBLE);
         String s = Manifest.permission.READ_SMS;
         Dexter.withActivity(this)
                 .withPermissions(s)
@@ -224,13 +237,19 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
                     if (unused.size() > 0) {
                         smsModelArrayList = SmsHelper.getAllSMSGroup();
+                        System.out.println("------ cursor : " + smsModelArrayList.size());
                         CardBankTranscationArrow.setVisibility(View.VISIBLE);
-                        String a2 = BankConstantsData.getAmountFormat(smsModelArrayList.get(getBalance).getBodyMsg());
-                        if (a2.length() > 4) {
-                            a2 = a2.substring(a2.length() - 4);
+                        TxtBankTranscation.setVisibility(View.VISIBLE);
+                        for (int i = 0; i < smsModelArrayList.size(); i++) {
+                            SMSModel smsMode = SmsHelper.getAllSMSBank(smsModelArrayList.get(i).getBankName());
+                            smsModelArrayList.set(i, smsMode);
+                        }
+                        String amountFormat = BankConstantsData.getAmountFormat(smsModelArrayList.get(getBalance).getBodyMsg());
+                        if (amountFormat.length() > 4) {
+                            amountFormat = amountFormat.substring(amountFormat.length() - 4);
                         }
                         TxtBankName.setText(smsModelArrayList.get(getBalance).getBankName());
-                        TxtBankAccNumber.setText("A/c No:- " + a2);
+                        TxtBankAccNumber.setText("A/c No:- " + amountFormat);
 
                         String Currency = "";
                         if (smsModelArrayList.get(getBalance).getBodyMsg().contains("Rs")) {
@@ -376,6 +395,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(context, NetBankinActivity.class));
                 break;
             case R.id.IvBankHoliday:
+                startActivity(new Intent(context, BankHolidayActivity.class));
                 break;
             case R.id.IvBankATMBox:
                 startActivity(new Intent(context, NearByActivity.class));
@@ -394,6 +414,11 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.CardRate:
                 GotoRateUs();
+                break;
+            case R.id.IvBankBalance:
+            case R.id.IvBankBalance1:
+            case R.id.IvBankBalance3:
+                startActivity(new Intent(context,SelectBankActivity.class));
                 break;
             case R.id.CardUpdate:
                 break;

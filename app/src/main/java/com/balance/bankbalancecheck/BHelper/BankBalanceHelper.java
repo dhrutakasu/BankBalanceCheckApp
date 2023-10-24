@@ -33,14 +33,14 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
     private static String BANK_MINI_STATEMENT = "Mini_Statement";
     private static String BANK_SHORT = "Bank_Short";
 
-    private static String SMS_TABLE = "SmsInformation";
-    private static String SMS_ID = "Sms_Id";
-    private static String SMS_TYPES = "Sms_Title";
-    private static String SMS_BANK_NAME = "Bank_Name";
-    private static String SMS_MESSAGE = "Message";
-    private static String SMS_DATE = "date";
-    private static String SMS_BALANCE = "balance";
-    private static String SMS_AMOUNT = "amount";
+    private static String SMS_TABLE = "SmsData";
+    private static String SMS_ID = "SmsId";
+    private static String SMS_TYPES = "SmsTitle";
+    private static String SMS_BANK_NAME = "SmsBankName";
+    private static String SMS_MESSAGE = "SmsMessage";
+    private static String SMS_DATE = "Smsdate";
+    private static String SMS_BALANCE = "Smsbalance";
+    private static String SMS_AMOUNT = "Smsamount";
 
     public BankBalanceHelper(Context context) {
         super(context, DATABASE_NAME, null, 2);
@@ -171,11 +171,11 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<SMSModel> getAllSMS(String BankName) {
+    public ArrayList<SMSModel> getAllSMSGroup() {
         ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + "=? ";
-        Cursor cursor = db.rawQuery(table_name, new String[]{BankName});
+        String table_name = "SELECT *FROM " + SMS_TABLE + " GROUP BY " + SMS_BANK_NAME;
+        Cursor cursor = db.rawQuery(table_name, null);
         if (cursor.getCount() > 0) {
             if (cursor.moveToFirst()) {
                 do {
@@ -195,10 +195,138 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<SMSModel> getAllSMSGroup() {
+    public SMSModel getAllSMSBank(String bankName) {
+        SMSModel smsModelArrayList = new SMSModel();
+        SQLiteDatabase db = getReadableDatabase();
+        String table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + "=? ";
+        Cursor cursor = db.rawQuery(table_name, new String[]{bankName});
+        if (cursor.moveToFirst()) {
+            SMSModel smsModel = new SMSModel();
+            smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
+            smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
+            smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
+            smsModel.setBodyMsg(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+            smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
+            smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
+            smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));
+            smsModelArrayList = smsModel;
+        }
+        return smsModelArrayList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<SMSModel> getAllSMSRupee(String bankName, String type, String Sdate, String Edate) {
         ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String table_name = "SELECT *FROM " + SMS_TABLE + " GROUP BY " + SMS_BANK_NAME;
+        String table_name;
+        if (type.equalsIgnoreCase("all")) {
+            table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " = '" + bankName
+                    + "' AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) >= '" +
+                    Sdate + "'AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) <= '" + Edate + "'";
+        } else {
+            table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " = '" + bankName
+                    + "' AND " + SMS_TYPES + " = '" + type
+                    + "' AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) >= '" +
+                    Sdate + "'AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) <= '" + Edate + "'";
+        }
+        Cursor cursor = db.rawQuery(table_name, null);
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    SMSModel smsModel = new SMSModel();
+                    smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
+                    smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
+                    smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
+                    smsModel.setBodyMsg(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+                    smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
+                    smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
+                    smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));
+                    smsModelArrayList.add(smsModel);
+                } while (cursor.moveToNext());
+            }
+        }
+        return smsModelArrayList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<SMSModel> getAllSMSDateType(String bankName, String type, long Sdate, long Edate) {
+
+        ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String table_name;
+        if (type.equalsIgnoreCase("all")) {
+            table_name = "SELECT * FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " = '" + bankName
+                    + "' AND " + SMS_DATE + " BETWEEN '" + Sdate + "' AND '" + Edate + "'";
+        } else {
+            table_name = "SELECT * FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " = '" + bankName
+                    + "' AND " + SMS_TYPES + " = '" + type + "' AND " + SMS_DATE + " BETWEEN '" + Sdate + "' AND '" + Edate + "'";
+        }
+        System.out.println("----- ---  qq : " + table_name);
+        Cursor cursor = db.rawQuery(table_name, null);
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    SMSModel smsModel = new SMSModel();
+                    smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
+                    smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
+                    smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
+                    smsModel.setBodyMsg(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+                    smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
+                    smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
+                    smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));
+                    smsModelArrayList.add(smsModel);
+                } while (cursor.moveToNext());
+            }
+        }
+        return smsModelArrayList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<SMSModel> getAllSMSAAllData(String bankName, String type, String Sdate, String Edate, String Samount, String Eamount) {
+        ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String table_name;
+        if (type.equalsIgnoreCase("all")) {
+            table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " ='" + bankName
+                    + "' AND " + SMS_DATE + " BETWEEN '" + Sdate + "' AND '" + Edate +
+                    "' AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) >= '" + Samount +
+                    "' AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) <= '" + Eamount + "'";
+        } else {
+            table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " ='" + bankName + "' AND "
+                    + SMS_TYPES + " ='" + type + "' AND " + SMS_DATE + " BETWEEN '" + Sdate + "' AND '" + Edate +
+                    "' AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) >= '" + Samount +
+                    "' AND CAST(REPLACE(" + SMS_AMOUNT + ", ',', '') AS DECIMAL(10, 2)) <= '" + Eamount + "'";
+        }
+        System.out.println("------- qqqq : " + table_name);
+        Cursor cursor = db.rawQuery(table_name, null);
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    SMSModel smsModel = new SMSModel();
+                    smsModel.setId(cursor.getString(cursor.getColumnIndex(SMS_ID)));
+                    smsModel.setTypes(cursor.getString(cursor.getColumnIndex(SMS_TYPES)));
+                    smsModel.setBankName(cursor.getString(cursor.getColumnIndex(SMS_BANK_NAME)));
+                    smsModel.setBodyMsg(cursor.getString(cursor.getColumnIndex(SMS_MESSAGE)));
+                    smsModel.setDate(cursor.getLong(cursor.getColumnIndex(SMS_DATE)));
+                    smsModel.setBalance(cursor.getString(cursor.getColumnIndex(SMS_BALANCE)));
+                    smsModel.setAmount(cursor.getString(cursor.getColumnIndex(SMS_AMOUNT)));
+                    smsModelArrayList.add(smsModel);
+                } while (cursor.moveToNext());
+            }
+        }
+        return smsModelArrayList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<SMSModel> getAllSMSType(String bankName, String type) {
+        ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String table_name;
+        if (type.equalsIgnoreCase("all")) {
+            table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " = '" + bankName + "'";
+        } else {
+            table_name = "SELECT *FROM " + SMS_TABLE + " where " + SMS_BANK_NAME + " = '" + bankName + "' AND " + SMS_TYPES + " = '" + type + "'";
+        }
         Cursor cursor = db.rawQuery(table_name, null);
         if (cursor.getCount() > 0) {
             if (cursor.moveToFirst()) {

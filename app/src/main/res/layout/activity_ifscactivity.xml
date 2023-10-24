@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:src="@drawable/ic_bank_icon"
+                android:src="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

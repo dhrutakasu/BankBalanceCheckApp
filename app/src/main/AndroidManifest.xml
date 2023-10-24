@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
+            android:name=".BUi.BActivities.SelectBankActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BUi.BActivities.BankHolidayActivity"
+            android:exported="false" />
+        <activity
             android:name=".BUi.BActivities.BankPrivacyActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

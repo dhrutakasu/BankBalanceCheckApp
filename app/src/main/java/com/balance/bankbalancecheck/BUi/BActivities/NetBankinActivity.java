@@ -46,9 +46,6 @@ public class NetBankinActivity extends AppCompatActivity implements TextWatcher,
     private RecyclerView RvNetBank;
     private WebView WebNetBanking;
 
-    public NetBankinActivity() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

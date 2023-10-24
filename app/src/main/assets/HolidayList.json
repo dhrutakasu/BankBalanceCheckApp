@@ -200,6 +200,206 @@
         "Day": "Monday",
         "Date": "Dec 25, 2023",
         "Holiday": "Christmas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Jan 26, 2024",
+        "Holiday": "Republic Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 08, 2024",
+        "Holiday": "Maha Shivratri"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Mar 25, 2024",
+        "Holiday": "Holi 2nd Day"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 29, 2024",
+        "Holiday": "Good Friday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Apr 01, 2024",
+        "Holiday": "Annual Closing of Bank Accounts"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Apr 11, 2024",
+        "Holiday": "Eid al-Fitr"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 11, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "May 23, 2024",
+        "Holiday": "Buddha Purnima"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 25, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 08, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jun 17, 2024",
+        "Holiday": "Eid-al-Adha"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 22, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Jul 17, 2024",
+        "Holiday": "Muharram"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Aug 15, 2024",
+        "Holiday": "Independence Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Sep 16, 2024",
+        "Holiday": "Eid-e-Milad"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Oct 02, 2024",
+        "Holiday": "Mahatma Gandhi Jayanti"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "Dusshera"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 26, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Nov 01, 2024",
+        "Holiday": "Deepavali / Diwali"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday ",
+        "Date": "Nov 15, 2024",
+        "Holiday": "Guru Nanak Jayanti"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Dec 25, 2024",
+        "Holiday": "Christmas"
       }
     ],
     "Andhra Pradesh": [
@@ -407,6 +607,206 @@
         "Day": "Monday",
         "Date": "Dec 25, 2023",
         "Holiday": "Christmas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jan 15, 2024",
+        "Holiday": "Makar Sankranti"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Jan 26, 2024",
+        "Holiday": "Republic Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Mar 25, 2024",
+        "Holiday": "Holi 2nd Day"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 29, 2024",
+        "Holiday": "Good Friday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Apr 05, 2024",
+        "Holiday": "Babu Jagjivan Ram's Birthday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Apr 11, 2024",
+        "Holiday": "Eid al-Fitr"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "May 06, 2024",
+        "Holiday": "May Day / Labour Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 11, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 25, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 08, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jun 17, 2024",
+        "Holiday": "Eid-al-Adha"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 22, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Aug 15, 2024",
+        "Holiday": "Independence Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 07, 2024",
+        "Holiday": "Vinayaka Chavithi"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Sep 16, 2024",
+        "Holiday": "Eid-e-Milad"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Oct 02, 2024",
+        "Holiday": "Mahatma Gandhi Jayanti"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Oct 11, 2024",
+        "Holiday": "Durgastami"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "Vijaya Dasami"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 26, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Nov 01, 2024",
+        "Holiday": "Deepavali / Diwali"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Dec 25, 2024",
+        "Holiday": "Christmas"
       }
     ],
     "Arunachal Pradesh": [
@@ -609,6 +1009,201 @@
         "Day": "Monday",
         "Date": "Dec 25, 2023",
         "Holiday": "Christmas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jan 15, 2024",
+        "Holiday": "Makar Sankranti"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Jan 26, 2024",
+        "Holiday": "Republic Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 08, 2024",
+        "Holiday": "Maha Shivratri"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Mar 25, 2024",
+        "Holiday": "Holi 2nd Day"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 29, 2024",
+        "Holiday": "Good Friday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Apr 01, 2024",
+        "Holiday": "Annual Closing of Bank Accounts"
+      },
+      {
+        "Day": "Sunday",
+        "Date": "Apr 14, 2024",
+        "Holiday": "Bohag Bihu"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Apr 11, 2024",
+        "Holiday": "Eid al-Fitr"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 11, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "May 23, 2024",
+        "Holiday": "Buddha Purnima"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 25, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 08, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 22, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Aug 15, 2024",
+        "Holiday": "Independence Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Oct 02, 2024",
+        "Holiday": "Mahatma Gandhi Jayanti"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "Dusshera"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 26, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Nov 01, 2024",
+        "Holiday": "Deepavali / Diwali"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday ",
+        "Date": "Nov 15, 2024",
+        "Holiday": "Guru Nanak Jayanti"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Dec 25, 2024",
+        "Holiday": "Christmas"
       }
     ],
     "Assam": [
@@ -800,6 +1395,196 @@
       {
         "Day": "Monday",
         "Date": "Dec 25, 2023",
+        "Holiday": "Christmas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Magh Bihu",
+        "Date": "Jan 15, 2024",
+        "Holiday": "Magh Bihu"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Jan 26, 2024",
+        "Holiday": "Republic Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Mar 25, 2024",
+        "Holiday": "Dol Jatra"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 29, 2024",
+        "Holiday": "Good Friday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Apr 11, 2024",
+        "Holiday": "Eid al-Fitr"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Sunday",
+        "Date": "Apr 14, 2024",
+        "Holiday": "Bohag Bihu"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "May 06, 2024",
+        "Holiday": "May Day / Labour Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 11, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 25, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 08, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jun 17, 2024",
+        "Holiday": "Eid-al-zuha"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 22, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Aug 15, 2024",
+        "Holiday": "Independence Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Oct 02, 2024",
+        "Holiday": "Mahatma Gandhi Jayanti"
+      },
+      {
+        "Day": "Tuesday",
+        "Date": "Oct 09, 2024",
+        "Holiday": "Durga Puja"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 26, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday ",
+        "Date": "Oct 31, 2024",
+        "Holiday": "Kali Puja"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday ",
+        "Date": "Nov 15, 2024",
+        "Holiday": "Guru Nanak Jayanti"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Dec 25, 2024",
         "Holiday": "Christmas"
       }
     ],
@@ -1022,6 +1807,226 @@
       {
         "Day": "Monday",
         "Date": "Dec 25, 2023",
+        "Holiday": "Christmas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Jan 26, 2024",
+        "Holiday": "Republic Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 22, 2024",
+        "Holiday": "Bihar Divas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Tuesday",
+        "Date": "Mar 24, 2024",
+        "Holiday": "Holi"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Mar 25, 2024",
+        "Holiday": "Holi 2nd Day"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 29, 2024",
+        "Holiday": "Good Friday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Apr 01, 2024",
+        "Holiday": "Yearly Closing of Bank Accounts"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Apr 11, 2024",
+        "Holiday": "Eid al-Fitr"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Apr 17, 2024",
+        "Holiday": "Shri Ram Navami"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "May 06, 2024",
+        "Holiday": "May Day / Labour Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 11, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 25, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 08, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jun 17, 2024",
+        "Holiday": "Eid-al-Adha"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 22, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Jul 17, 2024",
+        "Holiday": "Muharram"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Aug 15, 2024",
+        "Holiday": "Independence Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Aug 26, 2024",
+        "Holiday": "Shri Krishna Janmashtami"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Oct 02, 2024",
+        "Holiday": "Mahatma Gandhi Jayanti"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Oct 11, 2024",
+        "Holiday": "Maha Navami"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "Vijaya Dashami"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 26, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Nov 01, 2024",
+        "Holiday": "Deepavali / Diwali"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Nov 07, 2024",
+        "Holiday": "Chhat Puja"
+      },
+      {
+        "Day": "Sunday",
+        "Date": "Nov 10, 2024",
+        "Holiday": "Chhat Puja"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Dec 25, 2024",
         "Holiday": "Christmas"
       }
     ],
@@ -2436,6 +3441,206 @@
       {
         "Day": "Monday",
         "Date": "Dec 25, 2023",
+        "Holiday": "Christmas"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Jan 26, 2024",
+        "Holiday": "Republic Day"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jan 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Feb 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Mar 08, 2024",
+        "Holiday": "Maha Shivratri"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Mar 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Mar 25, 2024",
+        "Holiday": "Holi 2nd Day"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Apr 11, 2024",
+        "Holiday": "Eid al-Fitr"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Apr 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 11, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "May 25, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 08, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Jun 17, 2024",
+        "Holiday": "Eid-al-Adha"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jun 22, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 13, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Jul 17, 2024",
+        "Holiday": "Muharram"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Jul 27, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 10, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Thursday",
+        "Date": "Aug 15, 2024",
+        "Holiday": "Parsi New Year"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Aug 24, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Sunday",
+        "Date": "Aug 25, 2024",
+        "Holiday": "Independence Day"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Aug 26, 2024",
+        "Holiday": "Janmashtami"
+      },
+      {
+        "Day": "Sunday",
+        "Date": "Sep 08, 2024",
+        "Holiday": "Samvatsari"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Monday",
+        "Date": "Sep 16, 2024",
+        "Holiday": "Eid-e-Milad"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Sep 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Oct 02, 2024",
+        "Holiday": "Mahatma Gandhi's Birthday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 12, 2024",
+        "Holiday": "Dusshera"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Oct 26, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Friday",
+        "Date": "Nov 01, 2024",
+        "Holiday": "Deepavali / Diwali"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 02, 2024",
+        "Holiday": "Vikram Samvat New Year"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 09, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Nov 23, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 14, 2024",
+        "Holiday": "2nd Saturday Bank Holiday"
+      },
+      {
+        "Day": "Saturday",
+        "Date": "Dec 28, 2024",
+        "Holiday": "4th Saturday Bank Holiday"
+      },
+      {
+        "Day": "Wednesday",
+        "Date": "Dec 25, 2024",
         "Holiday": "Christmas"
       }
     ],

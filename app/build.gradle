@@ -54,4 +54,7 @@ dependencies {
 //    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
 
+    implementation 'com.google.code.gson:gson:2.8.8'
+
+
 }
