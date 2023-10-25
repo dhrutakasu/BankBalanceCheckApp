@@ -98,6 +98,7 @@ public class SelectBankActivity extends AppCompatActivity implements View.OnClic
                 public void BankClick(int pos, ArrayList<String> strings) {
                     BankStr = strings.get(pos).toString();
                     new BankPreferences(context).putPrefString(BankPreferences.BANK_NAME, BankStr);
+                    new BankPreferences(context).putPrefString(BankPreferences.BRANCH_NAME, "");
                     finish();
                 }
             });

@@ -306,6 +306,10 @@
                             android:fontFamily="@font/poppins_medium"
                             android:gravity="center_vertical"
                             android:text="@string/dash"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />

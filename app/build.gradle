@@ -51,9 +51,9 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
 
     //todo bottom navigation dependency
-//    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
 
+    //todo gson dependency
     implementation 'com.google.code.gson:gson:2.8.8'
 
 

@@ -90,8 +90,8 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
 
         holder.TxtRefNo.setText(str2);
         if (!DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString().equalsIgnoreCase(date)) {
-            holder.TxtFormateDate.setVisibility(View.VISIBLE);
             date = DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString();
+            holder.TxtFormateDate.setVisibility(View.VISIBLE);
         } else {
             holder.TxtFormateDate.setVisibility(View.GONE);
         }

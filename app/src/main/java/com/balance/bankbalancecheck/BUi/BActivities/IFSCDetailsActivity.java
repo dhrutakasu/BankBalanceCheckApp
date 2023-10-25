@@ -116,6 +116,7 @@ public class IFSCDetailsActivity extends AppCompatActivity implements View.OnCli
                 TxtPhNo.setText(IFSCDetailsArray[1].toString());
                 TxtAddress.setSelected(true);
                 TxtBank.setSelected(true);
+                TxtPhNo.setSelected(true);
             }
         } catch (Exception unused) {
             unused.getMessage();
