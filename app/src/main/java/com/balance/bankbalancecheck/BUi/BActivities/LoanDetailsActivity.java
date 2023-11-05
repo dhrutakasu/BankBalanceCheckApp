@@ -52,7 +52,8 @@ public class LoanDetailsActivity extends AppCompatActivity implements View.OnCli
         WebSettings webPrivacySettings = WebLoanDetails.getSettings();
         webPrivacySettings.setJavaScriptEnabled(true);
 //        webPrivacySettings.setTextZoom(webPrivacySettings.getTextZoom() + 70);
-        WebLoanDetails.loadUrl("file:///android_asset/" + getIntent().getStringExtra(BankConstantsData.LOAN_WEB) + ".html");
+        WebLoanDetails.loadUrl("https://groww.in/mutual-funds/category");
+//        WebLoanDetails.loadUrl("file:///android_asset/" + getIntent().getStringExtra(BankConstantsData.LOAN_WEB) + ".html");
     }
 
     @Override

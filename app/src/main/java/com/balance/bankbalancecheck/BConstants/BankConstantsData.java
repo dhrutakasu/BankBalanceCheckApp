@@ -115,7 +115,9 @@ public class BankConstantsData {
         int i2 = 0;
         Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc");
 //        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, "date desc limit 1000");
-        smsHelper.DeleteSMS();
+        if (smsHelper.isTableExists("SmsData", true)) {
+            smsHelper.DeleteSMS();
+        }
         if (cursor != null && cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex("_id");
             int addressIndex = cursor.getColumnIndex("address");

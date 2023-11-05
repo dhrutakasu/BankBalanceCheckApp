@@ -109,4 +109,15 @@
         <item>Yes</item>
         <item>Bank of India</item>
     </array>
+    <array name="Mutual_fund_type">
+        <item>Balanced Fund</item>
+        <item>Better Fund</item>
+        <item>High Return</item>
+        <item>Index Fund</item>
+        <item>Popular Fund</item>
+        <item>Tax Saving</item>
+        <item>topc</item>
+<!--        <item>All AMC's</item>-->
+        <item>Return Calculator</item>
+    </array>
 </resources>

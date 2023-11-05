@@ -170,6 +170,30 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    public boolean isTableExists(String tableName, boolean openDb) {
+        if (openDb) {
+            if (sqLiteDatabase == null || !sqLiteDatabase.isOpen()) {
+                sqLiteDatabase = getReadableDatabase();
+            }
+
+            if (!sqLiteDatabase.isReadOnly()) {
+                sqLiteDatabase.close();
+                sqLiteDatabase = getReadableDatabase();
+            }
+        }
+
+        String query = "select DISTINCT tbl_name  from sqlite_master where tbl_name  = '" + tableName + "'";
+//        String query = "select DISTINCT " + SMS_TABLE + " from sqlite_master where " + SMS_TABLE + " = '" + tableName + "'";
+        try (Cursor cursor = sqLiteDatabase.rawQuery(query, null)) {
+            if (cursor != null) {
+                if (cursor.getCount() > 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     @SuppressLint("Range")
     public ArrayList<SMSModel> getAllSMSGroup() {
         ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
