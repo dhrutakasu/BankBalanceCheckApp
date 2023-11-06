@@ -176,4 +176,9 @@
     <string name="date_wise_filter">Date Wise Filter</string>
     <string name="amount_wise_filter">Amount Wise Filter</string>
     <string name="ok">Ok</string>
+    <string name="estimated_return">Estimated Return</string>
+    <string name="total_value">Total Value</string>
+    <string name="Return_calculator">Return Calculator</string>
+    <string name="cancel">Cancel</string>
+    <string name="Exit">Exit</string>
 </resources>

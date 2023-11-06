@@ -18,11 +18,18 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.balance.bankbalancecheck.BHelper.BankBalanceHelper;
 import com.balance.bankbalancecheck.BModel.SMS;
 import com.balance.bankbalancecheck.BModel.SMSModel;
+import com.balance.bankbalancecheck.BModel.ShowAdsModel;
+import com.balance.bankbalancecheck.LoadData;
 import com.balance.bankbalancecheck.R;
 import com.karumi.dexter.PermissionToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +43,7 @@ import kotlin.jvm.internal.Ref;
 import kotlin.text.Regex;
 
 public class BankConstantsData {
+    public static final String ADS_URL = "https://7starinnovation.com/api/loan.json";
     public static final String SCHEMES_LINK = "SCHEMES_LINK";
     public static final String SCHEMES_TITLE = "SCHEMES_TITLE";
     public static final String LOAN_TYPE = "LOAN_TYPE";
@@ -1284,4 +1292,63 @@ public class BankConstantsData {
         Log.e("BALANCE", "getAvailableBalance getBalance: " + model.getBalance());
         return model;
     }
+
+
+    public static ShowAdsModel LoadAdsData(Context context, LoadAdsId loadAdsId) {
+        ShowAdsModel showAdsModel = new ShowAdsModel();
+        StringRequest request = new StringRequest(Request.Method.GET, ADS_URL,
+                response2 -> {
+                    try {
+                        JSONObject response = new JSONObject(response2);
+                        showAdsModel.setPkg(response.getString("pkg"));
+                        showAdsModel.setBtype(response.getString("btype"));
+                        showAdsModel.setNtype(response.getString("ntype"));
+                        showAdsModel.setItype(response.getString("itype"));
+                        showAdsModel.setLogin(response.getString("login"));
+                        showAdsModel.setQuerkalink(response.getString("querkalink"));
+                        showAdsModel.setOwnb(response.getString("ownb"));
+                        showAdsModel.setOwnn(response.getString("ownn"));
+                        showAdsModel.setOwnblink(response.getString("ownblink"));
+                        showAdsModel.setOwnnlink(response.getString("ownnlink"));
+                        showAdsModel.setStartappid(response.getString("startappid"));
+                        showAdsModel.setFbad(response.getString("fbad"));
+                        showAdsModel.setFiad(response.getString("fiad"));
+                        showAdsModel.setFnad(response.getString("fnad"));
+                        showAdsModel.setFnbad(response.getString("fnbad"));
+                        showAdsModel.setPreload(response.getString("preload"));
+                        showAdsModel.setCloseadopen(response.getString("closeadopen"));
+                        showAdsModel.setBackads(response.getString("backads"));
+                        showAdsModel.setSiad(response.getString("siad"));
+                        showAdsModel.setOad2(response.getString("oad2"));
+                        showAdsModel.setOad(response.getString("oad"));
+                        showAdsModel.setBad(response.getString("bad"));
+                        showAdsModel.setIad(response.getString("iad"));
+                        showAdsModel.setNad2(response.getString("nad2"));
+                        showAdsModel.setNad(response.getString("nad"));
+                        showAdsModel.setLbad(response.getString("lbad"));
+                        showAdsModel.setLnad(response.getString("lnad"));
+                        showAdsModel.setLiad(response.getString("liad"));
+                        showAdsModel.setTelegramlink(response.getString("telegramlink"));
+                        showAdsModel.setAppPrivacyPolicyLink(response.getString("app_privacyPolicyLink"));
+                        showAdsModel.setAppAdsButtonColor(response.getString("appAdsButtonColor"));
+                        showAdsModel.setAppAdsButtonTextColor(response.getString("appAdsButtonTextColor"));
+                        showAdsModel.setBackgroundcolor(response.getString("backgroundcolor"));
+                        showAdsModel.setAdscount(response.getString("adscount"));
+                        loadAdsId.getAdsIds(showAdsModel);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    error.getLocalizedMessage();
+                }) {
+        };
+        LoadData.getInstance(context).addToRequestQueue(request);
+        return showAdsModel;
+    }
+
+    public interface LoadAdsId {
+        void getAdsIds(ShowAdsModel showAdsModel);
+    }
+
 }

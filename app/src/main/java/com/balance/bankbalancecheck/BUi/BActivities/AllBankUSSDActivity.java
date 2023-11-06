@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BModel.USSDCodeModel;
 import com.balance.bankbalancecheck.BUi.BAdapters.ALlBankUSSDAdapter;
 import com.balance.bankbalancecheck.BuildConfig;
@@ -56,6 +59,7 @@ public class AllBankUSSDActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
+        AdverClass.ShowScreenBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(R.string.ussd_code);

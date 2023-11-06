@@ -13,6 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
+import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.BModel.ShowAdsModel;
 import com.balance.bankbalancecheck.R;
 
 public class BankPrivacyActivity extends AppCompatActivity implements View.OnClickListener {
@@ -46,30 +49,30 @@ public class BankPrivacyActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void GuideActions() {
-//        LoanAdsClass.ShowActivityBannerAds(context,((ProgressBar) findViewById(R.id.progressBar)),(RelativeLayout) findViewById(R.id.RlBannerAd));
+        AdverClass.ShowScreenBannerAds(context,((ProgressBar) findViewById(R.id.progressBarAd)),(RelativeLayout) findViewById(R.id.RlAdver));
         IvBack.setVisibility(View.VISIBLE);
         ProgressDialog.setVisibility(View.VISIBLE);
         WebViewPolicy.setVisibility(View.GONE);
         TvNotFOund.setVisibility(View.GONE);
         TvTitle.setText(getString(R.string.privacy_policy));
-//        if (LoanAdsClass.isInternetOn(this)) {
-//            LoanConst.LoadAdsData(BankPrivacyActivity.this, new LoanConst.LoadAdsId() {
-//                @Override
-//                public void getAdsIds(LoanAdsModel loanAdsModel) {
-//                    if (!loanAdsModel.getAppPrivacyPolicyLink().equalsIgnoreCase("")) {
-//                        WebViewPolicy.setInitialScale(100);
-//                        WebSettings webPrivacySettings = WebViewPolicy.getSettings();
-//                        webPrivacySettings.setJavaScriptEnabled(true);
-//                        webPrivacySettings.setTextZoom(webPrivacySettings.getTextZoom() + 70);
-//                        WebViewPolicy.loadUrl("https://sites.google.com/view/sleeping-sound/home");
-//                        WebViewPolicy.setWebViewClient(new AppWebViewClients(ProgressDialog));
-//                    } else {
-//                        ProgressDialog.setVisibility(View.GONE);
-//                        TvNotFOund.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//            });
-//        }
+        if (AdverClass.SetInternetOn(this)) {
+            BankConstantsData.LoadAdsData(BankPrivacyActivity.this, new BankConstantsData.LoadAdsId() {
+                @Override
+                public void getAdsIds(ShowAdsModel loanAdsModel) {
+                    if (!loanAdsModel.getAppPrivacyPolicyLink().equalsIgnoreCase("")) {
+                        WebViewPolicy.setInitialScale(100);
+                        WebSettings webPrivacySettings = WebViewPolicy.getSettings();
+                        webPrivacySettings.setJavaScriptEnabled(true);
+                        webPrivacySettings.setTextZoom(webPrivacySettings.getTextZoom() + 70);
+                        WebViewPolicy.loadUrl(loanAdsModel.getAppPrivacyPolicyLink());
+                        WebViewPolicy.setWebViewClient(new AppWebViewClients(ProgressDialog));
+                    } else {
+                        ProgressDialog.setVisibility(View.GONE);
+                        TvNotFOund.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
     }
 
     @Override

@@ -20,8 +20,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BModel.Holiday;
 import com.balance.bankbalancecheck.BUi.BAdapters.BankAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.HolidayAdapter;
@@ -144,6 +146,7 @@ public class BankHolidayActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
+        AdverClass.ShowScreenBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         int i = 0;
         if (HolidayType.equalsIgnoreCase("BANK")) {
             BankList.clear();

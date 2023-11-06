@@ -9,7 +9,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,6 +36,7 @@ import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SIPCalculatorAct
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.SwapCalculatorActivity;
 import com.balance.bankbalancecheck.BUi.BAdapters.CalculatorsAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.FundsAdapter;
+import com.balance.bankbalancecheck.BUtils.ExitDialog;
 import com.balance.bankbalancecheck.BUtils.SchemesWebData;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.BuildConfig;
@@ -72,6 +77,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private ImageView IvBankBalance3;
     private int getBalance = 0;
     private ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
+    private TextView EdtBankName;
 
     public HomeScreenActivity() {
     }
@@ -116,6 +122,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         IvBankBalance1 = (ImageView) findViewById(R.id.IvBankBalance1);
         IvBankBalance3 = (ImageView) findViewById(R.id.IvBankBalance3);
         CardBankTranscationArrow = (CardView) findViewById(R.id.CardBankTranscationArrow);
+        EdtBankName = (TextView) findViewById(R.id.EdtBankName);
     }
 
     private void BankInitListeners() {
@@ -129,9 +136,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         CardShare.setOnClickListener(this);
         CardRate.setOnClickListener(this);
         CardUpdate.setOnClickListener(this);
-        IvBankBalance.setOnClickListener(this);
-        IvBankBalance1.setOnClickListener(this);
-        IvBankBalance3.setOnClickListener(this);
+        EdtBankName.setOnClickListener(this);
         bottom_menu.setOnItemSelectedListener(i -> {
             switch (i) {
                 case R.id.Menu_Home:
@@ -353,20 +358,25 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void GotoMutualFundsActivity(int position, ArrayList<LoanModel> strings) {
-        Intent intent = new Intent(context, LoanDetailsActivity.class);
-        intent.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
         switch (position) {
             case 0:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "mutual funds");
+                Intent intent = new Intent(context, MutualFundActivity.class);
+                startActivity(intent);
                 break;
             case 1:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "popular funds");
+                Intent in = new Intent(context, FundLoanDetailsActivity.class);
+                in.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
+                in.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/top-rated-funds");
+                startActivity(in);
                 break;
             case 2:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "explore funds");
+                Intent ins = new Intent(context, FundLoanDetailsActivity.class);
+                ins.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
+                ins.putExtra(BankConstantsData.LOAN_WEB, "https://groww.in/mutual-funds/category");
+                startActivity(ins);
                 break;
         }
-        startActivity(intent);
+
     }
 
     @Override
@@ -415,10 +425,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             case R.id.CardRate:
                 GotoRateUs();
                 break;
-            case R.id.IvBankBalance:
-            case R.id.IvBankBalance1:
-            case R.id.IvBankBalance3:
-                startActivity(new Intent(context,SelectBankActivity.class));
+            case R.id.EdtBankName:
+                startActivity(new Intent(context, SelectBankActivity.class));
                 break;
             case R.id.CardUpdate:
                 break;
@@ -575,5 +583,30 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         } catch (ActivityNotFoundException unused) {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, "").isEmpty()) {
+            EdtBankName.setText("");
+        } else {
+            EdtBankName.setText(new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, ""));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        ExitDialog exitDialog = new ExitDialog(HomeScreenActivity.this, context, () -> finishAffinity());
+        exitDialog.show();
+        exitDialog.setCancelable(false);
+        WindowManager.LayoutParams lp = exitDialog.getWindow().getAttributes();
+        Window window = exitDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+        window.setAttributes(lp);
+
     }
 }

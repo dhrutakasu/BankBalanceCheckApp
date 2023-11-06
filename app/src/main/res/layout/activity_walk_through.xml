@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BUi.BActivities.WalkThroughActivity">
+
+    <RelativeLayout
+        android:id="@+id/RlWelcomeBgThorugh"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/PagerWalk"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@+id/RlTextsThorugh"
+            android:layout_alignParentTop="true" />
+
+        <RelativeLayout
+            android:id="@+id/RlTextsThorugh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/RlAdViewMain"
+            android:layout_marginBottom="2dp">
+
+            <ImageView
+                android:id="@+id/TvWalkThorughContinue"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:src="@drawable/ic_arrow_next"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RlAdViewMain"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom|center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom|center">
+
+            <RelativeLayout
+                android:id="@+id/RlAdView"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="center|bottom" />
+        </RelativeLayout>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
