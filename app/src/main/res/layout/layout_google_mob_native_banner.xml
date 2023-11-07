@@ -31,7 +31,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.gms.ads.nativead.MediaView
-                    android:id="@+id/MediaGooAdMedia"
+                    android:id="@+id/MediaGAdMedia"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -74,7 +74,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/IvGooAdIcon"
+                        android:id="@+id/IvGAdIcon"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:adjustViewBounds="true"
@@ -86,7 +86,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/TvGooAdHeadline"
+                            android:id="@+id/TvGAdHeadline"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:id="@+id/TvGooAdAdvertiser"
+                                android:id="@+id/TvGAdAdvertiser"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="bottom"
@@ -117,7 +117,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/TvGooAdBody"
+                                android:id="@+id/TvGAdBody"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
@@ -132,7 +132,7 @@
                                 android:textSize="12sp" />
 
                             <RatingBar
-                                android:id="@+id/RbGooAdStars"
+                                android:id="@+id/RbGAdStars"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -156,21 +156,21 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/TvGooAdPrice"
+                            android:id="@+id/TvGAdPrice"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/TvGooAdStore"
+                            android:id="@+id/TvGAdStore"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
                         <Button
-                            android:id="@+id/BtnGooAdCallToAction"
+                            android:id="@+id/BtnGAdCallToAction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"

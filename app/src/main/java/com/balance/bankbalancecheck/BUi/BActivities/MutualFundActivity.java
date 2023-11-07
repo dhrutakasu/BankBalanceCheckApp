@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BUi.BAdapters.MutualFundAdapter;
 import com.balance.bankbalancecheck.R;
@@ -43,6 +46,7 @@ public class MutualFundActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         TxtTitle.setText(getString(R.string.mutual_fund));
 
@@ -53,35 +57,40 @@ public class MutualFundActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void GotoMutualFundActivity(String[] strings, int position) {
-        Intent intent = new Intent(context, FundLoanDetailsActivity.class);
-        intent.putExtra(BankConstantsData.LOAN_TYPE, strings[position].toString());
-        switch (position) {
-            case 0:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/balanced-funds");
-                break;
-            case 1:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/better-than-fixed-deposit/26916795-d233-47c4-b806-eef82bf500b5");
-                break;
-            case 2:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/best-return-funds");
-                break;
-            case 3:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/index-funds/3b47e748-ee39-430c-9df1-d8fdb4077719");
-                break;
-            case 4:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/top-rated-funds");
-                break;
-            case 5:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/invest-to-save-tax/f769eed4-fba6-40f6-a2c3-1096ecd53df8");
-                break;
-            case 6:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/invest-in-large-companies/dbd8a28f-1bef-4b9c-b9d0-8eaf9c28521d");
-                break;
-            case 7:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "https://groww.in/mutual-funds/amc");
-                break;
-        }
-        startActivity(intent);
+        AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+            @Override
+            public void AdListen() {
+                Intent intent = new Intent(context, FundLoanDetailsActivity.class);
+                intent.putExtra(BankConstantsData.LOAN_TYPE, strings[position].toString());
+                switch (position) {
+                    case 0:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/balanced-funds");
+                        break;
+                    case 1:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/better-than-fixed-deposit/26916795-d233-47c4-b806-eef82bf500b5");
+                        break;
+                    case 2:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/best-return-funds");
+                        break;
+                    case 3:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/index-funds/3b47e748-ee39-430c-9df1-d8fdb4077719");
+                        break;
+                    case 4:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/top-rated-funds");
+                        break;
+                    case 5:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/invest-to-save-tax/f769eed4-fba6-40f6-a2c3-1096ecd53df8");
+                        break;
+                    case 6:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/investment-ideas/invest-in-large-companies/dbd8a28f-1bef-4b9c-b9d0-8eaf9c28521d");
+                        break;
+                    case 7:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "https://groww.in/mutual-funds/amc");
+                        break;
+                }
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

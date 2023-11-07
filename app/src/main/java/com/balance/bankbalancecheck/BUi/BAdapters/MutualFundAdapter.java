@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.balance.bankbalancecheck.BModel.LoanModel;
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BUi.BActivities.Calculators.ReturnCalculatorActivity;
 import com.balance.bankbalancecheck.R;
-
-import java.util.ArrayList;
 
 public class MutualFundAdapter extends RecyclerView.Adapter<MutualFundAdapter.MyViewHolder> {
     private final Context context;
@@ -43,8 +40,13 @@ public class MutualFundAdapter extends RecyclerView.Adapter<MutualFundAdapter.My
             @Override
             public void onClick(View v) {
                 if ((strings.length - 1) == position) {
-                    Intent intent = new Intent(context, ReturnCalculatorActivity.class);
-                    context.startActivity(intent);
+                    AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                        @Override
+                        public void AdListen() {
+                            Intent intent = new Intent(context, ReturnCalculatorActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
                 } else
                     clickListener.CalculatorsClickListener(strings, position);
             }

@@ -29,30 +29,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.15" />
-            <TextView
-                android:id="@+id/TxtTranscationDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center"
-                android:padding="@dimen/_5sdp"
-                android:text="@string/transaction_details"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/IvBankClose" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/main_color"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginEnd="@dimen/_18sdp"
-                app:layout_constraintStart_toStartOf="@id/TxtTranscationDetail"
-                app:layout_constraintEnd_toEndOf="@id/TxtTranscationDetail"
-                app:layout_constraintTop_toBottomOf="@id/TxtTranscationDetail"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardNBank"
@@ -68,7 +44,7 @@
                 app:layout_constraintBottom_toTopOf="@id/TxtBankMsg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TxtTranscationDetail">
+                app:layout_constraintTop_toBottomOf="@+id/IvBankClose">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -94,7 +70,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"
-                        android:singleLine="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -115,6 +90,8 @@
                 android:layout_marginBottom="@dimen/_18sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:text="To receive balance inquiries via missed call, user should have registered or must register their mobile phone number with the bank."
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

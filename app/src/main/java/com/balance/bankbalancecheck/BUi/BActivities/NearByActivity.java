@@ -5,16 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BUi.BAdapters.NearByAdapter;
 import com.balance.bankbalancecheck.R;
 
@@ -56,6 +57,7 @@ public class NearByActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         TxtTitle.setText(R.string.near_by);
         ArrayList<String> strings = new ArrayList<>();

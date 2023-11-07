@@ -6,13 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
@@ -55,6 +56,7 @@ public class GratuityCalculatorActivity extends AppCompatActivity implements Vie
     }
 
     private void CalInitActions() {
+        AdverClass.ShowLayoutNativeAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(getResources().getString(R.string.gratuity_calculator));

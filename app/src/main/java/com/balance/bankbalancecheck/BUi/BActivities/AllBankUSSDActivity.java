@@ -59,7 +59,7 @@ public class AllBankUSSDActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
-        AdverClass.ShowScreenBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(R.string.ussd_code);

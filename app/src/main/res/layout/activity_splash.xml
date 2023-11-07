@@ -16,10 +16,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_splash_text"
+        android:text="Finance"
+        android:gravity="center"
+        android:textColor="@color/main_color"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="@dimen/_35sdp"
         app:layout_constraintTop_toTopOf="@id/guide_text"
         app:layout_constraintBottom_toBottomOf="@id/guide_text_bottom"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +35,7 @@
         android:layout_height="0dp"
         android:text="Start Manging your life finance"
         android:gravity="center"
-        android:textSize="@dimen/_16sdp"
+        android:textSize="@dimen/_14sdp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/guide_sub_text"
@@ -64,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.73" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_sub_text"

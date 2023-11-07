@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
@@ -60,6 +63,7 @@ public class RdCalculatorActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void CalInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         String[] timePeriod = {"Yearly", "Half Yearly", "Quarterly", "Monthly"};
 
         ImgBack.setVisibility(View.VISIBLE);

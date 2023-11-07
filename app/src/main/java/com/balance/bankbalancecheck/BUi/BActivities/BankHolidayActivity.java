@@ -43,7 +43,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class BankHolidayActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, AdapterView.OnItemClickListener {
+public class BankHolidayActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     private Context context;
     private ImageView ImgBack, ImgShareApp;
     private TextView TxtTitle, TxtTitle2023, TxtTitle2024;
@@ -146,7 +146,7 @@ public class BankHolidayActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
-        AdverClass.ShowScreenBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         int i = 0;
         if (HolidayType.equalsIgnoreCase("BANK")) {
             BankList.clear();
@@ -309,18 +309,21 @@ public class BankHolidayActivity extends AppCompatActivity implements View.OnCli
                 GotoShareApp();
                 break;
             case R.id.CardBank2023:
-                GotoSetUpList(RvHolidayList2023);
+                GotoSetUpList(RvHolidayList2023, TxtTitle2023);
                 break;
             case R.id.CardBank2024:
-                GotoSetUpList(RvHolidayList2024);
+                GotoSetUpList(RvHolidayList2024, TxtTitle2024);
                 break;
         }
     }
 
-    private void GotoSetUpList(View view) {
+    private void GotoSetUpList(View view, TextView txtTitle) {
+        TxtTitle2023.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_right, 0);
+        TxtTitle2024.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_right, 0);
         if (view.getVisibility() == View.VISIBLE) {
             view.setVisibility(View.GONE);
         } else {
+            txtTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
             view.setVisibility(View.VISIBLE);
         }
     }
@@ -359,8 +362,20 @@ public class BankHolidayActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        StateStr = StateList.get(i).toString();
+        StateStr = adapterView.getItemAtPosition(i).toString();
         new BankPreferences(context).putPrefString(BankPreferences.STATE_NAME, StateStr);
         GotoGetHoliday(StateStr);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        StateStr = parent.getItemAtPosition(position).toString();
+//        new BankPreferences(context).putPrefString(BankPreferences.STATE_NAME, StateStr);
+//        GotoGetHoliday(StateStr);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

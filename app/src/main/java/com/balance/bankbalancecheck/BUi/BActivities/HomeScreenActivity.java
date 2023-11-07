@@ -8,16 +8,16 @@ import android.icu.text.NumberFormat;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BHelper.BankBalanceHelper;
 import com.balance.bankbalancecheck.BModel.LoanModel;
@@ -137,6 +137,9 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         CardRate.setOnClickListener(this);
         CardUpdate.setOnClickListener(this);
         EdtBankName.setOnClickListener(this);
+        IvBankBalance.setOnClickListener(this);
+        IvBankBalance1.setOnClickListener(this);
+        IvBankBalance3.setOnClickListener(this);
         bottom_menu.setOnItemSelectedListener(i -> {
             switch (i) {
                 case R.id.Menu_Home:
@@ -172,6 +175,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         GetCreditLoan();
         GetMutualFund();
         GetCalculators();
@@ -332,48 +336,68 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void GotoCreditLoanActivity(int position, ArrayList<LoanModel> strings) {
-        Intent intent = new Intent(context, LoanDetailsActivity.class);
-        intent.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
-        switch (position) {
-            case 0:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "car loan");
-                break;
-            case 1:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "home loan");
-                break;
-            case 2:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "personal loan");
-                break;
-            case 3:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "business loan");
-                break;
-            case 4:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "education loan");
-                break;
-            case 5:
-                intent.putExtra(BankConstantsData.LOAN_WEB, "credit loan");
-                break;
-        }
-        startActivity(intent);
+        AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+            @Override
+            public void AdListen() {
+                Intent intent = new Intent(context, LoanDetailsActivity.class);
+                intent.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
+                switch (position) {
+                    case 0:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "car loan");
+                        break;
+                    case 1:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "home loan");
+                        break;
+                    case 2:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "personal loan");
+                        break;
+                    case 3:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "business loan");
+                        break;
+                    case 4:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "education loan");
+                        break;
+                    case 5:
+                        intent.putExtra(BankConstantsData.LOAN_WEB, "credit loan");
+                        break;
+                }
+                startActivity(intent);
+            }
+        });
     }
 
     private void GotoMutualFundsActivity(int position, ArrayList<LoanModel> strings) {
         switch (position) {
             case 0:
-                Intent intent = new Intent(context, MutualFundActivity.class);
-                startActivity(intent);
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        Intent intent = new Intent(context, MutualFundActivity.class);
+                        startActivity(intent);
+                    }
+                });
                 break;
             case 1:
-                Intent in = new Intent(context, FundLoanDetailsActivity.class);
-                in.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
-                in.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/top-rated-funds");
-                startActivity(in);
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        Intent in = new Intent(context, FundLoanDetailsActivity.class);
+                        in.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
+                        in.putExtra(BankConstantsData.LOAN_WEB, "https://www.paytmmoney.com/mutual-funds/top-rated-funds");
+                        startActivity(in);
+                    }
+                });
                 break;
             case 2:
-                Intent ins = new Intent(context, FundLoanDetailsActivity.class);
-                ins.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
-                ins.putExtra(BankConstantsData.LOAN_WEB, "https://groww.in/mutual-funds/category");
-                startActivity(ins);
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        Intent ins = new Intent(context, FundLoanDetailsActivity.class);
+                        ins.putExtra(BankConstantsData.LOAN_TYPE, strings.get(position).getName().toString());
+                        ins.putExtra(BankConstantsData.LOAN_WEB, "https://groww.in/mutual-funds/category");
+                        startActivity(ins);
+                    }
+                });
                 break;
         }
 
@@ -383,41 +407,76 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.IvIFSCCode:
-                if (!new BankPreferences(context).getPrefString(BankPreferences.BRANCH_NAME, "").isEmpty()) {
-                    String BankStr = new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, "");
-                    String StateStr = new BankPreferences(context).getPrefString(BankPreferences.STATE_NAME, "");
-                    String DistrictStr = new BankPreferences(context).getPrefString(BankPreferences.DISTRICT_NAME, "");
-                    String BranchStr = new BankPreferences(context).getPrefString(BankPreferences.BRANCH_NAME, "");
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        if (!new BankPreferences(context).getPrefString(BankPreferences.BRANCH_NAME, "").isEmpty()) {
+                            String BankStr = new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, "");
+                            String StateStr = new BankPreferences(context).getPrefString(BankPreferences.STATE_NAME, "");
+                            String DistrictStr = new BankPreferences(context).getPrefString(BankPreferences.DISTRICT_NAME, "");
+                            String BranchStr = new BankPreferences(context).getPrefString(BankPreferences.BRANCH_NAME, "");
 
-                    startActivity(new Intent(context, IFSCDetailsActivity.class)
-                            .putExtra(BankConstantsData.IFSC_BANK, BankStr)
-                            .putExtra(BankConstantsData.IFSC_STATE, StateStr)
-                            .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
-                            .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
-                } else {
-                    startActivity(new Intent(context, IFSCActivity.class));
-                }
+                            startActivity(new Intent(context, IFSCDetailsActivity.class)
+                                    .putExtra(BankConstantsData.IFSC_BANK, BankStr)
+                                    .putExtra(BankConstantsData.IFSC_STATE, StateStr)
+                                    .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
+                                    .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
+                        } else {
+                            startActivity(new Intent(context, IFSCActivity.class));
+                        }
+                    }
+                });
                 break;
             case R.id.IvUSSDCode:
-                startActivity(new Intent(context, USSDBankingActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, USSDBankingActivity.class));
+                    }
+                });
                 break;
             case R.id.IvNetBanking:
-                startActivity(new Intent(context, NetBankinActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, NetBankinActivity.class));
+                    }
+                });
                 break;
             case R.id.IvBankHoliday:
-                startActivity(new Intent(context, BankHolidayActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, BankHolidayActivity.class));
+                    }
+                });
                 break;
             case R.id.IvBankATMBox:
-                startActivity(new Intent(context, NearByActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, NearByActivity.class));
+                    }
+                });
                 break;
             case R.id.TxtBankTranscation:
-                if (IsTransc) {
-                    startActivity(new Intent(context, TransactionActivity.class)
-                            .putExtra(BankConstantsData.BANK_NAME, TxtBankName.getText().toString()));
-                }
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        if (IsTransc) {
+                            startActivity(new Intent(context, TransactionActivity.class)
+                                    .putExtra(BankConstantsData.BANK_NAME, TxtBankName.getText().toString()));
+                        }
+                    }
+                });
                 break;
             case R.id.CardPrivacy:
-                startActivity(new Intent(context, BankPrivacyActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, BankPrivacyActivity.class));
+                    }
+                });
                 break;
             case R.id.CardShare:
                 GotoShareApp();
@@ -426,7 +485,22 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                 GotoRateUs();
                 break;
             case R.id.EdtBankName:
-                startActivity(new Intent(context, SelectBankActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, SelectBankActivity.class));
+                    }
+                });
+                break;
+            case R.id.IvBankBalance:
+            case R.id.IvBankBalance1:
+            case R.id.IvBankBalance3:
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, BankBalanceActivity.class));
+                    }
+                });
                 break;
             case R.id.CardUpdate:
                 break;
@@ -466,44 +540,49 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void GotoCalculatorsActivity(int position) {
-        switch (position) {
-            case 0:
-                startActivity(new Intent(context, SIPCalculatorActivity.class));
-                break;
-            case 1:
-                startActivity(new Intent(context, EMICalculatorActivity.class));
-                break;
-            case 2:
-                startActivity(new Intent(context, LoanAmountCalculatorActivity.class));
-                break;
-            case 3:
-                startActivity(new Intent(context, GSTCalculatorActivity.class));
-                break;
-            case 4:
-                startActivity(new Intent(context, FDCalculatorActivity.class));
-                break;
-            case 5:
-                startActivity(new Intent(context, BrokerageCalculatorActivity.class));
-                break;
-            case 6:
-                startActivity(new Intent(context, SwapCalculatorActivity.class));
-                break;
-            case 7:
-                startActivity(new Intent(context, RdCalculatorActivity.class));
-                break;
-            case 8:
-                startActivity(new Intent(context, PPFCalculatorActivity.class));
-                break;
-            case 9:
-                startActivity(new Intent(context, EPFCalculatorActivity.class));
-                break;
-            case 10:
-                startActivity(new Intent(context, InflationCalculatorActivity.class));
-                break;
-            case 11:
-                startActivity(new Intent(context, GratuityCalculatorActivity.class));
-                break;
-        }
+        AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+            @Override
+            public void AdListen() {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(context, SIPCalculatorActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(context, EMICalculatorActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(context, LoanAmountCalculatorActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(context, GSTCalculatorActivity.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(context, FDCalculatorActivity.class));
+                        break;
+                    case 5:
+                        startActivity(new Intent(context, BrokerageCalculatorActivity.class));
+                        break;
+                    case 6:
+                        startActivity(new Intent(context, SwapCalculatorActivity.class));
+                        break;
+                    case 7:
+                        startActivity(new Intent(context, RdCalculatorActivity.class));
+                        break;
+                    case 8:
+                        startActivity(new Intent(context, PPFCalculatorActivity.class));
+                        break;
+                    case 9:
+                        startActivity(new Intent(context, EPFCalculatorActivity.class));
+                        break;
+                    case 10:
+                        startActivity(new Intent(context, InflationCalculatorActivity.class));
+                        break;
+                    case 11:
+                        startActivity(new Intent(context, GratuityCalculatorActivity.class));
+                        break;
+                }
+            }
+        });
     }
 
     private void GetSchemes() {
@@ -529,36 +608,41 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void GotoSchemeActivity(int position, ArrayList<LoanModel> strings) {
-        Intent intent = new Intent(context, ViewSchemesDetailsActivity.class);
-        System.out.println("===== : " + new SchemesWebData().getSCHEME_PM_VAYA());
-        switch (position) {
-            case 0:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PUBLIC_PF());
-                break;
-            case 1:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_EMPLOYEE_PF());
-                break;
-            case 2:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_NATIONAL_PS());
-                break;
-            case 3:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_SENIOR_CS());
-                break;
-            case 4:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_NATIONAL_SC());
-                break;
-            case 5:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_POST_OFFICE_SS());
-                break;
-            case 6:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PM_VAYA());
-                break;
-            case 7:
-                intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PM_JAN_DHAN());
-                break;
-        }
-        intent.putExtra(BankConstantsData.SCHEMES_TITLE, strings.get(position).toString());
-        startActivity(intent);
+        AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+            @Override
+            public void AdListen() {
+                Intent intent = new Intent(context, ViewSchemesDetailsActivity.class);
+                System.out.println("===== : " + new SchemesWebData().getSCHEME_PM_VAYA());
+                switch (position) {
+                    case 0:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PUBLIC_PF());
+                        break;
+                    case 1:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_EMPLOYEE_PF());
+                        break;
+                    case 2:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_NATIONAL_PS());
+                        break;
+                    case 3:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_SENIOR_CS());
+                        break;
+                    case 4:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_NATIONAL_SC());
+                        break;
+                    case 5:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_POST_OFFICE_SS());
+                        break;
+                    case 6:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PM_VAYA());
+                        break;
+                    case 7:
+                        intent.putExtra(BankConstantsData.SCHEMES_LINK, new SchemesWebData().getSCHEME_PM_JAN_DHAN());
+                        break;
+                }
+                intent.putExtra(BankConstantsData.SCHEMES_TITLE, strings.get(position).getName().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void GotoShareApp() {

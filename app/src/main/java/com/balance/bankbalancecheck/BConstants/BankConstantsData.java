@@ -43,7 +43,7 @@ import kotlin.jvm.internal.Ref;
 import kotlin.text.Regex;
 
 public class BankConstantsData {
-    public static final String ADS_URL = "https://7starinnovation.com/api/loan.json";
+    public static final String ADS_URL = "https://7starinnovation.com/api/bankbalancenew.json";
     public static final String SCHEMES_LINK = "SCHEMES_LINK";
     public static final String SCHEMES_TITLE = "SCHEMES_TITLE";
     public static final String LOAN_TYPE = "LOAN_TYPE";

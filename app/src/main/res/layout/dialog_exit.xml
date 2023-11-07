@@ -23,36 +23,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <RelativeLayout
+                android:id="@+id/RlAdver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:gravity="bottom|center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/progressBarAd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <com.facebook.ads.NativeAdLayout
+                    android:id="@+id/NativeBAdContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
             <ImageView
                 android:id="@+id/IvDialogQuitTitle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintWidth_percent="0.55"
-                app:layout_constraintHeight_percent="0.35"
                 android:src="@drawable/ic_exit_vector"
+                app:layout_constraintBottom_toBottomOf="@+id/RlAdver"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/RlAdver" />
+
             <TextView
                 android:id="@+id/BtnDialogQuitTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="left"
                 android:text="Exit Now!!"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintBottom_toTopOf="@+id/BtnDialogQuit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/IvDialogQuitTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/RlAdver" />
 
             <TextView
                 android:id="@+id/BtnDialogQuit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:paddingStart="@dimen/_8sdp"
@@ -60,6 +89,7 @@
                 android:text="Are you sure you want to exit?"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
+                app:layout_constraintBottom_toTopOf="@+id/TxtCancel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/BtnDialogQuitTitle" />
@@ -67,7 +97,7 @@
                 android:id="@+id/TxtCancel"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_weight="0.5"
@@ -88,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_weight="0.5"
                 android:background="@drawable/ic_exit"
@@ -111,25 +141,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="20dp"
                 app:layout_constraintGuide_percent="0.5" />
-            <androidx.cardview.widget.CardView
-                android:id="@+id/CardNativeExit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_2sdp"
-                app:cardCornerRadius="@dimen/_3sdp"
-                app:cardElevation="@dimen/_5sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <FrameLayout
-                    android:id="@+id/FlNativeExit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp" />
-            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

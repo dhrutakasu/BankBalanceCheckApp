@@ -13,12 +13,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BUi.BAdapters.BankAdapter;
 import com.balance.bankbalancecheck.BUi.BAdapters.BranchAdapter;
@@ -97,6 +98,7 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         RvIFSCBank.setLayoutManager(new LinearLayoutManager(context));
         RvIFSCState.setLayoutManager(new LinearLayoutManager(context));
         RvIFSCDistrict.setLayoutManager(new LinearLayoutManager(context));
@@ -243,17 +245,22 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
                     branchAdapter = new BranchAdapter(context, BranchList, new BranchAdapter.BankListener() {
                         @Override
                         public void BankClick(int pos, ArrayList<String> strings) {
-                            BranchStr = strings.get(pos).toString();
+                            AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                                @Override
+                                public void AdListen() {
+                                    BranchStr = strings.get(pos).toString();
 
-                            new BankPreferences(context).putPrefString(BankPreferences.STATE_NAME, StateStr);
-                            new BankPreferences(context).putPrefString(BankPreferences.DISTRICT_NAME, DistrictStr);
-                            new BankPreferences(context).putPrefString(BankPreferences.BRANCH_NAME, BranchStr);
-                            startActivity(new Intent(context, IFSCDetailsActivity.class)
-                                    .putExtra(BankConstantsData.IFSC_BANK, BankStr)
-                                    .putExtra(BankConstantsData.IFSC_STATE, StateStr)
-                                    .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
-                                    .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
-                            finish();
+                                    new BankPreferences(context).putPrefString(BankPreferences.STATE_NAME, StateStr);
+                                    new BankPreferences(context).putPrefString(BankPreferences.DISTRICT_NAME, DistrictStr);
+                                    new BankPreferences(context).putPrefString(BankPreferences.BRANCH_NAME, BranchStr);
+                                    startActivity(new Intent(context, IFSCDetailsActivity.class)
+                                            .putExtra(BankConstantsData.IFSC_BANK, BankStr)
+                                            .putExtra(BankConstantsData.IFSC_STATE, StateStr)
+                                            .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
+                                            .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
+                                    finish();
+                                }
+                            });
                         }
                     });
                     RvIFSCBranch.setAdapter(branchAdapter);
@@ -332,12 +339,17 @@ public class IFSCActivity extends AppCompatActivity implements View.OnClickListe
             IFSCType = "BRANCH";
             BankInitActions();
         } else if (IFSCType.equalsIgnoreCase("BRANCH")) {
-            BranchStr = BranchList.get(i).toString();
-            startActivity(new Intent(context, IFSCDetailsActivity.class)
-                    .putExtra(BankConstantsData.IFSC_BANK, BankStr)
-                    .putExtra(BankConstantsData.IFSC_STATE, StateStr)
-                    .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
-                    .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
+            AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                @Override
+                public void AdListen() {
+                    BranchStr = BranchList.get(i).toString();
+                    startActivity(new Intent(context, IFSCDetailsActivity.class)
+                            .putExtra(BankConstantsData.IFSC_BANK, BankStr)
+                            .putExtra(BankConstantsData.IFSC_STATE, StateStr)
+                            .putExtra(BankConstantsData.IFSC_DISTRICT, DistrictStr)
+                            .putExtra(BankConstantsData.IFSC_BRANCH, BranchStr));
+                }
+            });
         }
     }
 

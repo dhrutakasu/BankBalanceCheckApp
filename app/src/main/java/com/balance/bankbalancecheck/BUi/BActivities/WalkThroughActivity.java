@@ -9,12 +9,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BUi.BAdapters.WalkThorughAdapter;
 import com.balance.bankbalancecheck.R;
-import com.google.android.material.tabs.TabLayout;
 
 public class WalkThroughActivity extends AppCompatActivity {
 
@@ -53,9 +51,13 @@ public class WalkThroughActivity extends AppCompatActivity {
             } else if (PagerWalk.getCurrentItem() == 1) {
                 PagerWalk.setCurrentItem(2);
             } else {
-                Intent intent = new Intent(context, HomeScreenActivity.class);
-                startActivity(intent);
-                finish();
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, HomeScreenActivity.class));
+                        finish();
+                    }
+                });
             }
         });
     }

@@ -155,7 +155,7 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:drawableEnd="@drawable/ic_arrow_right"
                         android:drawablePadding="@dimen/_8sdp"
                         android:drawableTint="@color/main_color"
                         android:fontFamily="@font/poppins_semibold"
@@ -192,7 +192,7 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:drawableEnd="@drawable/ic_arrow_right"
                         android:drawablePadding="@dimen/_8sdp"
                         android:drawableTint="@color/main_color"
                         android:fontFamily="@font/poppins_semibold"
@@ -251,10 +251,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
 
         <com.facebook.ads.NativeAdLayout
-            android:id="@+id/NativeBannerAdContainer"
+            android:id="@+id/NativeBAdContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"

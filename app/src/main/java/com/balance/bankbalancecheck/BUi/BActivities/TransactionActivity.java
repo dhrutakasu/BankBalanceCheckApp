@@ -13,10 +13,12 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BHelper.BankBalanceHelper;
 import com.balance.bankbalancecheck.BModel.SMSModel;
@@ -74,6 +76,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         Type = "all";
         BankName = getIntent().getStringExtra(BankConstantsData.BANK_NAME);
         helper = new BankBalanceHelper(context);
@@ -292,6 +295,29 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void TransactionClick(int pos, ArrayList<SMSModel> strings) {
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_transcation);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+        window.setAttributes(lp);
+        ImageView IvBankClose = dialog.findViewById(R.id.IvBankClose);
+        TextView TxtBankName = dialog.findViewById(R.id.TxtBankName);
+        TextView TxtBankMsg = dialog.findViewById(R.id.TxtBankMsg);
+        TxtBankName.setText(strings.get(pos).getBankName());
+        TxtBankMsg.setText(strings.get(pos).getBodyMsg());
+        IvBankClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
+        dialog.show();
     }
 }

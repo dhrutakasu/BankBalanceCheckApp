@@ -1,7 +1,6 @@
 package com.balance.bankbalancecheck.BUi.BActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ClipData;
@@ -11,11 +10,13 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
@@ -76,6 +77,7 @@ public class IFSCDetailsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(BranchStr);

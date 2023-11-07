@@ -49,13 +49,13 @@ public class BankPrivacyActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void GuideActions() {
-        AdverClass.ShowScreenBannerAds(context,((ProgressBar) findViewById(R.id.progressBarAd)),(RelativeLayout) findViewById(R.id.RlAdver));
+        AdverClass.ShowLayoutBannerAds(context,((ProgressBar) findViewById(R.id.progressBarAd)),(RelativeLayout) findViewById(R.id.RlAdver));
         IvBack.setVisibility(View.VISIBLE);
         ProgressDialog.setVisibility(View.VISIBLE);
         WebViewPolicy.setVisibility(View.GONE);
         TvNotFOund.setVisibility(View.GONE);
         TvTitle.setText(getString(R.string.privacy_policy));
-        if (AdverClass.SetInternetOn(this)) {
+        if (AdverClass.IsInternetOn(this)) {
             BankConstantsData.LoadAdsData(BankPrivacyActivity.this, new BankConstantsData.LoadAdsId() {
                 @Override
                 public void getAdsIds(ShowAdsModel loanAdsModel) {

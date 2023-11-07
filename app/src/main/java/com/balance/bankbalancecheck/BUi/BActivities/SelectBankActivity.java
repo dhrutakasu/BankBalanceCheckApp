@@ -6,31 +6,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BUi.BAdapters.BankAdapter;
-import com.balance.bankbalancecheck.BUi.BAdapters.BranchAdapter;
-import com.balance.bankbalancecheck.BUi.BAdapters.DistrictAdapter;
-import com.balance.bankbalancecheck.BUi.BAdapters.StateAdapter;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SelectBankActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     private Context context;
@@ -71,6 +64,7 @@ public class SelectBankActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         RvBankBank.setLayoutManager(new LinearLayoutManager(context));
         BankList = new ArrayList<>();
         int i = 0;

@@ -9,8 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BuildConfig;
 import com.balance.bankbalancecheck.R;
 
@@ -61,6 +64,7 @@ public class USSDBankingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         TxtTitle.setText(R.string.ussd_banking);
     }
@@ -93,7 +97,12 @@ public class USSDBankingActivity extends AppCompatActivity implements View.OnCli
                 GotoCall("tel:*99#");
                 break;
             case R.id.CardAllBank:
-                startActivity(new Intent(context, AllBankUSSDActivity.class));
+                AdverClass.ShowLayoutInterstitialAd(context, new AdverClass.setAdListerner() {
+                    @Override
+                    public void AdListen() {
+                        startActivity(new Intent(context, AllBankUSSDActivity.class));
+                    }
+                });
                 break;
             case R.id.CardSendMoney:
                 GotoCall("tel:*99*1#");

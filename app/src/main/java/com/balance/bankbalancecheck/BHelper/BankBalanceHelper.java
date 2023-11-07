@@ -103,8 +103,12 @@ public class BankBalanceHelper extends SQLiteOpenHelper {
         System.out.println("---- - -- bank : " + bankName);
         BankBalanceModel bankBalanceModels = new BankBalanceModel();
         SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM " + BANK_TABLE + " WHERE " + BANK_NAME + "=? ", new String[]{bankName});
+        String query = "SELECT * FROM " + BANK_TABLE + " WHERE " + BANK_NAME + " LIKE ? ";
+        System.out.println("---- - -- bank qq: " + query + new String[]{"%" + bankName + "%"});
+        Cursor cursor = database.rawQuery(query, new String[]{"%" + bankName + "%"});
         cursor.moveToFirst();
+        System.out.println("----------- cccc qq: " + cursor.toString());
+        System.out.println("----------- cccc : " + cursor.getCount());
         if (cursor.moveToFirst()) {
             do {
                 String miniStatement = null;

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,11 +18,11 @@ import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.balance.bankbalancecheck.BConstants.BankConstantsData;
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BHelper.BankBalanceHelper;
-import com.balance.bankbalancecheck.BModel.BankBalanceModel;
 import com.balance.bankbalancecheck.BUi.BAdapters.BankAdapter;
 import com.balance.bankbalancecheck.BUtilsClasses.BankPreferences;
 import com.balance.bankbalancecheck.BuildConfig;
@@ -78,6 +77,7 @@ public class NetBankinActivity extends AppCompatActivity implements TextWatcher,
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         RvNetBank.setLayoutManager(new LinearLayoutManager(context));
         BankList = new ArrayList<>();
         if (new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, "").isEmpty()) {

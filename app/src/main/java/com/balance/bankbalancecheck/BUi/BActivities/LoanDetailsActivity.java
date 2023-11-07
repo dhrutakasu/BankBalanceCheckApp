@@ -1,23 +1,20 @@
 package com.balance.bankbalancecheck.BUi.BActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BConstants.BankConstantsData;
-import com.balance.bankbalancecheck.BUi.BAdapters.NearByAdapter;
 import com.balance.bankbalancecheck.R;
-
-import java.util.ArrayList;
 
 public class LoanDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
@@ -46,6 +43,7 @@ public class LoanDetailsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void BankInitActions() {
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         TxtTitle.setText(getIntent().getStringExtra(BankConstantsData.LOAN_TYPE));
 

@@ -1,7 +1,6 @@
 package com.balance.bankbalancecheck.BUi.BActivities.Calculators;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -91,14 +90,13 @@ public class EMICalculatorActivity extends AppCompatActivity implements View.OnC
         TxtTotalInterestBtn.setTextColor(getResources().getColor(R.color.main_color));
         TxtTotalPaymentBtn.setBackgroundResource(R.drawable.ic_btn_boarder);
         TxtTotalPaymentBtn.setTextColor(getResources().getColor(R.color.main_color));
-        view.setBackgroundResource(R.drawable.ic_reset);
-        view.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.main_color));
+        view.setBackgroundResource(R.drawable.ic_emi);
         view.setTextColor(getResources().getColor(R.color.white));
         emiAdapter.getItem(position);
     }
 
     private void CalInitActions() {
-        AdverClass.ShowScreenBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
+        AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         ImgBack.setVisibility(View.VISIBLE);
         ImgShareApp.setVisibility(View.VISIBLE);
         TxtTitle.setText(getResources().getString(R.string.emi_calculator));
