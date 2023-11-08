@@ -121,6 +121,7 @@ public class NetBankinActivity extends AppCompatActivity implements TextWatcher,
             ConsEdtNetBank.setVisibility(View.GONE);
             ConsNetBank.setVisibility(View.VISIBLE);
             helper = new BankBalanceHelper(context);
+            TxtTitle.setText(new BankPreferences(context).getPrefString(BankPreferences.BANK_NAME, ""));
             new AsyncTask<Void, Void, String>() {
                 @Override
                 protected void onPreExecute() {
@@ -140,13 +141,11 @@ public class NetBankinActivity extends AppCompatActivity implements TextWatcher,
                     System.out.println("------ -- : " + result.toString());
                     WebSettings webPrivacySettings = WebNetBanking.getSettings();
                     webPrivacySettings.setJavaScriptEnabled(true);
-                    WebNetBanking.setWebViewClient(new WebViewClient());
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         WebNetBanking.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
                     }
                     WebNetBanking.loadUrl(result);
-
-                    ProgressNetBank.setVisibility(View.GONE);
+                    WebNetBanking.setWebViewClient(new AppWebViewClients(ProgressNetBank));
                     super.onPostExecute(result);
                 }
             }.execute();
@@ -192,5 +191,29 @@ public class NetBankinActivity extends AppCompatActivity implements TextWatcher,
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+    private class AppWebViewClients extends WebViewClient {
+
+        private final View progressBar;
+
+        public AppWebViewClients(View progressBar) {
+            this.progressBar = progressBar;
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // TODO Auto-generated method stub
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            // TODO Auto-generated method stub
+            super.onPageFinished(view, url);
+            progressBar.setVisibility(View.GONE);
+            WebNetBanking.setVisibility(View.VISIBLE);
+        }
     }
 }

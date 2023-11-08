@@ -39,8 +39,8 @@ public class BankPrivacyActivity extends AppCompatActivity implements View.OnCli
         context = this;
         IvBack = (ImageView) findViewById(R.id.ImgBack);
         TvTitle = (TextView) findViewById(R.id.TxtTitle);
-        TvNotFOund = (TextView) findViewById(R.id.TvNotFOund);
         WebViewPolicy = (WebView) findViewById(R.id.WebViewPolicy);
+        TvNotFOund = (TextView) findViewById(R.id.TvNotFOund);
         ProgressDialog = (ProgressBar) findViewById(R.id.ProgressDialog);
     }
 

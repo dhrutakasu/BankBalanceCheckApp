@@ -77,7 +77,11 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     private void BankInitActions() {
         AdverClass.ShowLayoutBannerAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
-        Type = "all";
+        if (!getIntent().getStringExtra(BankConstantsData.TRANSCATION).equalsIgnoreCase("")) {
+            Type = getIntent().getStringExtra(BankConstantsData.TRANSCATION);
+        } else {
+            Type = "all";
+        }
         BankName = getIntent().getStringExtra(BankConstantsData.BANK_NAME);
         helper = new BankBalanceHelper(context);
         RlTopBar.setBackgroundColor(getResources().getColor(R.color.white));
@@ -88,15 +92,15 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         TxtTitle.setTextColor(getResources().getColor(R.color.black));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String Currency = "";
-            if (helper.getAllSMSType(BankName, "all").get(0).getBodyMsg().contains("Rs")) {
+            if (helper.getAllSMSType(BankName, Type).get(0).getBodyMsg().contains("Rs")) {
                 Currency = "Rs.";
             }
-            if (helper.getAllSMSType(BankName, "all").get(0).getBodyMsg().contains("INR")) {
+            if (helper.getAllSMSType(BankName, Type).get(0).getBodyMsg().contains("INR")) {
                 Currency = "INR.";
             }
-            TxtActiveBalanceAmount.setText(Currency + " " + helper.getAllSMSType(BankName, "all").get(0).getBalance());
+            TxtActiveBalanceAmount.setText(Currency + " " + helper.getAllSMSType(BankName, Type).get(0).getBalance());
         }
-        SmsList = helper.getAllSMSType(BankName, "all");
+        SmsList = helper.getAllSMSType(BankName, Type);
         RvTranscations.setLayoutManager(new LinearLayoutManager(context));
         transcationAdapter = new TranscationAdapter(context, SmsList, this);
         RvTranscations.setAdapter(transcationAdapter);

@@ -53,6 +53,7 @@ public class BankConstantsData {
     public static final String IFSC_DISTRICT = "IFSC_DISTRICT";
     public static final String IFSC_BRANCH = "IFSC_BRANCH";
     public static final String BANK_NAME = "BANK_NAME";
+    public static final String TRANSCATION = "TRANSCATION";
     public static String EMI_Pos = "EMI_Pos";
     public static ArrayList<SMSModel> TranscationsResult = new ArrayList<SMSModel>();
 
@@ -338,6 +339,7 @@ public class BankConstantsData {
                 if (msg == null) {
                     msg = FetchSMSData(body, Breaks);
                 }
+                System.out.println("----------- bankformat : " + format);
                 if (format != null) {
                     if (format.contains(",")) {
                         format = format.replace(",", "");
@@ -354,8 +356,134 @@ public class BankConstantsData {
                         smsModel.setAmount(amFormat);
                     } else {
                         String balance = GetBalance(body);
+                        System.out.println("----------- bankbalance : " + balance);
                         if (balance != null) {
+                            smsModel.setBalance(balance);
                             smsModel.setAmount(amFormat);
+                        } else {
+                            smsModel.setAmount(amFormat);
+                        }
+                    }
+                }
+            }
+
+            for (int k = 0; k < context.getResources().getStringArray(R.array.bank_full).length; k++) {
+                if (context.getResources().getStringArray(R.array.bank_full)[k].contains(body)) {
+                    System.out.println("----------- bank : " + context.getResources().getStringArray(R.array.bank_full)[k]);
+                }
+            }
+
+            System.out.println("----------- amt : " + amFormat + " - " + format);
+            String[] bankShort = context.getResources().getStringArray(R.array.bank_short);
+            for (int i = 0; i < bankShort.length; i++) {
+                if (i >= bankShort.length) {
+                    bool = false;
+                    break;
+                }
+                String BankName = context.getResources().getStringArray(R.array.bank_full)[i].toLowerCase();
+//                if (address.contains(bankShort[i]) || address.toLowerCase().contains(BankName) || body.contains(bankShort[i]) || body.toLowerCase().contains(BankName)) {
+                if (address.length()>=6) {
+                    String add = address.substring(0, 6);
+                    if (address.substring(0, 6).contains(bankShort[i])) {
+                        System.out.println("----------- addressaddddddd : " + address + " --- " + bankShort[i]);
+                        smsModel.setBankName(context.getResources().getStringArray(R.array.bank_full)[i]);
+                        smsModel.setBodyMsg(body);
+                        break;
+                    }
+                }else {
+                    bool = false;
+                    break;
+                }
+            }
+
+            bool = true;
+            if (!bool) {
+                if (address.toLowerCase().contains("paytm")) {
+                    address = "Paytm Bank";
+                }
+                smsModel.setBankName(address);
+            }
+            if (amFormat != null && format != null && !amountFormat.equals("NA") && !amountFormat.equals("") && !amountFormat.contains("*") && !amountFormat.contains("#")) {
+                if (smsModel.getBodyMsg() != null && smsModel.getBankName() != null) {
+                    smsModel.setAddress(address);
+                    if (smsModel.getBodyMsg().toLowerCase().contains("credit")) {
+                        smsModel.setTypes("credit");
+                    } else {
+                        smsModel.setTypes("debit");
+                    }
+                    smsHelper.InsertSMS(smsModel);
+                    smsModels.add(smsModel);
+//                    for (int i = 0; i < new BankBalanceHelper(context).getAllSMS().size(); i++) {
+//                        if (getAmountFormat(new BankBalanceHelper(context).getAllSMS().get(i).getBodyMsg()).equalsIgnoreCase(getAmountFormat(smsModel.getBodyMsg())) && !new BankBalanceHelper(context).getAllSMS().get(i).getBankName().equalsIgnoreCase(smsModel.getBankName())) {
+//                            smsHelper.DeleteSMSBody(smsModel.getBankName());
+//                            smsModels.remove(i);
+//                        }
+//                    }
+                    return smsModels;
+                }
+            }
+        }
+        return smsModels;
+    }
+
+    public static ArrayList<SMSModel> FetchSMSDataCopy(Cursor cursor, Context context, ArrayList<SMSModel> smsModels, BankBalanceHelper smsHelper) {
+        boolean bool;
+        int addressIndex = cursor.getColumnIndex("address");
+        int bodyIndex = cursor.getColumnIndex("body");
+        int dateIndex = cursor.getColumnIndex("date");
+        String address = cursor.getString(addressIndex);
+        String body = cursor.getString(bodyIndex);
+        SMSModel smsModel = new SMSModel();
+        String msg = FetchMsg(body);
+
+        if (GetMsgPattern(body) && !address.contains("paytm")) {
+            String amountFormat = getAmountFormat(body);
+            if (amountFormat.length() > 4) {
+                amountFormat = amountFormat.substring(amountFormat.length() - 4);
+            }
+            Date date = new Date(cursor.getLong(dateIndex));
+            smsModel.setDate(cursor.getLong(dateIndex));
+            smsModel.setTrans(IsTrans(body));
+            if (!body.toLowerCase().contains("card") || body.toLowerCase().contains("debit card of acct") || body.toLowerCase().contains("debit card of a/c") || body.toLowerCase().contains("debit card of account")) {
+                smsModel.setConfirmed(false);
+            } else {
+                smsModel.setTrans(true);
+                smsModel.setConfirmed(true);
+            }
+
+            String format = null;
+            String amFormat = FetchAmount(" " + body);
+            String Breaks = FetchAmount(" " + body);
+            if (amFormat != null) {
+                format = MsgFormats(body);
+                if (amFormat.contains(",")) {
+                    amFormat = amFormat.replace(",", "");
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    amFormat = getAmountFormat(GetDoubleAMount(amFormat).doubleValue());
+                }
+
+                if (msg == null) {
+                    msg = FetchSMSData(body, Breaks);
+                }
+                if (format != null) {
+                    if (format.contains(",")) {
+                        format = format.replace(",", "");
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        format = getAmountFormat(GetDoubleAMount(format).doubleValue());
+                    }
+                    smsModel.setBalance(format);
+                    smsModel.setAmount(amFormat);
+                } else {
+                    if (!body.toLowerCase().contains("bal") && !body.toLowerCase().contains("balance") && !body.toLowerCase().contains("net")) {
+                        smsModel.setAmount(amFormat);
+                    } else if (body.toLowerCase().contains("netbank")) {
+                        smsModel.setAmount(amFormat);
+                    } else {
+                        String balance = GetBalance(body);
+                        smsModel.setAmount(amFormat);
+                        if (balance != null) {
                             smsModel.setBalance(balance);
                         } else {
                             smsModel.setAmount(amFormat);
@@ -363,6 +491,7 @@ public class BankConstantsData {
                     }
                 }
             }
+
             String[] bankShort = context.getResources().getStringArray(R.array.bank_short);
             for (int i = 0; i < bankShort.length; i++) {
                 if (i >= bankShort.length) {

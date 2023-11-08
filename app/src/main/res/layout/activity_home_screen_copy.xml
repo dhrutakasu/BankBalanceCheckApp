@@ -39,8 +39,8 @@
         android:id="@+id/ConsSetting"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_20sdp"
         android:visibility="gone"
+        android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintBottom_toTopOf="@id/ConsBottomMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -340,8 +340,8 @@
         android:id="@+id/ConsCalculators"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_20sdp"
         android:visibility="gone"
+        android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintBottom_toTopOf="@id/ConsBottomMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -654,256 +654,13 @@
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/_2sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guide_transcation_top">
+            app:layout_constraintTop_toBottomOf="@id/ConsBankTranscationBox">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20ssp"
                 android:layout_marginEnd="@dimen/_20sdp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ConsBankTranscationBox"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10ssp"
-                    android:layout_marginEnd="@dimen/_10ssp"
-                    app:layout_constraintBottom_toTopOf="@id/guide_Scroll"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/IvBankTranscationBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_bank_transation"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/ConsAccountDetail"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@id/GuideBoxBottom"
-                        app:layout_constraintEnd_toEndOf="@id/GuideBoxEnd"
-                        app:layout_constraintStart_toStartOf="@id/GuideBoxStart"
-                        app:layout_constraintTop_toTopOf="@id/GuideBoxTop">
-
-                        <TextView
-                            android:id="@+id/TxtBankName"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:ellipsize="marquee"
-                            android:fontFamily="@font/poppins_medium"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Bank Name"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintWidth_percent="0.6" />
-
-                        <TextView
-                            android:id="@+id/TxtBankAccNumber"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:fontFamily="@font/poppins_medium"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Bank Name"
-                            android:textAllCaps="true"
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/_10sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/TxtBankName"
-                            app:layout_constraintWidth_percent="0.6" />
-
-                        <TextView
-                            android:id="@+id/TxtBankAmount"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:fontFamily="@font/poppins_medium"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Bank Name"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/TxtBankAccNumber"
-                            app:layout_constraintWidth_percent="0.6" />
-
-                        <ImageView
-                            android:id="@+id/IvBankView"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:adjustViewBounds="true"
-                            app:layout_constraintBottom_toTopOf="@id/TxtBankAmount"
-                            app:layout_constraintStart_toEndOf="@+id/TxtBankAccNumber"
-                            app:layout_constraintTop_toTopOf="@+id/TxtBankName"
-                            app:layout_constraintWidth_percent="0.15" />
-
-                        <ImageView
-                            android:id="@+id/IvBankIcon"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:adjustViewBounds="true"
-                            android:src="@drawable/ic_bank_icon"
-                            app:layout_constraintBottom_toTopOf="@id/TxtBankAmount"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/IvBankView"
-                            app:layout_constraintTop_toTopOf="@+id/TxtBankName"
-                            app:layout_constraintWidth_percent="0.15" />
-
-                        <View
-                            android:id="@+id/ViewLine"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:background="#EEF2F8"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHeight_percent="0.01"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/TxtBankAmount" />
-
-                        <TextView
-                            android:id="@+id/TxtBankTranscation"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="@dimen/_8ssp"
-                            android:layout_marginBottom="@dimen/_8ssp"
-                            android:background="@drawable/ic_transcation_btn"
-                            android:fontFamily="@font/poppins_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            android:text="@string/see_transactions"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintHeight_percent="0.22"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/ViewLine"
-                            app:layout_constraintWidth_percent="0.5" />
-
-                        <TextView
-                            android:id="@+id/TxtBankCredit"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="@dimen/_8ssp"
-                            android:layout_marginBottom="@dimen/_8ssp"
-                            android:fontFamily="@font/poppins_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            android:text="Credit"
-                            android:textColor="@color/Txt_green_color"
-                            android:textSize="@dimen/_10sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/TxtBankDebit"
-                            app:layout_constraintHeight_percent="0.25"
-                            app:layout_constraintStart_toEndOf="@+id/TxtBankTranscation"
-                            app:layout_constraintTop_toBottomOf="@+id/ViewLine"
-                            app:layout_constraintWidth_percent="0.22" />
-
-                        <TextView
-                            android:id="@+id/TxtBankDebit"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="@dimen/_8ssp"
-                            android:layout_marginBottom="@dimen/_8ssp"
-                            android:fontFamily="@font/poppins_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            android:text="Debit"
-                            android:textColor="@color/Txt_red_color"
-                            android:textSize="@dimen/_10sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintHeight_percent="0.25"
-                            app:layout_constraintStart_toEndOf="@+id/TxtBankCredit"
-                            app:layout_constraintTop_toBottomOf="@+id/ViewLine"
-                            app:layout_constraintWidth_percent="0.22" />
-
-                        <ProgressBar
-                            android:id="@+id/ProgressBankAcoount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:indeterminateTint="@color/purple_200"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toTopOf="@+id/TxtBankTranscation"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/GuideBoxTop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.15" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/GuideBoxBottom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.85" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/GuideBoxEnd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.95" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/GuideBoxStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.05" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/CardBankTranscationArrow"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    app:cardCornerRadius="@dimen/_50ssp"
-                    app:cardElevation="@dimen/_5ssp"
-                    app:layout_constraintBottom_toBottomOf="@id/ConsBankTranscationBox"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ConsBankTranscationBox">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/main_color"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/main_color"
-                            android:padding="@dimen/_12sdp"
-                            android:src="@drawable/ic_arrow"
-                            app:tint="@color/white" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <ImageView
                     android:id="@+id/IvBankATMBox"
@@ -913,7 +670,7 @@
                     android:src="@drawable/ic_near_atm"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ConsBankTranscationBox" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/TxtMutualFundTitles"
@@ -971,15 +728,203 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/TxtCreditLoanTitles" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guide_Scroll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.25" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConsBankTranscationBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginEnd="@dimen/_20ssp"
+            app:layout_constraintBottom_toTopOf="@id/guide_Scroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guide_transcation_top">
+
+            <ImageView
+                android:id="@+id/IvBankTranscationBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_bank_transation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConsAccountDetail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/GuideBoxBottom"
+                app:layout_constraintEnd_toEndOf="@id/GuideBoxEnd"
+                app:layout_constraintStart_toStartOf="@id/GuideBoxStart"
+                app:layout_constraintTop_toTopOf="@id/GuideBoxTop">
+
+                <TextView
+                    android:id="@+id/TxtBankName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/poppins_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bank Name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.6" />
+
+                <TextView
+                    android:id="@+id/TxtBankAccNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/poppins_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bank Name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/TxtBankName"
+                    app:layout_constraintWidth_percent="0.6" />
+
+                <TextView
+                    android:id="@+id/TxtBankAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/poppins_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bank Name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/TxtBankAccNumber"
+                    app:layout_constraintWidth_percent="0.6" />
+
+                <ImageView
+                    android:id="@+id/IvBankView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toTopOf="@id/TxtBankAmount"
+                    app:layout_constraintStart_toEndOf="@+id/TxtBankAccNumber"
+                    app:layout_constraintTop_toTopOf="@+id/TxtBankName"
+                    app:layout_constraintWidth_percent="0.15" />
+
+                <ImageView
+                    android:id="@+id/IvBankIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_bank_icon"
+                    app:layout_constraintBottom_toTopOf="@id/TxtBankAmount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/IvBankView"
+                    app:layout_constraintTop_toTopOf="@+id/TxtBankName"
+                    app:layout_constraintWidth_percent="0.15" />
+
+                <TextView
+                    android:id="@+id/TxtBankTranscation"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_8ssp"
+                    android:layout_marginBottom="@dimen/_8ssp"
+                    android:background="@drawable/ic_transcation_btn"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/see_transactions"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHeight_percent="0.3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/TxtBankAmount"
+                    app:layout_constraintWidth_percent="0.6" />
+
+                <ProgressBar
+                    android:id="@+id/ProgressBankAcoount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/purple_200"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/TxtBankTranscation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideBoxStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardBankTranscationArrow"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_50ssp"
+            app:cardElevation="@dimen/_5ssp"
+            app:layout_constraintBottom_toBottomOf="@id/ConsBankTranscationBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ConsBankTranscationBox">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_color"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color"
+                    android:padding="@dimen/_12sdp"
+                    android:src="@drawable/ic_arrow"
+                    app:tint="@color/white" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_top"
@@ -1008,6 +953,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_Scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout

@@ -77,7 +77,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private ImageView IvBankBalance3;
     private int getBalance = 0;
     private ArrayList<SMSModel> smsModelArrayList = new ArrayList<>();
-    private TextView EdtBankName;
+    private TextView EdtBankName,TxtBankDebit,TxtBankCredit;
 
     public HomeScreenActivity() {
     }
@@ -123,6 +123,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         IvBankBalance3 = (ImageView) findViewById(R.id.IvBankBalance3);
         CardBankTranscationArrow = (CardView) findViewById(R.id.CardBankTranscationArrow);
         EdtBankName = (TextView) findViewById(R.id.EdtBankName);
+        TxtBankCredit = (TextView) findViewById(R.id.TxtBankCredit);
+        TxtBankDebit = (TextView) findViewById(R.id.TxtBankDebit);
     }
 
     private void BankInitListeners() {
@@ -140,6 +142,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
         IvBankBalance.setOnClickListener(this);
         IvBankBalance1.setOnClickListener(this);
         IvBankBalance3.setOnClickListener(this);
+        TxtBankCredit.setOnClickListener(this);
+        TxtBankDebit.setOnClickListener(this);
         bottom_menu.setOnItemSelectedListener(i -> {
             switch (i) {
                 case R.id.Menu_Home:
@@ -465,7 +469,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                     public void AdListen() {
                         if (IsTransc) {
                             startActivity(new Intent(context, TransactionActivity.class)
-                                    .putExtra(BankConstantsData.BANK_NAME, TxtBankName.getText().toString()));
+                                    .putExtra(BankConstantsData.BANK_NAME, TxtBankName.getText().toString())
+                                    .putExtra(BankConstantsData.TRANSCATION, ""));
                         }
                     }
                 });
@@ -505,6 +510,20 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
             case R.id.CardUpdate:
                 break;
             case R.id.CardVersion:
+                break;
+            case R.id.TxtBankDebit:
+                if (IsTransc) {
+                    startActivity(new Intent(context, TransactionActivity.class)
+                            .putExtra(BankConstantsData.BANK_NAME, TxtBankName.getText().toString())
+                            .putExtra(BankConstantsData.TRANSCATION, "debit"));
+                }
+                break;
+            case R.id.TxtBankCredit:
+                if (IsTransc) {
+                    startActivity(new Intent(context, TransactionActivity.class)
+                            .putExtra(BankConstantsData.BANK_NAME, TxtBankName.getText().toString())
+                            .putExtra(BankConstantsData.TRANSCATION, "credit"));
+                }
                 break;
         }
     }

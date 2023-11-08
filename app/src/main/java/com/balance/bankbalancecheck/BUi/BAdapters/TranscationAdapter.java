@@ -70,7 +70,11 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
                 str2 = sb.toString();
             }
             if (!str2.isEmpty()) {
-                holder.TxtStartLetter.setText(str2.substring(1, 2).toUpperCase());
+                if (str2.substring(0, 1).equalsIgnoreCase("(")) {
+                    holder.TxtStartLetter.setText(str2.substring(1, 2).toUpperCase());
+                } else {
+                    holder.TxtStartLetter.setText(str2.substring(0, 1).toUpperCase());
+                }
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -89,14 +93,34 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
         }
 
         holder.TxtRefNo.setText(str2);
-        if (!DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString().equalsIgnoreCase(date)) {
+        if (!DateFormat.format("dd MMM,yyyy", new
+
+                Date(strings.get(position).
+
+                getDate())).
+
+                toString().
+
+                equalsIgnoreCase(date)) {
             date = DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString();
             holder.TxtFormateDate.setVisibility(View.VISIBLE);
         } else {
             holder.TxtFormateDate.setVisibility(View.GONE);
         }
-        holder.TxtDate.setText(DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString());
-        holder.TxtFormateDate.setText(DateFormat.format("dd MMM,yyyy", new Date(strings.get(position).getDate())).toString());
+        holder.TxtDate.setText(DateFormat.format("dd MMM,yyyy", new
+
+                Date(strings.get(position).
+
+                getDate())).
+
+                toString());
+        holder.TxtFormateDate.setText(DateFormat.format("dd MMM,yyyy", new
+
+                Date(strings.get(position).
+
+                getDate())).
+
+                toString());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +149,7 @@ public class TranscationAdapter extends RecyclerView.Adapter<TranscationAdapter.
             TxtFormateDate = itemView.findViewById(R.id.TxtFormateDate);
             TxtAmount = itemView.findViewById(R.id.TxtAmount);
         }
+
     }
 
     @Override

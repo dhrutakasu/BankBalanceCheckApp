@@ -53,6 +53,53 @@
         <item>VJB</item>
         <item>YBL</item>
         <item>BOI</item>
+        <item>YES</item>
+        <item>AXI</item>
+        <item>KBL</item>
+        <item>TSB</item>
+        <item>vysya</item>
+        <item>SCB</item>
+        <item>CUB</item>
+        <item>GPB</item>
+        <item>VVS</item>
+        <item>TBS</item>
+        <item>RKN</item>
+        <item>JKB</item>
+        <item>BDN</item>
+        <item>KJB</item>
+        <item>KIJ</item>
+        <item>HTI</item>
+        <item>MCB</item>
+        <item>ARL</item>
+        <item>FIN</item>
+        <item>KLG</item>
+        <item>PKB</item>
+        <item>KVG</item>
+        <item>AND</item>
+        <item>PRT</item>
+        <item>PUR</item>
+        <item>TGB</item>
+        <item>CHB</item>
+        <item>SAG</item>
+        <item>AVP</item>
+        <item>UKG</item>
+        <item>MRB</item>
+        <item>MZR</item>
+        <item>VGB</item>
+        <item>BKG</item>
+        <item>DGB</item>
+        <item>CGG</item>
+        <item>BUB</item>
+        <item>BGI</item>
+        <item>DLB</item>
+        <item>PBG</item>
+        <item>UIJ</item>
+        <item>JSF</item>
+        <item>JKG</item>
+        <item>PGB</item>
+        <item>HGB</item>
+        <item>SBG</item>
+        <item>AUS</item>
     </array>
 
     <array name="bank_full">
@@ -108,6 +155,53 @@
         <item>Vijaya</item>
         <item>Yes</item>
         <item>Bank of India</item>
+        <item>Yes Bank</item>
+        <item>Axis Bank</item>
+        <item>Karnataka Bank</item>
+        <item>The Thane Janta Sahakari Bank</item>
+        <item>Karur Vysaya Bank</item>
+        <item>Standard Chartered</item>
+        <item>City Union Bank</item>
+        <item>G P Parsik Bank</item>
+        <item>Vasai Vikas Co-op Bank</item>
+        <item>Thane Bharat Sahakari Bank</item>
+        <item>Rajkot Nagari Sahakari Bank</item>
+        <item>Jammu &amp; Kashmir Bank</item>
+        <item>Bandhan Bank</item>
+        <item>The Kalyan Janta Sahkari Bank</item>
+        <item>Kallappanna Awade Ichalkaranji Janata Sahakari Bank</item>
+        <item>The Hasti Co-operative Bank</item>
+        <item>The Mahanagar Co-Op. Bank</item>
+        <item>Airtel Payments Bank</item>
+        <item>FINO Payments Bank</item>
+        <item>Kerala Gramin Bank</item>
+        <item>Pragathi Krishna Gramin Bank</item>
+        <item>Karnataka vikas Gramin Bank</item>
+        <item>Andhra Pragathi Grameena Bank</item>
+        <item>Prathama Bank	PRTH</item>
+        <item>Purvanchal Bank</item>
+        <item>Telangana Gramin Bank</item>
+        <item>Chhattisgarh Rajya Gramin Bank</item>
+        <item>Saurashtra Gramin Bank</item>
+        <item>Andhra Pradesh Grameena Vikas Bank</item>
+        <item>Uttarakhand Gramin Bank</item>
+        <item>Meghalaya Rural Bank</item>
+        <item>Mizoram Rural Bank</item>
+        <item>Vananchal Gramin Bank</item>
+        <item>Baroda Rajasthan Kshetriya Gramin Bank</item>
+        <item>Dena Gujarat Gramin Bank</item>
+        <item>Chaitanya Godavari Grameena Bank</item>
+        <item>Baroda Uttar Pradesh Gramin Bank</item>
+        <item>Baroda Gujarat Gramin Bank</item>
+        <item>Dhanlaxmi Bank</item>
+        <item>Paschim Banga Gramin Bank</item>
+        <item>Ujjivan Small Finance Bank</item>
+        <item>Jana Small Finance Bank</item>
+        <item>J &amp; K Grameen Bank</item>
+        <item>Punjab Gramin Bank</item>
+        <item>Himachal Pradesh Gramin Bank</item>
+        <item>Sarva Haryana Gramin Bank</item>
+        <item>AU Small Finance Bank</item>
     </array>
     <array name="Mutual_fund_type">
         <item>Balanced Fund</item>
