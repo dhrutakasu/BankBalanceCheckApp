@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.balance.bankbalancecheck.AdverClass;
 import com.balance.bankbalancecheck.BUi.BAdapters.WalkThorughAdapter;
@@ -63,6 +65,7 @@ public class WalkThroughActivity extends AppCompatActivity {
     }
 
     private void initActions() {
+        AdverClass.ShowLayoutNativeAds(context, ((ProgressBar) findViewById(R.id.progressBarAd)), (RelativeLayout) findViewById(R.id.RlAdver));
         WalkThorughAdapter adapter = new WalkThorughAdapter(this, images, Text, SubText);
         PagerWalk.setAdapter(adapter);
 

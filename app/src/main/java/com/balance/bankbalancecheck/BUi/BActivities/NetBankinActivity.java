@@ -141,6 +141,7 @@ public class NetBankinActivity extends AppCompatActivity implements TextWatcher,
                     System.out.println("------ -- : " + result.toString());
                     WebSettings webPrivacySettings = WebNetBanking.getSettings();
                     webPrivacySettings.setJavaScriptEnabled(true);
+                    WebNetBanking.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         WebNetBanking.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
                     }

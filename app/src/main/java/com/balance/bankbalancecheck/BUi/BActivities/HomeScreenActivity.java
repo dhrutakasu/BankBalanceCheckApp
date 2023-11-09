@@ -251,8 +251,6 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                     if (unused.size() > 0) {
                         smsModelArrayList = SmsHelper.getAllSMSGroup();
                         System.out.println("------ cursor : " + smsModelArrayList.size());
-                        CardBankTranscationArrow.setVisibility(View.VISIBLE);
-                        TxtBankTranscation.setVisibility(View.VISIBLE);
                         for (int i = 0; i < smsModelArrayList.size(); i++) {
                             SMSModel smsMode = SmsHelper.getAllSMSBank(smsModelArrayList.get(i).getBankName());
                             smsModelArrayList.set(i, smsMode);
@@ -275,9 +273,26 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
                         TxtBankAmount.setSelected(true);
                         TxtBankAccNumber.setSelected(true);
                         TxtBankName.setSelected(true);
-                        ProgressBankAcoount.setVisibility(View.GONE);
+                        if (smsModelArrayList.size()!=1) {
+                            CardBankTranscationArrow.setVisibility(View.VISIBLE);
+                        }else {
+                            CardBankTranscationArrow.setVisibility(View.GONE);
+                        }
+                        IsTransc = true;
+                    }else {
+                        TxtBankName.setText("-- --");
+                        TxtBankAccNumber.setText("xxxx");
+                        NumberFormat numberFormat = null;
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                            double number = Double.parseDouble("000000");
+                            numberFormat = NumberFormat.getNumberInstance(Locale.US);
+                            TxtBankAmount.setText("INR :- " + numberFormat.format(number));
+                        }
                     }
-                    IsTransc = true;
+
+
+                    TxtBankTranscation.setVisibility(View.VISIBLE);
+                    ProgressBankAcoount.setVisibility(View.GONE);
                 }
             }.execute();
         } catch (Exception e) {

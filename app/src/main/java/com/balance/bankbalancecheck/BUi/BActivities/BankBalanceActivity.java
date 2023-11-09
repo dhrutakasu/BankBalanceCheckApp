@@ -40,7 +40,7 @@ public class BankBalanceActivity extends AppCompatActivity implements View.OnCli
     private Context context;
     private ImageView ImgBack, ImgShareApp;
     private TextView TxtTitle, TxtBankBalanceNumber, TxtMiniStatementNumber, TxtCustomerCardNumber, TxtMiniStatementMsg;
-    private ImageView IvBankBalanceNumber, IvMiniStatementNumber,IvCustomerCardNumber;
+    private ImageView IvBankBalanceNumber, IvMiniStatementNumber, IvCustomerCardNumber;
     private BankBalanceHelper helper;
     private ProgressBar ProgressBankBalance;
     private ArrayList<String> BankList = new ArrayList<>();
@@ -217,10 +217,16 @@ public class BankBalanceActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intentCustomer);
                 break;
             case R.id.IvMiniStatementNumber:
-                Intent intentMini = new Intent(Intent.ACTION_DIAL);
-                intentMini.setData(Uri.parse("tel:" + TxtMiniStatementNumber.getText().toString()));
+//                Intent intentMini = new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse("sms:" + TxtMiniStatementNumber.getText().toString().trim()));
+                Intent intentMini =new Intent(Intent.ACTION_SENDTO,  Uri.parse("sms:" + TxtMiniStatementNumber.getText().toString().trim()));
                 intentMini.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentMini);
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" +  TxtMiniStatementNumber.getText().toString().trim())));
+//                Intent intentMini = new Intent(Intent.ACTION_DIAL);
+//                intentMini.setData(Uri.parse("tel:" + TxtMiniStatementNumber.getText().toString()));
+//                intentMini.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intentMini);
                 break;
         }
     }

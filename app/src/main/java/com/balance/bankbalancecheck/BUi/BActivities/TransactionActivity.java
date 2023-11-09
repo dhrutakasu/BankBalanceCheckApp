@@ -90,15 +90,17 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         ImgBack.setColorFilter(getResources().getColor(R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
         TxtTitle.setText(R.string.bank_transactions);
         TxtTitle.setTextColor(getResources().getColor(R.color.black));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            String Currency = "";
-            if (helper.getAllSMSType(BankName, Type).get(0).getBodyMsg().contains("Rs")) {
-                Currency = "Rs.";
+        if (helper.getAllSMSType(BankName, Type).size()>=0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                String Currency = "";
+                if (helper.getAllSMSType(BankName, Type).get(0).getBodyMsg().contains("Rs")) {
+                    Currency = "Rs.";
+                }
+                if (helper.getAllSMSType(BankName, Type).get(0).getBodyMsg().contains("INR")) {
+                    Currency = "INR.";
+                }
+                TxtActiveBalanceAmount.setText(Currency + " " + helper.getAllSMSType(BankName, "all").get(0).getBalance());
             }
-            if (helper.getAllSMSType(BankName, Type).get(0).getBodyMsg().contains("INR")) {
-                Currency = "INR.";
-            }
-            TxtActiveBalanceAmount.setText(Currency + " " + helper.getAllSMSType(BankName, Type).get(0).getBalance());
         }
         SmsList = helper.getAllSMSType(BankName, Type);
         RvTranscations.setLayoutManager(new LinearLayoutManager(context));

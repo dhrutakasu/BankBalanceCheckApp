@@ -23,6 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/IvDialogQuitTitle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.55"
+                android:src="@drawable/ic_exit_vector"
+                app:layout_constraintBottom_toBottomOf="@+id/RlAdver"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/RlAdver" />
+
             <RelativeLayout
                 android:id="@+id/RlAdver"
                 android:layout_width="match_parent"
@@ -52,16 +63,6 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>
-            <ImageView
-                android:id="@+id/IvDialogQuitTitle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintWidth_percent="0.55"
-                android:src="@drawable/ic_exit_vector"
-                app:layout_constraintBottom_toBottomOf="@+id/RlAdver"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/RlAdver" />
 
             <TextView
                 android:id="@+id/BtnDialogQuitTitle"

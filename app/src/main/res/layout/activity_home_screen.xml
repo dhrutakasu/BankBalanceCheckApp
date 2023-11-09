@@ -666,8 +666,6 @@
                     android:id="@+id/ConsBankTranscationBox"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/_10ssp"
-                    android:layout_marginEnd="@dimen/_10ssp"
                     app:layout_constraintBottom_toTopOf="@id/guide_Scroll"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
