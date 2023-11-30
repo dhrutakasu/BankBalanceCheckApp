@@ -6,7 +6,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.balance.bankbalancecheck"
+        applicationId "com.check.allbank.account.balance.banking.passbook"
         minSdk 23
         targetSdk 33
         versionCode 1
@@ -19,6 +19,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a'
+            universalApk false
         }
     }
     compileOptions {
@@ -66,6 +74,4 @@ dependencies {
 
     //todo fb ads dependency
     implementation 'com.facebook.android:audience-network-sdk:6.16.0'
-
-
 }

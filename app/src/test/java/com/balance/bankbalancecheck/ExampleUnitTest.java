@@ -1,4 +1,4 @@
-package com.balance.bankbalancecheck;
+package com.check.allbank.account.balance.banking.passbook;
 
 import org.junit.Test;
 

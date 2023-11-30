@@ -14,9 +14,10 @@
         android:fontFamily="@font/poppins_medium"
         android:gravity="center_vertical"
         android:padding="@dimen/_15sdp"
+        android:drawableEnd="@drawable/ic_arrow"
+        android:drawableTint="@color/main_color"
         android:text="My Profile"
         android:textSize="@dimen/_12sdp"
         android:textColor="@color/black" />
-
 
 </androidx.cardview.widget.CardView>

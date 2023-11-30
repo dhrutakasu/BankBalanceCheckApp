@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.balance.bankbalancecheck">
+    package="com.check.allbank.account.balance.banking.passbook">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -15,151 +15,151 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.BankBalanceCheck">
         <activity
-            android:name=".BUi.BActivities.BankBalanceActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.BankBalanceActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.WalkThroughActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.WalkThroughActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.ReturnCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.ReturnCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.SelectBankActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.SelectBankActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.BankHolidayActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.BankHolidayActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.BankPrivacyActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.BankPrivacyActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.TransactionActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.TransactionActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.HomeScreenActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.HomeScreenActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.NetBankinActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.NetBankinActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.AllBankUSSDActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.AllBankUSSDActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.USSDBankingActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.USSDBankingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.IFSCDetailsActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.IFSCDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.LoanDetailsActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.LoanDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.IFSCActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.IFSCActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.NearByActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.NearByActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.MutualFundActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.MutualFundActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.ViewSchemesDetailsActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.ViewSchemesDetailsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.GratuityCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.GratuityCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.InflationCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.InflationCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.EPFCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.EPFCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.PPFCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.PPFCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BUi.BActivities.Calculators.RdCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.RdCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.SwapCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.SwapCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.BrokerageCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.BrokerageCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.FDCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.FDCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.GSTCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.GSTCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.LoanAmountCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.LoanAmountCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.EMICalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.EMICalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.Calculators.SIPCalculatorActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.SIPCalculatorActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".BUi.BActivities.SplashActivity"
+            android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize">
@@ -169,7 +169,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BUi.BActivities.FundLoanDetailsActivity" />
+        <activity android:name="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.FundLoanDetailsActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

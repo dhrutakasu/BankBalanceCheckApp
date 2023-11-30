@@ -1,4 +1,4 @@
-package com.balance.bankbalancecheck;
+package com.check.allbank.account.balance.banking.passbook;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.balance.bankbalancecheck", appContext.getPackageName());
+        assertEquals("com.check.allbank.account.balance.banking.passbook", appContext.getPackageName());
     }
 }

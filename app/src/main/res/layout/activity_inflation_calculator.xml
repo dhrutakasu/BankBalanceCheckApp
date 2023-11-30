@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".BUi.BActivities.Calculators.InflationCalculatorActivity">
+    tools:context="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.InflationCalculatorActivity">
 
     <RelativeLayout
         android:id="@+id/RlHeaderBar"

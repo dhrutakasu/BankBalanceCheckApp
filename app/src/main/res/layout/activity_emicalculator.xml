@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BUi.BActivities.Calculators.EMICalculatorActivity">
+    tools:context="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.Calculators.EMICalculatorActivity">
 
     <RelativeLayout
         android:id="@+id/RlHeaderBar"

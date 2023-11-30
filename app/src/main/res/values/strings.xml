@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Bank Balance Check</string>
-    <string name="calculators">Calculators</string>
     <string name="monthly_invest_amount">Monthly Invest Amount</string>
     <string name="enter_amount_rs">Enter Amount (Rs.)</string>
     <string name="exp_annual_amount">Exp Annual Amount</string>
@@ -110,7 +109,6 @@
     <string name="monthly_salary_basic_da">Monthly Salary (Basic + DA)</string>
     <string name="monthly_salary_amount">Monthly Salary Amount</string>
     <string name="year_of_service">Year Of Service</string>
-    <string name="saving_scheme">Saving scheme</string>
     <string name="public_pf">Public PF</string>
     <string name="employee_pf">Employee PF</string>
     <string name="natinal_ps">Natinal PS</string>
@@ -119,7 +117,6 @@
     <string name="post_office_ss">Post Office SS</string>
     <string name="pm_vaya">PM Vaya</string>
     <string name="pm_jan_dhan">PM Jan Dhan</string>
-    <string name="credit_loan_type">Credit Loan Type</string>
     <string name="car_loan">Car Loan</string>
     <string name="home_loan">Home Loan</string>
     <string name="personal_loan">Personal Loan</string>
@@ -129,14 +126,8 @@
     <string name="mutual_fund">Mutual Fund</string>
     <string name="explore_fund">Explore Funds</string>
     <string name="popular_fund">Popular Funds</string>
-    <string name="banking">Banking</string>
-    <string name="near_by_atm">Near By ATM</string>
-    <string name="net_banking">Net Banking</string>
-    <string name="bank_holiday">Bank Holiday</string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="bank_balance">Bank Balance</string>
-    <string name="nearby">NearBy</string>
-    <string name="ifsc">IFSC</string>
     <string name="near_by">Near By</string>
     <string name="ussd_banking">USSD Banking</string>
     <string name="copy_all">Copy All</string>
@@ -154,12 +145,9 @@
     <string name="ussd_code">USSD Code</string>
     <string name="mini_statement">Mini Statement</string>
     <string name="customer_card_number">Customer Card Number</string>
-    <string name="please_dial_from_registered_mobile_number_in_bank">*Please dial from registered mobile number in bank</string>
     <string name="credits_amp_loan_services"><![CDATA[Credits & Loan Services]]></string>
     <string name="mutual_funds">Mutual Funds</string>
-    <string name="home">Home</string>
     <string name="Setting">Setting</string>
-    <string name="Money">Funds</string>
     <string name="MSG_ASK_PERMISSION">This app needs permissions to use this feature. You can grant them in app settings.</string>
     <string name="all_calculator">All Calculator</string>
     <string name="see_transactions">See Transactions</string>

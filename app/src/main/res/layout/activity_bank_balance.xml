@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".BUi.BActivities.BankBalanceActivity">
+    tools:context="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.BankBalanceActivity">
 
     <RelativeLayout
         android:id="@+id/RlHeaderBar"
@@ -244,7 +244,7 @@
             <TextView
                 android:id="@+id/TxtMiniStatementMsg"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:padding="@dimen/_3sdp"
                 android:text="@string/mini_statement"

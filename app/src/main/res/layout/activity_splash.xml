@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_spalsh_bg"
-    tools:context=".BUi.BActivities.SplashActivity">
+    tools:context="com.check.allbank.account.balance.banking.passbook.BUi.BActivities.SplashActivity">
 
     <ImageView
         android:layout_width="0dp"
